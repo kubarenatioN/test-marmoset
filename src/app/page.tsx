@@ -1,5 +1,14 @@
+import Header from '@/components/Header/Header';
 import HomeFullpage from '@/components/HomeFullpage/HomeFullpage';
+import styles from './page.module.scss';
 
 export default function Home() {
-  return <HomeFullpage />;
+  return (
+    <>
+      <div className={styles.HeaderWrapper}>
+        <Header />
+      </div>
+      <HomeFullpage />;
+    </>
+  );
 }

@@ -9,9 +9,10 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   return (
     <>
       <ReactFullpage
-        licenseKey={''}
+        licenseKey={'qweasdzxc'}
         credits={{
           enabled: false,
+          label: '',
         }}
         render={({ state, fullpageApi }) => {
           return (

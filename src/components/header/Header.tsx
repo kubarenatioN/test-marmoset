@@ -10,6 +10,9 @@ const Header: FC<HeaderProps> = ({}) => {
       <nav className={styles.Menu}>
         <ul className={styles.MenuList}>
           <li>
+            <Link href={'/'}>Home</Link>
+          </li>
+          <li>
             <Link href={'/portfolio'}>Portfolio</Link>
           </li>
           <li>

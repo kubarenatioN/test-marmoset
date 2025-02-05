@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 const Page: FC<PageProps> = async ({ params }) => {

@@ -26,7 +26,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
           return (
             <ReactFullpage.Wrapper>
               <div className={`${styles.Section} section`}>
-                <div>
+                <div className={styles.SectionInner}>
                   <Image src={'/images/img-1.jpg'} fill alt='Bubna' />
                   <p>Section 1 (welcome to fullpage.js)</p>
                   <button onClick={() => fullpageApi.moveSectionDown()}>
@@ -34,15 +34,21 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                   </button>
                 </div>
               </div>
-              <div className={`${styles.Section} section`}>
-                <Image src={'/images/img-2.jpg'} fill alt='Bubna' />
 
-                <p>Section 2</p>
+              <div className={`${styles.Section} section`}>
+                <div className={styles.SectionInner}>
+                  <Image src={'/images/img-2.jpg'} fill alt='Bubna' />
+
+                  <p>Section 2</p>
+                </div>
               </div>
-              <div className={`${styles.Section} section`}>
-                <Image src={'/images/img-3.jpg'} fill alt='Bubna' />
 
-                <p>Section 3</p>
+              <div className={`${styles.Section} section`}>
+                <div className={styles.SectionInner}>
+                  <Image src={'/images/img-3.jpg'} fill alt='Bubna' />
+
+                  <p>Section 3</p>
+                </div>
               </div>
             </ReactFullpage.Wrapper>
           );

@@ -1,4 +1,3 @@
-import Header from '@/components/Header/Header';
 import { FC } from 'react';
 
 interface layoutProps {
@@ -8,7 +7,7 @@ interface layoutProps {
 const layout: FC<layoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
     </>
   );

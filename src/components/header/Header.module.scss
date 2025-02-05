@@ -1,0 +1,14 @@
+.Header {
+  display: flex;
+}
+
+.Menu {
+  width: 100%;
+
+  &List {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-block: 1rem;
+  }
+}

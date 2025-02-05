@@ -1,4 +1,4 @@
-import Header from '@/components/Header/Header';
+import Header from '@/components/header/Header';
 import HomeFullpage from '@/components/HomeFullpage/HomeFullpage';
 import styles from './page.module.scss';
 

@@ -1,15 +1,22 @@
 'use client';
 
+import '@/assets/styles/fullpagejs.overrides.css';
 import ReactFullpage from '@fullpage/react-fullpage';
+import Image from 'next/image';
 import { FC } from 'react';
 
 interface HomeFullpageProps {}
+
+const anchors = ['one', 'two', 'three'];
 
 const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   return (
     <>
       <ReactFullpage
-        licenseKey={'qweasdzxc'}
+        licenseKey={'xxxxxxxxxxxxxxxxxxxxxxxxx'}
+        anchors={anchors}
+        navigation
+        navigationTooltips={anchors}
         credits={{
           enabled: false,
           label: '',
@@ -18,15 +25,19 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
           return (
             <ReactFullpage.Wrapper>
               <div className='section'>
+                <Image src={'/images/img-1.jpg'} fill alt='Bubna' />
                 <p>Section 1 (welcome to fullpage.js)</p>
                 <button onClick={() => fullpageApi.moveSectionDown()}>
                   Click me to move down
                 </button>
               </div>
               <div className='section'>
+                <Image src={'/images/img-2.jpg'} fill alt='Bubna' />
                 <p>Section 2</p>
               </div>
               <div className='section'>
+                <Image src={'/images/img-3.jpg'} fill alt='Bubna' />
+
                 <p>Section 3</p>
               </div>
             </ReactFullpage.Wrapper>

@@ -1,0 +1,19 @@
+body {
+  /* Overwriting styles for the navigation dots */
+  #fp-nav ul li a span,
+  .fp-slidesNav ul li a span {
+    background-color: #fff;
+  }
+
+  #fp-nav ul li a.active span {
+    background-color: #fdc3ff;
+  }
+
+  /* Uncomment to overwrite the styles of the tooltips too */
+  /*
+  .fp-tooltip{
+      font-size: 1.2em !important;
+      margin-right: 10px;
+  }
+  */
+}

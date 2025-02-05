@@ -16,4 +16,8 @@ body {
       margin-right: 10px;
   }
   */
+
+  .fp-watermark {
+    display: none;
+  }
 }

@@ -8,9 +8,7 @@ export default function Home() {
       <div className={styles.HeaderWrapper}>
         <Header />
       </div>
-      <div className={styles.Content}>
-        <HomeFullpage />;
-      </div>
+      <HomeFullpage />;
     </>
   );
 }

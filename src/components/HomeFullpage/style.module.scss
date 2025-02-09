@@ -1,14 +1,26 @@
 .Section {
   position: relative;
+
+  &Inner {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &Footer {
+    height: auto;
+  }
+}
+
+.Footer {
+  padding-block: 3rem;
 }
 
 .Content {
-  min-height: 100vh;
-  max-height: 100vh;
-  height: 100vh;
   overflow: hidden;
-  opacity: 0;
-  transition: 0.8s opacity;
+  opacity: 0.8;
+  transition: 1s opacity;
 
   &.inited {
     opacity: 1;

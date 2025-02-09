@@ -2,11 +2,11 @@ body {
   /* Overwriting styles for the navigation dots */
   #fp-nav ul li a span,
   .fp-slidesNav ul li a span {
-    background-color: #fff;
+    background-color: #575757;
   }
 
   #fp-nav ul li a.active span {
-    background-color: #fdc3ff;
+    background-color: #151515;
   }
 
   /* Uncomment to overwrite the styles of the tooltips too */
@@ -19,5 +19,75 @@ body {
 
   .fp-watermark {
     display: none;
+  }
+}
+
+/* add specificity */
+.pr-fp-hidden.fp-section {
+  margin-left: -5000px;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+.pr-fp-hidden.pr-fp-active {
+  visibility: visible;
+  margin-left: 0;
+}
+
+.pr-animating-in {
+  animation-duration: var(--fp-anim-dur);
+}
+
+.pr-animating-out {
+  animation-duration: var(--fp-anim-dur);
+}
+
+/* FP Main Page animations */
+@keyframes moveFromBottomOut {
+  25% {
+    transform: scale(0.88);
+  }
+  50%,
+  100% {
+    transform: translateY(-50%) scale(0.8);
+  }
+}
+
+@keyframes moveFromTopOut {
+  25% {
+    transform: scale(0.88);
+  }
+  50%,
+  100% {
+    transform: translateY(50%) scale(0.8);
+  }
+}
+
+@keyframes moveFromBottom {
+  0%,
+  25% {
+    transform: scale(0.88) translateY(125%);
+  }
+  50% {
+    transform: scale(0.88) translateY(0);
+  }
+  75%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes moveFromTop {
+  0%,
+  25% {
+    transform: scale(0.88) translateY(-125%);
+  }
+  50% {
+    transform: scale(0.88) translateY(0);
+  }
+  75%,
+  100% {
+    transform: scale(1);
   }
 }

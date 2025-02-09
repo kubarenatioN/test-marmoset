@@ -2,7 +2,7 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --fp-home-scale: 0.88;
+  --fp-anim-dur: 1.6s;
 }
 
 @media (prefers-color-scheme: dark) {

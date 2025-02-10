@@ -7,6 +7,7 @@ import ReactFullpage, {
   Item,
 } from '@fullpage/react-fullpage';
 import { clsx } from 'clsx';
+import Image from 'next/image';
 import { FC, useRef } from 'react';
 import styles from './style.module.scss';
 
@@ -25,6 +26,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
 
+  const withImages = true;
   let _api: FullpageApi;
 
   const afterRender = () => {
@@ -37,7 +39,6 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
     requestAnimationFrame(() => {
       containerRef.current?.classList.add(styles.inited);
       const current = _api.getActiveSection().item;
-      // console.log(_api);
 
       // show by default first slide
       current.classList.add(ACTIVE_SLIDE);
@@ -74,19 +75,15 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
       _api.moveTo(1);
     }
 
-    console.log(_api.getActiveSection().anchor);
+    // console.log(_api.getActiveSection().anchor);
   };
 
   const slideLeave = (origin: Item, dest: Item, dir: string) => {
     const currentSlide = origin.item;
     const nextSlide = dest.item;
     const footerQuery = '.' + styles.SectionFooter;
-    // const isNextFooter = false;
-    // const isFooter = false;
     const isNextFooter = Boolean(dest.item.querySelector(footerQuery));
     const isFooter = Boolean(origin.item.querySelector(footerQuery));
-
-    // console.log(currentSlide, nextSlide);
 
     let animIn = '';
     let animOut = '';
@@ -178,8 +175,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             enabled: false,
             label: '',
           }}
-          // scrollBar={false}
-          sectionsColor={['pink', 'orange', 'salmon', 'bisque']}
+          sectionsColor={
+            withImages ? undefined : ['pink', 'orange', 'salmon', 'bisque']
+          }
           scrollingSpeed={400}
           afterRender={afterRender}
           onLeave={onLeave}
@@ -189,19 +187,19 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             return (
               <ReactFullpage.Wrapper>
                 <FpSection options={{ api: fullpageApi }}>
-                  {/* <Image src={'/images/img-1.jpg'} fill alt='Bubna' /> */}
+                  <Image priority src={'/images/img-1.jpg'} fill alt='Bubna' />
 
                   <p>Section 1</p>
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  {/* <Image src={'/images/img-2.jpg'} fill alt='Bubna' /> */}
+                  <Image priority src={'/images/img-2.jpg'} fill alt='Bubna' />
 
                   <p>Section 2</p>
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  {/* <Image src={'/images/img-3.jpg'} fill alt='Bubna' /> */}
+                  <Image priority src={'/images/img-3.jpg'} fill alt='Bubna' />
 
                   <p>Section 3</p>
                 </FpSection>

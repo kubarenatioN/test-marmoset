@@ -14,6 +14,11 @@
 }
 
 .Footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #909090;
   padding-block: 3rem;
 }
 

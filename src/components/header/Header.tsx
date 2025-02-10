@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { FC } from 'react';
 import styles from './Header.module.scss';
@@ -10,7 +12,16 @@ const Header: FC<HeaderProps> = ({}) => {
       <nav className={styles.Menu}>
         <ul className={styles.MenuList}>
           <li>
-            <Link href={'/'}>Home</Link>
+            <Link
+              href={'/'}
+              // onClick={() => {
+              //   const url = new URL(window.location.href);
+              //   url.hash = '#one';
+              //   window.history.pushState({}, '', url.toString());
+              // }}
+            >
+              Home
+            </Link>
           </li>
           <li>
             <Link href={'/portfolio'}>Portfolio</Link>

@@ -28,19 +28,19 @@
 
 .section-content-1__nav {
   display: flex;
+}
 
-  a {
-    display: inline-block;
-    background-color: rgba(39, 39, 39, 0.714);
-    padding: 1rem 1.6rem;
-    transition: 0.3s;
-    letter-spacing: 0.8px;
+.section-content-1__link {
+  display: inline-block;
+  background-color: rgba(39, 39, 39, 0.714);
+  padding: 1rem 1.6rem;
+  transition: 0.3s;
+  letter-spacing: 0.8px;
+}
 
-    &:hover {
-      background-color: rgba(215, 215, 215, 0.714);
-      color: #222;
-    }
-  }
+.section-content-1__link:hover {
+  background-color: rgba(215, 215, 215, 0.714);
+  color: #222;
 }
 
 .section-content-1__cta {

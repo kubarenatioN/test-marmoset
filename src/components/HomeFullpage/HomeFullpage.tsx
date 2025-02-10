@@ -9,6 +9,7 @@ import ReactFullpage, {
 } from '@fullpage/react-fullpage';
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC, useRef } from 'react';
 import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
@@ -221,9 +222,13 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                           {mainSectionLinks.map((l) => {
                             return (
                               <li key={l.label}>
-                                <a href={l.url} target='_blank'>
+                                <Link
+                                  href={l.url}
+                                  target='_blank'
+                                  className='section-content-1__link'
+                                >
                                   {l.label}
-                                </a>
+                                </Link>
                               </li>
                             );
                           })}

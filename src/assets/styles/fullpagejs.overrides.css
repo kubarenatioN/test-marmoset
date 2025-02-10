@@ -28,6 +28,7 @@ body {
   visibility: hidden;
   position: absolute;
   z-index: 1;
+  overflow: hidden;
 }
 
 .fp-overflow {

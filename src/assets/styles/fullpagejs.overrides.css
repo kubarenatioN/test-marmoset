@@ -30,6 +30,10 @@ body {
   z-index: 1;
 }
 
+.fp-overflow {
+  position: relative;
+}
+
 .pr-fp-hidden.pr-fp-active {
   visibility: visible;
   margin-left: 0;
@@ -46,48 +50,68 @@ body {
 /* FP Main Page animations */
 @keyframes moveFromBottomOut {
   25% {
-    transform: scale(0.88);
+    transform: scale(var(--fp-s-scale));
   }
   50%,
   100% {
-    transform: translateY(-50%) scale(0.8);
+    transform: translateY(-80%) scale(var(--fp-s-scale));
+    opacity: 0.4;
+    filter: blur(8px);
   }
 }
 
 @keyframes moveFromTopOut {
   25% {
-    transform: scale(0.88);
+    transform: scale(var(--fp-s-scale));
   }
   50%,
   100% {
-    transform: translateY(50%) scale(0.8);
+    transform: translateY(80%) scale(var(--fp-s-scale));
+    opacity: 0.4;
+    filter: blur(8px);
   }
 }
 
 @keyframes moveFromBottom {
-  0%,
+  0% {
+    transform: scale(var(--fp-s-scale)) translateY(125%);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
   25% {
-    transform: scale(0.88) translateY(125%);
+    transform: scale(var(--fp-s-scale)) translateY(125%);
   }
   50% {
-    transform: scale(0.88) translateY(0);
+    transform: scale(var(--fp-s-scale)) translateY(0);
+    /* opacity: 0.8; */
+    filter: blur(2px);
   }
   75%,
   100% {
     transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
   }
 }
 
 @keyframes moveFromTop {
-  0%,
+  0% {
+    transform: scale(var(--fp-s-scale)) translateY(-125%);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
   25% {
-    transform: scale(0.88) translateY(-125%);
+    transform: scale(var(--fp-s-scale)) translateY(-125%);
   }
   50% {
-    transform: scale(0.88) translateY(0);
+    transform: scale(var(--fp-s-scale)) translateY(0);
+    /* opacity: 0.8; */
+    filter: blur(2px);
   }
   75%,
   100% {
     transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
   }
 }

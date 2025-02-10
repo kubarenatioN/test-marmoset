@@ -42,6 +42,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
     });
 
     requestAnimationFrame(() => {
+      // remove FP watermark
+      document.querySelector('.fp-watermark')?.remove();
+
       containerRef.current?.classList.add(styles.inited);
       const current = _api.getActiveSection().item;
 
@@ -205,7 +208,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                   <FpImage src={`${imagesDir}/1.png`} />
 
                   <div className='section-content__wrapper'>
-                    <div className={clsx('section-content')}>
+                    <div className={clsx('section-content section-content-1')}>
                       <a
                         href='x.com'
                         target='_blank'

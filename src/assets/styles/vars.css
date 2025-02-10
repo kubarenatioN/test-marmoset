@@ -3,6 +3,7 @@
   --foreground: #171717;
 
   --fp-anim-dur: 1.6s;
+  --fp-s-scale: 0.9;
 }
 
 @media (prefers-color-scheme: dark) {

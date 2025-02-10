@@ -12,15 +12,9 @@
   }
 }
 
-.Footer {
-  &Logo {
-    // text-transform: uppercase;
-  }
-}
-
 .Content {
   overflow: hidden;
-  opacity: 0.8;
+  opacity: 0.4;
   transition: 1s opacity;
 
   &.inited {

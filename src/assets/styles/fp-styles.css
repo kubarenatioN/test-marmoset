@@ -22,10 +22,15 @@
   width: 100%;
 }
 
+.section-content-1 {
+  flex-wrap: wrap;
+}
+
 .section-content-1__nav {
   display: flex;
 
   a {
+    display: inline-block;
     background-color: rgba(39, 39, 39, 0.714);
     padding: 1rem 1.6rem;
     transition: 0.3s;

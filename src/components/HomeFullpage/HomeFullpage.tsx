@@ -1,5 +1,6 @@
 'use client';
 
+import '@/assets/styles/fp-styles.css';
 import '@/assets/styles/fullpagejs.overrides.css';
 import { requestTimeout } from '@/helpers/timeout';
 import ReactFullpage, {
@@ -9,8 +10,10 @@ import ReactFullpage, {
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import { FC, useRef } from 'react';
+import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
 
+const FOOTER_CLASS = 'pr-section-footer';
 const HIDDEN_SLIDE = 'pr-fp-hidden';
 const ACTIVE_SLIDE = 'pr-fp-active';
 const ANIM_IN_CLASS = 'pr-animating-in';
@@ -20,7 +23,9 @@ const Z_INDEX_BELOW = 1;
 
 interface HomeFullpageProps {}
 
-const _anchors = ['one', 'two', 'three', 'footer'];
+const sectionIds = ['one', 'two', 'three', 'four', 'footer'];
+
+const imagesDir = '/images/fullpage';
 
 const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -81,7 +86,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   const slideLeave = (origin: Item, dest: Item, dir: string) => {
     const currentSlide = origin.item;
     const nextSlide = dest.item;
-    const footerQuery = '.' + styles.SectionFooter;
+    const footerQuery = `.${FOOTER_CLASS}`;
     const isNextFooter = Boolean(dest.item.querySelector(footerQuery));
     const isFooter = Boolean(origin.item.querySelector(footerQuery));
 
@@ -95,36 +100,47 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
     }
     animOut = animIn + 'Out';
 
+    // if next slide is going to be footer...
     if (isNextFooter) {
       _api.setLockAnchors(true);
-      nextSlide.classList.add(ACTIVE_SLIDE);
-      // const container = nextSlide.parentElement;
       const fH = nextSlide.clientHeight;
 
+      // set transformations for current slide
+      // lift up last major slide to release space for footer
       currentSlide.style.transition = `transform 400ms`;
       currentSlide.style.transform = `translate3d(0, -${fH}px, 0)`;
 
+      // set transformations for next slide (footer block)
+      // initially it will be below the fold, then it would show up
+      nextSlide.classList.add(ACTIVE_SLIDE);
       nextSlide.style.bottom = `-${fH}px`;
       nextSlide.style.transform = `translate3d(0, -100%, 0)`;
       nextSlide.style.transition = `transform 400ms`;
 
+      // handle end of transition
       const trEnd = () => {
         onAnimationPhaseEnd();
         currentSlide.removeEventListener('transitionend', trEnd);
         _api.setLockAnchors(false);
       };
+      // listen end of transition
       currentSlide.addEventListener('transitionend', trEnd);
-    } else if (isFooter) {
+    }
+    // if current slide is footer and we go up
+    else if (isFooter) {
       _api.setLockAnchors(true);
-      // const fH = currentSlide.clientHeight;
 
+      // move back the slide right above footer
       nextSlide.style.transition = `transform 400ms`;
       nextSlide.style.transform = `translate3d(0, 0, 0)`;
 
+      // move back footer (hide below the fold)
       currentSlide.style.transform = `translate3d(0, 0, 0)`;
       currentSlide.style.transition = `transform 400ms`;
 
+      // handle end of transition
       const trEnd = () => {
+        // reset styles and ccs classes
         nextSlide.style.transition = ``;
         nextSlide.style.transform = ``;
         currentSlide.style.bottom = ``;
@@ -168,9 +184,8 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
       <div ref={containerRef} className={clsx(styles.Content, 'fp-root')}>
         <ReactFullpage
           licenseKey={'asd'}
-          anchors={_anchors}
+          anchors={sectionIds}
           navigation={false}
-          navigationTooltips={_anchors}
           credits={{
             enabled: false,
             label: '',
@@ -187,26 +202,76 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             return (
               <ReactFullpage.Wrapper>
                 <FpSection options={{ api: fullpageApi }}>
-                  <Image priority src={'/images/img-1.jpg'} fill alt='Bubna' />
+                  <FpImage src={`${imagesDir}/1.png`} />
 
-                  <p>Section 1</p>
+                  <div className='section-content__wrapper'>
+                    <div className={clsx('section-content')}>
+                      <a
+                        href='x.com'
+                        target='_blank'
+                        className='section-content-1__cta'
+                      >
+                        View more
+                      </a>
+                      <nav>
+                        <ul className='section-content-1__nav'>
+                          {mainSectionLinks.map((l) => {
+                            return (
+                              <li key={l.label}>
+                                <a href={l.url} target='_blank'>
+                                  {l.label}
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <Image priority src={'/images/img-2.jpg'} fill alt='Bubna' />
+                  <FpImage src={`${imagesDir}/2.png`} />
 
-                  <p>Section 2</p>
+                  <div className='section-content__wrapper'>
+                    <div className={clsx('section-content')}>
+                      <h1>Section 2</h1>
+                    </div>
+                  </div>
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <Image priority src={'/images/img-3.jpg'} fill alt='Bubna' />
+                  <FpImage src={`${imagesDir}/3.png`} />
 
-                  <p>Section 3</p>
+                  <div className='section-content__wrapper'>
+                    <div className={clsx('section-content')}>
+                      <h1>Section 3</h1>
+                    </div>
+                  </div>
+                </FpSection>
+
+                <FpSection options={{ api: fullpageApi }}>
+                  <FpImage src={`${imagesDir}/4.png`} />
+
+                  <div className='section-content__wrapper'>
+                    <div className={clsx('section-content')}>
+                      <h1>Section 4</h1>
+                    </div>
+                  </div>
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }} footer>
-                  <footer className={clsx(styles.Footer)}>
-                    <h1>Hello I'm Footer</h1>
+                  <footer className='pr-section-footer'>
+                    <div className={'section-content'}>
+                      <div>
+                        <h1 className={clsx(styles.FooterLogo)}>Polyrhythm</h1>
+                      </div>
+                      <div>
+                        <a href='https://x.com' target='_blank'>
+                          X.com
+                        </a>
+                      </div>
+                    </div>
                   </footer>
                 </FpSection>
               </ReactFullpage.Wrapper>
@@ -238,16 +303,27 @@ const FpSection: FC<FullpageSectionProps> = ({ options, children, footer }) => {
         HIDDEN_SLIDE
       )}
     >
-      <div
-        className={clsx(
-          styles.SectionInner,
-          footer ? styles.SectionFooter : ''
-        )}
-      >
-        {/*  */}
-        {children}
-      </div>
+      {/*  */}
+      {children}
     </div>
+  );
+};
+
+interface FullpageImageProps {
+  src: string;
+}
+
+const FpImage: FC<FullpageImageProps> = ({ src }) => {
+  return (
+    <Image
+      priority
+      fill
+      src={src}
+      alt='Bubna'
+      style={{
+        objectFit: 'cover',
+      }}
+    />
   );
 };
 

@@ -1,25 +1,21 @@
 .Section {
   position: relative;
 
-  &Inner {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   &Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     height: auto;
+    padding: 3rem 2rem;
+    background-color: #909090;
   }
 }
 
 .Footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #909090;
-  padding-block: 3rem;
+  &Logo {
+    // text-transform: uppercase;
+  }
 }
 
 .Content {

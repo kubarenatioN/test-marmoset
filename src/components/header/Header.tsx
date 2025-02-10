@@ -1,5 +1,6 @@
 'use client';
 
+import { requestTimeout } from '@/helpers/timeout';
 import Link from 'next/link';
 import { FC } from 'react';
 import styles from './Header.module.scss';
@@ -14,18 +15,18 @@ const Header: FC<HeaderProps> = ({}) => {
           <li>
             <Link
               href={'/'}
-              // onClick={() => {
-              //   const url = new URL(window.location.href);
-              //   url.hash = '#one';
-              //   window.history.pushState({}, '', url.toString());
-              // }}
+              onClick={() => {
+                requestTimeout(() => {
+                  window.location.hash = '';
+                }, 10);
+              }}
             >
               Home
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href={'/portfolio'}>Portfolio</Link>
-          </li>
+          </li> */}
           <li>
             <Link href={'/ness'}>Ness</Link>
           </li>

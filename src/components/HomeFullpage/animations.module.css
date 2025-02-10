@@ -1,5 +1,6 @@
 /* FP Main Page animations */
-@keyframes moveFromBottomOut {
+
+/* @keyframes moveFromBottomOut {
   25% {
     transform: scale(0.8);
   }
@@ -45,4 +46,4 @@
   100% {
     transform: scale(1);
   }
-}
+} */

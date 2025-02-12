@@ -10,7 +10,7 @@ import ReactFullpage, {
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
 
@@ -29,6 +29,7 @@ const sectionIds = ['one', 'two', 'three', 'four', 'footer'];
 const imagesDir = '/images/fullpage';
 
 const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
+  const [activeSlide, setActiveSlide] = useState(sectionIds[0]);
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
 
@@ -47,14 +48,27 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
       document.querySelector('.fp-watermark')?.remove();
 
       containerRef.current?.classList.add(styles.inited);
-      const current = _api.getActiveSection().item;
 
-      // show by default first slide
-      current.classList.add(ACTIVE_SLIDE);
-      if (location.hash === '') {
-        current.classList.add(ANIM_IN_CLASS);
-        current.style.animationName = 'moveFromTop';
-        current.style.zIndex = String(Z_INDEX_ABOVE);
+      let { hash } = location;
+
+      if (hash === '') {
+        // show by default first slide
+        const active = _api.getActiveSection();
+        if (active.anchor !== sectionIds[0]) {
+          _api.moveTo(sectionIds[0]);
+        } else {
+          const current = active.item;
+          current.classList.add(ACTIVE_SLIDE, ANIM_IN_CLASS);
+          current.style.animationName = 'moveFromTop';
+          current.style.zIndex = String(Z_INDEX_ABOVE);
+        }
+      } else {
+        hash = hash.replace('#', '');
+        const isInSections = sectionIds.findIndex((s) => s === hash);
+
+        if (isInSections) {
+          _api.moveTo(hash);
+        }
       }
     });
   };
@@ -80,11 +94,11 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
 
     if (hash !== '' && hash !== 'footer') {
       _api.moveTo(hash);
+      setActiveSlide(hash);
     } else if (hash === '') {
       _api.moveTo(1);
+      setActiveSlide(sectionIds[0]);
     }
-
-    // console.log(_api.getActiveSection().anchor);
   };
 
   const slideLeave = (origin: Item, dest: Item, dir: string) => {
@@ -181,6 +195,19 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
 
       currentSlide.onanimationend = () => {};
     }
+  };
+
+  const onClickDot = (e: any) => {
+    e.preventDefault();
+
+    if (isScrolling.current) {
+      return;
+    }
+
+    const href = (e.currentTarget as HTMLAnchorElement).href;
+
+    const dest = new URL(href).hash;
+    location.href = dest ? dest : '';
   };
 
   return (
@@ -286,6 +313,24 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             );
           }}
         ></ReactFullpage>
+        <ul className={styles.NavList}>
+          {sectionIds.slice(0, -1).map((s) => {
+            return (
+              <li key={s}>
+                <a
+                  className={clsx(
+                    styles.NavLink,
+                    activeSlide === s ? styles.NavLinkActive : ''
+                  )}
+                  href={'#' + s}
+                  onClick={onClickDot}
+                >
+                  <span className={styles.NavDot}></span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </>
   );

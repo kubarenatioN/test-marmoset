@@ -245,7 +245,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             return (
               <ReactFullpage.Wrapper>
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={`${imagesDir}/1.png`} />
+                  <FpImage
+                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/2.png`}
+                  />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content section-content-1')}>
@@ -278,7 +280,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={`${imagesDir}/2.png`} />
+                  <FpImage
+                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/3.png`}
+                  />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>
@@ -288,7 +292,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={`${imagesDir}/3.png`} />
+                  <FpImage
+                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739377565/1.png`}
+                  />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>
@@ -298,7 +304,9 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={`${imagesDir}/4.png`} />
+                  <FpImage
+                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/4.png`}
+                  />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>

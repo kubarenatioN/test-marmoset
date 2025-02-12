@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   sassOptions: {},
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'res.cloudinary.com'],
   },
 };
 

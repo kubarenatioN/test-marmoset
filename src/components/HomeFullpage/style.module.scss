@@ -35,30 +35,34 @@
 
   &Link {
     display: block;
-    padding: 7px;
+    padding: 12px;
 
     &:hover {
       .NavDot {
-        transform: scale(1.6);
+        transform: scale(1.5);
+        opacity: 1;
       }
     }
   }
 
   &LinkActive {
     .NavDot {
-      background-color: #ffffffb2;
-      transform: scale(1.6);
-      border-width: 0;
+      background-color: #ffffff;
+      border-color: #ffffff;
+      transform: scale(1.5);
+      opacity: 1;
     }
   }
 
   &Dot {
     display: block;
-    width: 10px;
+    width: 8px;
     aspect-ratio: 1;
-    border: 1px solid #ffffffad;
+    border: 1px solid #ffffff;
+    opacity: 0.7;
     border-radius: 50%;
     background-color: transparent;
-    transition: transform 0.2s;
+    transition: 0.2s;
+    mix-blend-mode: difference;
   }
 }

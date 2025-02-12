@@ -49,7 +49,8 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
 
       containerRef.current?.classList.add(styles.inited);
 
-      let { hash } = location;
+      const { hash } = location;
+      const clearHash = hash.replace('#', '');
 
       if (hash === '') {
         // show by default first slide
@@ -63,13 +64,14 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
           current.style.zIndex = String(Z_INDEX_ABOVE);
         }
       } else {
-        hash = hash.replace('#', '');
-        const isInSections = sectionIds.findIndex((s) => s === hash);
+        const isInSections = sectionIds.findIndex((s) => s === clearHash);
 
         if (isInSections) {
           _api.moveTo(hash);
         }
       }
+
+      setActiveSlide(clearHash);
     });
   };
 
@@ -148,9 +150,18 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
     else if (isFooter) {
       _api.setLockAnchors(true);
 
+      const isNextNotFooterSibling = origin.index - dest.index > 1;
+      let footerSibling: HTMLElement = nextSlide;
+
+      if (isNextNotFooterSibling) {
+        const siblingIndex = origin.index - 1;
+        const _p = origin.item.parentElement;
+        footerSibling = _p?.children.item(siblingIndex) as HTMLElement;
+      }
+
       // move back the slide right above footer
-      nextSlide.style.transition = `transform 400ms`;
-      nextSlide.style.transform = `translate3d(0, 0, 0)`;
+      footerSibling.style.transition = `transform 400ms`;
+      footerSibling.style.transform = `translate3d(0, 0, 0)`;
 
       // move back footer (hide below the fold)
       currentSlide.style.transform = `translate3d(0, 0, 0)`;
@@ -159,17 +170,24 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
       // handle end of transition
       const trEnd = () => {
         // reset styles and ccs classes
-        nextSlide.style.transition = ``;
-        nextSlide.style.transform = ``;
+        footerSibling.style.transition = ``;
+        footerSibling.style.transform = ``;
         currentSlide.style.bottom = ``;
         currentSlide.classList.remove(ACTIVE_SLIDE);
 
-        onAnimationPhaseEnd();
-        nextSlide.removeEventListener('transitionend', trEnd);
+        if (isNextNotFooterSibling) {
+          requestTimeout(() => {
+            _api.moveTo(dest.anchor);
+            slideLeave({ item: footerSibling } as any, dest, 'up');
+          }, 50);
+        } else {
+          onAnimationPhaseEnd();
+        }
         _api.setLockAnchors(false);
+        footerSibling.removeEventListener('transitionend', trEnd);
       };
 
-      nextSlide.addEventListener('transitionend', trEnd);
+      footerSibling.addEventListener('transitionend', trEnd);
     } else {
       nextSlide.classList.add(ANIM_IN_CLASS, ACTIVE_SLIDE);
       nextSlide.style.animationName = animIn;

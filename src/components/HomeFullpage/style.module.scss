@@ -1,15 +1,5 @@
 .Section {
   position: relative;
-
-  &Footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    padding: 3rem 2rem;
-    background-color: #909090;
-  }
 }
 
 .Content {
@@ -25,7 +15,7 @@
 .Nav {
   &List {
     position: fixed;
-    right: 80px;
+    right: 40px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -39,7 +29,7 @@
 
     &:hover {
       .NavDot {
-        transform: scale(1.5);
+        transform: scale(1.4);
         opacity: 1;
       }
     }
@@ -48,20 +38,18 @@
   &LinkActive {
     .NavDot {
       background-color: #ffffff;
-      border-color: #ffffff;
-      transform: scale(1.5);
+      transform: scale(1.4);
       opacity: 1;
     }
   }
 
   &Dot {
     display: block;
-    width: 8px;
+    width: 6px;
     aspect-ratio: 1;
-    border: 1px solid #ffffff;
-    opacity: 0.7;
+    opacity: 0.5;
     border-radius: 50%;
-    background-color: transparent;
+    background-color: #fff;
     transition: 0.2s;
     mix-blend-mode: difference;
   }

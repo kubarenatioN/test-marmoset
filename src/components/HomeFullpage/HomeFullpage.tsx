@@ -33,7 +33,6 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
 
-  const withImages = true;
   let _api: FullpageApi;
 
   const afterRender = () => {
@@ -49,29 +48,27 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
 
       containerRef.current?.classList.add(styles.inited);
 
+      const active = _api.getActiveSection();
+      const current = active.item;
+
+      current.classList.add(ACTIVE_SLIDE);
+
       const { hash } = location;
       const clearHash = hash.replace('#', '');
 
       if (hash === '') {
-        // show by default first slide
-        const active = _api.getActiveSection();
-        if (active.anchor !== sectionIds[0]) {
-          _api.moveTo(sectionIds[0]);
-        } else {
-          const current = active.item;
-          current.classList.add(ACTIVE_SLIDE, ANIM_IN_CLASS);
-          current.style.animationName = 'moveFromTop';
-          current.style.zIndex = String(Z_INDEX_ABOVE);
-        }
+        _api.moveTo(sectionIds[0]);
       } else {
         const isInSections = sectionIds.findIndex((s) => s === clearHash);
 
         if (isInSections) {
           _api.moveTo(hash);
+        } else {
+          _api.moveTo(sectionIds[0]);
         }
       }
 
-      setActiveSlide(clearHash);
+      setActiveSlide(hash ? clearHash : sectionIds[0]);
     });
   };
 
@@ -239,9 +236,6 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             enabled: false,
             label: '',
           }}
-          sectionsColor={
-            withImages ? undefined : ['pink', 'orange', 'salmon', 'bisque']
-          }
           scrollingSpeed={400}
           afterRender={afterRender}
           onLeave={onLeave}

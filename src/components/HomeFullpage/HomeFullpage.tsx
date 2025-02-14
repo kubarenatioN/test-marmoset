@@ -22,13 +22,17 @@ const ANIM_OUT_CLASS = 'pr-animating-out';
 const Z_INDEX_ABOVE = 2;
 const Z_INDEX_BELOW = 1;
 
-interface HomeFullpageProps {}
+interface HomeFullpageProps {
+  data: {
+    title: string;
+    text?: string;
+    imgUrl: string;
+  }[];
+}
 
 const sectionIds = ['one', 'two', 'three', 'four', 'footer'];
 
-const imagesDir = '/images/fullpage';
-
-const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
+const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
   const [activeSlide, setActiveSlide] = useState(sectionIds[0]);
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
@@ -245,9 +249,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
             return (
               <ReactFullpage.Wrapper>
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage
-                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/2.png`}
-                  />
+                  <FpImage src={data[0].imgUrl} />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content section-content-1')}>
@@ -280,9 +282,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage
-                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/3.png`}
-                  />
+                  <FpImage src={data[1].imgUrl} />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>
@@ -292,9 +292,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage
-                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739377565/1.png`}
-                  />
+                  <FpImage src={data[2].imgUrl} />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>
@@ -304,9 +302,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({}) => {
                 </FpSection>
 
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage
-                    src={`https://res.cloudinary.com/dc2sdos71/image/upload/v1739385323/4.png`}
-                  />
+                  <FpImage src={data[3].imgUrl} />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content')}>

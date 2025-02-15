@@ -1,0 +1,36 @@
+.header-menu {
+  &__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #b9b9b9;
+
+    a {
+      display: inline-block;
+      padding: 3rem 2rem;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+
+      &.logo-link {
+        padding: 2.2rem 2rem;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .logo {
+    display: block;
+    object-fit: contain;
+  }
+}
+
+.header {
+  &.homepage {
+  }
+}

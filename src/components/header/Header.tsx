@@ -1,17 +1,24 @@
 'use client';
 
+import '@/assets/styles/header.scss';
 import { requestTimeout } from '@/helpers/timeout';
+import clsx from 'clsx';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import styles from './Header.module.scss';
 
-interface HeaderProps {}
+interface HeaderProps {
+  onHomepage?: boolean;
+}
 
-const Header: FC<HeaderProps> = ({}) => {
+const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
   return (
-    <header className={styles.Header}>
+    <header
+      className={clsx(styles.Header, 'header', onHomepage ? 'homepage' : '')}
+    >
       <nav className={styles.Menu}>
-        <ul className={styles.MenuList}>
+        <ul className={clsx(styles.MenuList, 'header-menu__list')}>
           <li>
             <Link
               href={'/'}
@@ -24,11 +31,19 @@ const Header: FC<HeaderProps> = ({}) => {
               Home
             </Link>
           </li>
-          {/* <li>
-            <Link href={'/portfolio'}>Portfolio</Link>
-          </li> */}
           <li>
-            <Link href={'/ness'}>Ness</Link>
+            <Link href={'/'} className='logo-link'>
+              <Image
+                className='logo'
+                src={'/images/logo.svg'}
+                alt='Polyrhythm'
+                width={200}
+                height={30}
+              />
+            </Link>
+          </li>
+          <li>
+            <Link href={'/work'}>Work</Link>
           </li>
         </ul>
       </nav>

@@ -4,7 +4,17 @@ const nextConfig: NextConfig = {
   /* config options here */
   sassOptions: {},
   images: {
-    domains: ['localhost', 'res.cloudinary.com'],
+    remotePatterns: [
+      {
+        hostname: 'localhost',
+      },
+      {
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        hostname: 'dl.dropboxusercontent.com',
+      },
+    ],
   },
 };
 

@@ -11,6 +11,7 @@ import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useRef, useState } from 'react';
+import FooterContent from '../footer/FooterContent';
 import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
 
@@ -313,16 +314,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
 
                 <FpSection options={{ api: fullpageApi }} footer>
                   <footer className='pr-section-footer'>
-                    <div className={'section-content'}>
-                      <div>
-                        <h1 className={clsx(styles.FooterLogo)}>Polyrhythm</h1>
-                      </div>
-                      <div>
-                        <a href='https://x.com' target='_blank'>
-                          X.com
-                        </a>
-                      </div>
-                    </div>
+                    <FooterContent />
                   </footer>
                 </FpSection>
               </ReactFullpage.Wrapper>

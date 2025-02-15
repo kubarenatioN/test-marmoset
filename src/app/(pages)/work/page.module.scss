@@ -1,39 +1,59 @@
 .Banner {
-  height: 50dvh;
+  height: 540px;
 }
 
 .Grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  padding-top: 80px;
 }
 
 .GridItem {
   position: relative;
+  overflow: hidden;
   aspect-ratio: 4 / 3;
+
+  &:hover {
+    .GridItemInner {
+      background-color: #12121297;
+    }
+    .GridItemTitle {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ProjectImg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.GridItemInner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  z-index: 2;
+  padding: 1rem;
+  transition: background-color 0.3s;
+}
+
+.GridItemTitle {
+  color: #f2f2f2;
+  font-size: 1.6rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: 0.3s;
 }
 
 .ProjectImg {
   object-fit: cover;
+  transition: transform 0.3s;
 }
 
-.BannerVideo {
-  width: 100%;
-  height: 100%;
-  // object-fit: cover;
-}
-
-.BannerVideoWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.BannerVideoActions {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  z-index: 2;
-  display: flex;
-  gap: 2rem;
-  color: #fff;
+@media screen and (max-width: 600px) {
+  .Banner {
+    height: 50dvh;
+  }
 }

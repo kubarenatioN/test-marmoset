@@ -7,15 +7,8 @@ import Link from 'next/link';
 import { FC } from 'react';
 import styles from './page.module.scss';
 
-const {
-  Banner,
-  Grid,
-  GridItem,
-  ProjectImg,
-  BannerVideo,
-  BannerVideoWrapper,
-  BannerVideoActions,
-} = styles;
+const { Banner, Grid, GridItem, ProjectImg, GridItemInner, GridItemTitle } =
+  styles;
 
 const dataQuery = `*[_type == 'project'] | order(_createdAt asc)`;
 
@@ -57,7 +50,9 @@ const Page: FC<PageProps> = async () => {
         {projects.map((p) => {
           return (
             <Link href={`/work/${p.slug.current}`} className={clsx(GridItem)}>
-              <h3>{p.title}</h3>
+              <div className={clsx(GridItemInner)}>
+                <h3 className={clsx(GridItemTitle)}>{p.title}</h3>
+              </div>
               <Image
                 src={p.previewUrl}
                 fill

@@ -55,8 +55,9 @@ const Page: FC<PageProps> = async ({ params }) => {
                         style={{
                           marginBlock: '2rem',
                           position: 'relative',
-                          width: 600,
-                          height: 400,
+                          width: '100%',
+                          height: 'auto',
+                          aspectRatio: 16 / 9,
                         }}
                       >
                         <ModelViewerScene modelUrl={value.url} />
@@ -72,9 +73,13 @@ const Page: FC<PageProps> = async ({ params }) => {
                       >
                         <Image
                           src={value.url}
-                          width={600}
-                          height={400}
-                          style={{ objectFit: 'cover' }}
+                          width={1600}
+                          height={900}
+                          style={{
+                            objectFit: 'cover',
+                            width: '100%',
+                            height: 'auto',
+                          }}
                           alt=''
                         />
                       </div>

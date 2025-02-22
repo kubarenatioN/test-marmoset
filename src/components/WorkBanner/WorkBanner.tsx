@@ -1,6 +1,6 @@
 'use client';
 
-import { Banner } from '@/app/(pages)/work/page';
+import { IPageBanner } from '@/models';
 import Image from 'next/image';
 import { FC, useRef } from 'react';
 import styles from './style.module.scss';
@@ -8,7 +8,7 @@ import styles from './style.module.scss';
 const { BannerVideoWrapper, BannerVideo, BannerVideoActions } = styles;
 
 interface WorkBannerProps {
-  banner: Banner;
+  banner: IPageBanner;
 }
 
 const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
@@ -31,9 +31,9 @@ const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
             muted
             className={BannerVideo}
           />
-          <div className={BannerVideoActions}>
+          {/* <div className={BannerVideoActions}>
             <span>View full</span>
-          </div>
+          </div> */}
         </div>
       )}
     </>

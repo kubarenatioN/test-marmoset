@@ -1,6 +1,7 @@
 import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
+import { IPageBanner, IProject } from '@/models';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,21 +13,9 @@ const { Banner, Grid, GridItem, ProjectImg, GridItemInner, GridItemTitle } =
 
 const dataQuery = `*[_type == 'project'] | order(_createdAt asc)`;
 
-const bannerQuery = `*[_type == 'workBanner']`;
+const bannerQuery = `*[_type == 'workBanner'][0]`;
 
 interface PageProps {}
-
-export interface IProject {
-  title: string;
-  slug: { current: string };
-  previewUrl: string;
-}
-
-export interface Banner {
-  title?: string;
-  imageUrl: string;
-  videoUrl: string;
-}
 
 const Page: FC<PageProps> = async () => {
   const projects = await client.fetch<IProject[]>(
@@ -35,7 +24,7 @@ const Page: FC<PageProps> = async () => {
     { next: { revalidate: 10 } }
   );
 
-  const [banner] = await client.fetch<Banner[]>(
+  const banner = await client.fetch<IPageBanner>(
     bannerQuery,
     {},
     { next: { revalidate: 10 } }

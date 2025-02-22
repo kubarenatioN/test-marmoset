@@ -3,6 +3,7 @@
 import '@/assets/styles/fp-styles.css';
 import '@/assets/styles/fullpagejs.overrides.css';
 import { requestTimeout } from '@/helpers/timeout';
+import { IHomepageSlide } from '@/models';
 import ReactFullpage, {
   fullpageApi as FullpageApi,
   Item,
@@ -24,17 +25,14 @@ const Z_INDEX_ABOVE = 2;
 const Z_INDEX_BELOW = 1;
 
 interface HomeFullpageProps {
-  data: {
-    title: string;
-    text?: string;
-    imgUrl: string;
-  }[];
+  data: IHomepageSlide[];
 }
 
-const sectionIds = ['one', 'two', 'three', 'four', 'footer'];
-
 const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
+  const sectionIds = [...data.map((s, i) => String(i + 1)), 'footer'];
+
   const [activeSlide, setActiveSlide] = useState(sectionIds[0]);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
 
@@ -99,6 +97,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
     if (hash !== '' && hash !== 'footer') {
       _api.moveTo(hash);
       setActiveSlide(hash);
+      console.log(hash);
     } else if (hash === '') {
       _api.moveTo(1);
       setActiveSlide(sectionIds[0]);
@@ -250,7 +249,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
             return (
               <ReactFullpage.Wrapper>
                 <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={data[0].imgUrl} />
+                  <FpImage slide={data[0]} />
 
                   <div className='section-content__wrapper'>
                     <div className={clsx('section-content section-content-1')}>
@@ -282,35 +281,19 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
                   </div>
                 </FpSection>
 
-                <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={data[1].imgUrl} />
+                {data.slice(1).map((slide) => {
+                  return (
+                    <FpSection options={{ api: fullpageApi }} key={slide.title}>
+                      <FpImage slide={slide} />
 
-                  <div className='section-content__wrapper'>
-                    <div className={clsx('section-content')}>
-                      <h1>Section 2</h1>
-                    </div>
-                  </div>
-                </FpSection>
-
-                <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={data[2].imgUrl} />
-
-                  <div className='section-content__wrapper'>
-                    <div className={clsx('section-content')}>
-                      <h1>Section 3</h1>
-                    </div>
-                  </div>
-                </FpSection>
-
-                <FpSection options={{ api: fullpageApi }}>
-                  <FpImage src={data[3].imgUrl} />
-
-                  <div className='section-content__wrapper'>
-                    <div className={clsx('section-content')}>
-                      <h1>Section 4</h1>
-                    </div>
-                  </div>
-                </FpSection>
+                      <div className='section-content__wrapper'>
+                        <div className={clsx('section-content')}>
+                          <h1>{slide.title}</h1>
+                        </div>
+                      </div>
+                    </FpSection>
+                  );
+                })}
 
                 <FpSection options={{ api: fullpageApi }} footer>
                   <footer className='pr-section-footer'>
@@ -371,20 +354,41 @@ const FpSection: FC<FullpageSectionProps> = ({ options, children, footer }) => {
 };
 
 interface FullpageImageProps {
-  src: string;
+  slide: IHomepageSlide;
 }
 
-const FpImage: FC<FullpageImageProps> = ({ src }) => {
+const FpImage: FC<FullpageImageProps> = ({ slide }) => {
+  const { imgUrl, videoUrl, videoLoop } = slide;
+
   return (
-    <Image
-      priority
-      fill
-      src={src}
-      alt='Bubna'
-      style={{
-        objectFit: 'cover',
-      }}
-    />
+    <>
+      {/* Image */}
+      {imgUrl && (
+        <Image
+          priority
+          fill
+          src={imgUrl}
+          alt='Vanya loh'
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      )}
+
+      {/* Video */}
+      {videoUrl && (
+        <div className={styles.FpSlideVideoWrapper}>
+          <video
+            muted
+            loop={Boolean(videoLoop)}
+            autoPlay
+            playsInline
+            src={videoUrl}
+            className={styles.FpSlideVideo}
+          ></video>
+        </div>
+      )}
+    </>
   );
 };
 

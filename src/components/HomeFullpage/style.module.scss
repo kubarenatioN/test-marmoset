@@ -54,3 +54,18 @@
     mix-blend-mode: difference;
   }
 }
+
+.FpSlideVideoWrapper {
+  position: absolute;
+  inset: 0;
+  background-color: #0c0c0c;
+}
+
+.FpSlideVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #0c0c0c;
+}

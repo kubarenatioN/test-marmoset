@@ -1,18 +1,17 @@
 'use client';
 
-import MarmosetScene from "@/components/MarmosetScene";
-import { FC } from "react"
+import { FC } from 'react';
 
-type PageProps = object
+type PageProps = object;
 
-const page: FC<PageProps> = ({}) => {  
-	return (
-		<div>
-			<section>place here</section>
+const page: FC<PageProps> = ({}) => {
+  return (
+    <div>
+      <section>place here</section>
 
-      <MarmosetScene />
-		</div>
-	)
-}
+      {/* <MarmosetScene /> */}
+    </div>
+  );
+};
 
-export default page
+export default page;

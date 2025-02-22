@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-width: none; /* keep an eye on it */
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

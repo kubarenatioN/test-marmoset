@@ -6,10 +6,12 @@ import { IProject } from '@/models';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC } from 'react';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 import styles from './page.module.scss';
 
-const { Banner, PageContent, ModelContainer, Article } = styles;
+const { Banner, BannerBackLink, PageContent, ModelContainer, Article } = styles;
 
 interface PageProps {
   params: Promise<{
@@ -32,12 +34,14 @@ const Page: FC<PageProps> = async ({ params }) => {
     { next: { revalidate: 10 } }
   );
 
-  // console.log(project.content);
-
   return (
     <>
       {project.banner && (
         <div className={Banner}>
+          <Link href={'/work'} className={BannerBackLink}>
+            <IoIosArrowRoundBack size={20} />
+            Back to catalog
+          </Link>
           <ProjectBanner banner={project.banner} />
         </div>
       )}

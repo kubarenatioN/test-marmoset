@@ -1,9 +1,12 @@
+import { PortableTextBlock } from '@portabletext/react';
+
 export interface IProject {
   title: string;
   slug: { current: string };
   previewUrl: string;
   modelUrl?: string;
   banner?: IProjectBanner;
+  content?: PortableTextBlock[];
 }
 
 export interface IProjectBanner {

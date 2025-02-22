@@ -3,11 +3,13 @@ import ModelViewerScene from '@/components/ModelViewerScene/ModelViewerScene';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
 import { client } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
+import { PortableText, PortableTextComponentProps } from '@portabletext/react';
+import { TypedObject } from '@portabletext/types';
 import Image from 'next/image';
 import { FC } from 'react';
 import styles from './page.module.scss';
 
-const { Banner, PageContent, ModelContainer } = styles;
+const { Banner, PageContent, ModelContainer, Article } = styles;
 
 interface PageProps {
   params: Promise<{
@@ -30,6 +32,8 @@ const Page: FC<PageProps> = async ({ params }) => {
     { next: { revalidate: 10 } }
   );
 
+  // console.log(project.content);
+
   return (
     <>
       {project.banner && (
@@ -38,7 +42,97 @@ const Page: FC<PageProps> = async ({ params }) => {
         </div>
       )}
       <div className={PageContent}>
-        <div
+        <article className={Article}>
+          {project.content && (
+            <PortableText
+              value={project.content}
+              components={{
+                types: {
+                  // TODO: move all this in separate components
+                  modelBlock: ({ value }) => {
+                    return (
+                      <div
+                        style={{
+                          marginBlock: '2rem',
+                          position: 'relative',
+                          width: 600,
+                          height: 400,
+                        }}
+                      >
+                        <ModelViewerScene modelUrl={value.url} />
+                      </div>
+                    );
+                  },
+                  imgBlock: ({ value }) => {
+                    return (
+                      <div
+                        style={{
+                          marginBlock: '2rem',
+                        }}
+                      >
+                        <Image
+                          src={value.url}
+                          width={600}
+                          height={400}
+                          style={{ objectFit: 'cover' }}
+                          alt=''
+                        />
+                      </div>
+                    );
+                  },
+                  columns: (
+                    props: PortableTextComponentProps<{
+                      columns: TypedObject[];
+                    }>
+                  ) => {
+                    const { value, renderNode } = props;
+
+                    const nodes = value.columns.map((col, i) =>
+                      renderNode({
+                        index: i,
+                        isInline: false,
+                        renderNode,
+                        node: col,
+                      })
+                    );
+
+                    return (
+                      <div
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: `repeat(${nodes.length}, 1fr)`,
+                          columnGap: '1rem',
+                        }}
+                      >
+                        {nodes}
+                      </div>
+                    );
+                  },
+                  column: (
+                    props: PortableTextComponentProps<{
+                      content: TypedObject[];
+                    }>
+                  ) => {
+                    const { value, renderNode } = props;
+
+                    const nodes = value.content.map((col, i) =>
+                      renderNode({
+                        index: i,
+                        isInline: false,
+                        renderNode,
+                        node: col,
+                      })
+                    );
+
+                    return <div>{nodes}</div>;
+                  },
+                },
+              }}
+            />
+          )}
+        </article>
+
+        {/* <div
           style={{
             display: 'flex',
             gap: '2rem',
@@ -52,15 +146,9 @@ const Page: FC<PageProps> = async ({ params }) => {
 
           <div style={{ color: '#fff' }}>
             <h1>{project.title}</h1>
-            <p>Описание проекта с тегами, программами и тд.</p>
+            <p></p>
           </div>
-        </div>
-        <Image
-          src={project.previewUrl}
-          alt={project.title}
-          width={600}
-          height={400}
-        />
+        </div> */}
       </div>
       <Footer />
     </>

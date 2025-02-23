@@ -45,6 +45,9 @@ const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
           <li>
             <Link href={'/work'}>Work</Link>
           </li>
+          <li>
+            <Link href={'/contacts'}>Contacts</Link>
+          </li>
         </ul>
       </nav>
     </header>

@@ -31,9 +31,6 @@ const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
             muted
             className={BannerVideo}
           />
-          {/* <div className={BannerVideoActions}>
-            <span>View full</span>
-          </div> */}
         </div>
       )}
     </>

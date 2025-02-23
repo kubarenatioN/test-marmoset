@@ -1,11 +1,11 @@
 .Banner {
-  height: 540px;
+  height: 64dvh;
 }
 
 .Grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding-top: 80px;
+  padding-top: 4rem;
 }
 
 .GridItem {

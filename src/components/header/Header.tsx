@@ -1,7 +1,6 @@
 'use client';
 
 import '@/assets/styles/header.scss';
-import { requestTimeout } from '@/helpers/timeout';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +18,7 @@ const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
     >
       <nav className={styles.Menu}>
         <ul className={clsx(styles.MenuList, 'header-menu__list')}>
-          <li>
+          {/* <li>
             <Link
               href={'/'}
               onClick={() => {
@@ -30,6 +29,9 @@ const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
             >
               Home
             </Link>
+          </li> */}
+          <li>
+            <Link href={'/work'}>Work</Link>
           </li>
           <li>
             <Link href={'/'} className='logo-link'>
@@ -41,9 +43,6 @@ const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
                 height={30}
               />
             </Link>
-          </li>
-          <li>
-            <Link href={'/work'}>Work</Link>
           </li>
           <li>
             <Link href={'/contacts'}>Contacts</Link>

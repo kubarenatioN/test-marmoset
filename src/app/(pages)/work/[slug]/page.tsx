@@ -37,7 +37,7 @@ const Page: FC<PageProps> = async ({ params }) => {
         <div className={Banner}>
           <Link href={'/work'} className={BannerBackLink}>
             <IoIosArrowRoundBack size={20} />
-            Back to catalog
+            Back to Projects
           </Link>
           <ProjectBanner banner={project.banner} />
         </div>

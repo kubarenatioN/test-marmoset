@@ -1,0 +1,15 @@
+.List {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+.Item {
+  padding: 0.4rem 1rem;
+  border: 2px solid #ffffffb5;
+  color: #fff;
+  border-radius: 16px;
+  cursor: pointer;
+}

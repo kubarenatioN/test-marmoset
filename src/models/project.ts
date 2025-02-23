@@ -7,6 +7,7 @@ export interface IProject {
   modelUrl?: string;
   banner?: IProjectBanner;
   content?: PortableTextBlock[];
+  tags?: ITag[];
 }
 
 export interface IProjectBanner {
@@ -14,4 +15,9 @@ export interface IProjectBanner {
   imgUrl: string;
   videoUrl: string;
   // modelUrl: string; for now we don't support 3D models in banner
+}
+
+export interface ITag {
+  value: string;
+  label: string;
 }

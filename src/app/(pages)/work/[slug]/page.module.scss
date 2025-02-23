@@ -32,31 +32,6 @@
   gap: 3rem;
 }
 
-.Article {
-  color: #fff;
-
-  font-family: var(--font-geist-sans);
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.6;
-
-  ol,
-  ul {
-    list-style: auto;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-  }
-
-  blockquote {
-    font-style: italic;
-    font-weight: 300;
-    font-family: var(--font-geist-mono);
-  }
-}
-
 .ModelContainer {
   position: relative;
   width: 700px;

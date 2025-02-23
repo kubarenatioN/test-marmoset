@@ -1,0 +1,47 @@
+import { PortableTextTypeComponentProps } from '@portabletext/react';
+import Image from 'next/image';
+import { FC } from 'react';
+
+interface ImageBlockProps {
+  title?: string;
+  url: string;
+}
+
+const ImageBlock: FC<PortableTextTypeComponentProps<ImageBlockProps>> = ({
+  value,
+  isInline,
+}) => {
+  return isInline ? (
+    <Image
+      src={value.url}
+      width={1600}
+      height={900}
+      alt=''
+      style={{
+        objectFit: 'cover',
+        width: '100%',
+        height: 'auto',
+      }}
+    />
+  ) : (
+    <div
+      style={{
+        marginBlock: '2rem',
+      }}
+    >
+      <Image
+        src={value.url}
+        width={1600}
+        height={900}
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: 'auto',
+        }}
+        alt=''
+      />
+    </div>
+  );
+};
+
+export default ImageBlock;

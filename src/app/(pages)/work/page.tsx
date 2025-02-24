@@ -1,28 +1,36 @@
 import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
-import { IPageBanner, IProject } from '@/models';
+import { IPageBanner } from '@/models';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import { getProjects } from './data';
 import styles from './page.module.scss';
 
-const { Banner, Grid, GridItem, ProjectImg, GridItemInner, GridItemTitle } =
-  styles;
-
-const dataQuery = `*[_type == 'project'] | order(_createdAt asc)`;
+const {
+  Banner,
+  GridFilters,
+  Grid,
+  GridItem,
+  ProjectImg,
+  GridItemInner,
+  GridItemTitle,
+} = styles;
 
 const bannerQuery = `*[_type == 'workBanner'][0]`;
 
-interface PageProps {}
+interface PageProps {
+  searchParams?: Promise<{
+    type?: string;
+  }>;
+}
 
-const Page: FC<PageProps> = async () => {
-  const projects = await client.fetch<IProject[]>(
-    dataQuery,
-    {},
-    { next: { revalidate: 10 } }
-  );
+const Page: FC<PageProps> = async ({ searchParams }) => {
+  const category = (await searchParams)?.type;
+
+  const projects = await getProjects(category);
 
   const banner = await client.fetch<IPageBanner>(
     bannerQuery,
@@ -35,22 +43,54 @@ const Page: FC<PageProps> = async () => {
       <section className={Banner}>
         <WorkBanner banner={banner} />
       </section>
-      <section className={Grid}>
-        {projects.map((p) => {
-          return (
-            <Link href={`/work/${p.slug.current}`} className={clsx(GridItem)}>
-              <div className={clsx(GridItemInner)}>
-                <h3 className={clsx(GridItemTitle)}>{p.title}</h3>
-              </div>
-              <Image
-                src={p.previewUrl}
-                fill
-                alt={p.title}
-                className={clsx(ProjectImg)}
-              />
-            </Link>
-          );
-        })}
+      <section className={''}>
+        <div className={GridFilters}>
+          <Link href={'/work'} scroll={false}>
+            All
+          </Link>
+          <Link
+            href={{
+              query: { type: '3d-models' },
+            }}
+            scroll={false}
+          >
+            3D Models
+          </Link>
+          <Link
+            href={{
+              query: { type: 'videos' },
+            }}
+            scroll={false}
+          >
+            Videos
+          </Link>
+          <Link
+            href={{
+              query: { type: 'stills' },
+            }}
+            scroll={false}
+          >
+            Stills
+          </Link>
+        </div>
+
+        <div className={Grid}>
+          {projects.map((p) => {
+            return (
+              <Link href={`/work/${p.slug.current}`} className={clsx(GridItem)}>
+                <div className={clsx(GridItemInner)}>
+                  <h3 className={clsx(GridItemTitle)}>{p.title}</h3>
+                </div>
+                <Image
+                  src={p.previewUrl}
+                  fill
+                  alt={p.title}
+                  className={clsx(ProjectImg)}
+                />
+              </Link>
+            );
+          })}
+        </div>
       </section>
       <Footer />
     </>

@@ -5,7 +5,15 @@
 .Grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.GridFilters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  color: #fff;
   padding-top: 4rem;
+  padding-bottom: 2rem;
 }
 
 .GridItem {

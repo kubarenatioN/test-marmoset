@@ -1,3 +1,4 @@
+import '@/assets/styles/article.scss';
 import {
   PortableText,
   PortableTextBlock,
@@ -5,10 +6,10 @@ import {
 } from '@portabletext/react';
 import { Property } from 'csstype';
 import { FC } from 'react';
+import ArticleTagsBlock from './components/ArticleTagsBlock';
 import { ColumnBlock, ColumnsBlock } from './components/ColumnsBlock';
 import ImageBlock from './components/ImageBlock';
 import ModelBlock from './components/ModelBlock';
-import styles from './Post.module.scss';
 
 interface PostProps {
   content: PortableTextBlock[];
@@ -16,7 +17,7 @@ interface PostProps {
 
 const Post: FC<PostProps> = ({ content }) => {
   return (
-    <article className={styles.Article}>
+    <article className={'post-article'}>
       <PortableText
         value={content}
         components={{
@@ -25,6 +26,7 @@ const Post: FC<PostProps> = ({ content }) => {
             imgBlock: ImageBlock,
             columns: ColumnsBlock,
             column: ColumnBlock,
+            tagsBlock: ArticleTagsBlock,
           },
           block: {
             normal: ({ value, children }) => {

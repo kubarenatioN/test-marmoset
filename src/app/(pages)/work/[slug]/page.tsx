@@ -1,7 +1,6 @@
 import Footer from '@/components/footer/Footer';
 import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
-import TagsList from '@/components/TagsList/TagsList';
 import { client } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
 import Link from 'next/link';
@@ -20,7 +19,15 @@ interface PageProps {
 const projectQ = (slug: string) =>
   `*[_type == 'project' && slug.current == '${slug}'][0] {
   ...,
-  banner->
+  banner->,
+  primaryTags[]->,
+  content[]{
+    ...,
+    _type == 'tagsBlock' => {
+      "primaryTags": project->primaryTags[]->,
+      "otherTags": project->otherTags[]
+    }
+  }
 }`;
 
 const Page: FC<PageProps> = async ({ params }) => {
@@ -44,12 +51,6 @@ const Page: FC<PageProps> = async ({ params }) => {
         </div>
       )}
       <div className={PageContent}>
-        {project.tags && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <TagsList tags={project.tags} />
-          </div>
-        )}
-
         {project.content && <Post content={project.content} />}
       </div>
       <Footer />

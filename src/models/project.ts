@@ -1,13 +1,18 @@
 import { PortableTextBlock } from '@portabletext/react';
 
+export interface ISlug {
+  current: string;
+}
+
 export interface IProject {
   title: string;
-  slug: { current: string };
+  slug: ISlug;
   previewUrl: string;
   modelUrl?: string;
   banner?: IProjectBanner;
   content?: PortableTextBlock[];
-  tags?: ITag[];
+  primaryTags?: ITag[];
+  otherTags?: ITag[];
 }
 
 export interface IProjectBanner {
@@ -17,7 +22,7 @@ export interface IProjectBanner {
   // modelUrl: string; for now we don't support 3D models in banner
 }
 
-export interface ITag {
-  value: string;
+export interface ITag<T = string> {
+  value: T;
   label: string;
 }

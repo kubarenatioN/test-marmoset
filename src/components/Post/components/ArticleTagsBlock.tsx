@@ -6,7 +6,7 @@ import { FC } from 'react';
 
 interface ArticleTagsBlockProps {
   primaryTags?: ITag<ISlug>[];
-  otherTags?: ITag[];
+  otherTags?: ITag[] | null;
   dir?: 'left' | 'center' | 'right';
 }
 
@@ -14,9 +14,10 @@ const ArticleTagsBlock: FC<
   PortableTextTypeComponentProps<ArticleTagsBlockProps>
 > = ({ value, isInline }) => {
   const { primaryTags = [], otherTags = [] } = value;
+
   const tags = primaryTags
     .map((el) => ({ ...el, value: el.value.current }))
-    .concat(otherTags);
+    .concat(otherTags ?? []);
 
   const justifyContent: Property.JustifyContent =
     value.dir === 'left'

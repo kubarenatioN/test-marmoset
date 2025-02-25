@@ -6,7 +6,7 @@ import { IProject } from '@/models';
 import { FC } from 'react';
 import styles from './page.module.scss';
 
-const { Banner, BannerBackLink, PageContent } = styles;
+const { Banner, PageContent } = styles;
 
 interface PageProps {
   params: Promise<{
@@ -44,14 +44,7 @@ const Page: FC<PageProps> = async ({ params }) => {
           <ProjectBanner banner={project.banner} />
         </div>
       )}
-      {/* <div>
-        <span>
-          <Link href={'/work'} className={BannerBackLink}>
-            <IoIosArrowRoundBack size={20} />
-            Back to Projects
-          </Link>
-        </span>
-      </div> */}
+
       <div className={PageContent}>
         {project.content && <Post content={project.content} />}
       </div>

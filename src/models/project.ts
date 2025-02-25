@@ -12,7 +12,7 @@ export interface IProject {
   banner?: IProjectBanner;
   content?: PortableTextBlock[];
   primaryTags?: ITag[];
-  otherTags?: ITag[];
+  otherTags?: ITag[] | null;
 }
 
 export interface IProjectBanner {

@@ -2,24 +2,17 @@ import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
+import Gallery from './components/Gallery';
 import { getProjects } from './data';
 import styles from './page.module.scss';
 
-const {
-  Banner,
-  GridFilters,
-  Grid,
-  GridItem,
-  ProjectImg,
-  GridItemInner,
-  GridItemTitle,
-} = styles;
+const { Banner } = styles;
 
 const bannerQuery = `*[_type == 'workBanner'][0]`;
+
+// export const revalidate = 0;
+// export const fetchCache = 'force-no-store';
 
 interface PageProps {
   searchParams?: Promise<{
@@ -28,9 +21,8 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = async ({ searchParams }) => {
-  const category = (await searchParams)?.type;
-
-  const projects = await getProjects(category);
+  const type = (await searchParams)?.type;
+  const projects = getProjects(type);
 
   const banner = await client.fetch<IPageBanner>(
     bannerQuery,
@@ -44,53 +36,9 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
         <WorkBanner banner={banner} />
       </section>
       <section className={''}>
-        <div className={GridFilters}>
-          <Link href={'/work'} scroll={false}>
-            All
-          </Link>
-          <Link
-            href={{
-              query: { type: '3d-models' },
-            }}
-            scroll={false}
-          >
-            3D Models
-          </Link>
-          <Link
-            href={{
-              query: { type: 'videos' },
-            }}
-            scroll={false}
-          >
-            Videos
-          </Link>
-          <Link
-            href={{
-              query: { type: 'stills' },
-            }}
-            scroll={false}
-          >
-            Stills
-          </Link>
-        </div>
-
-        <div className={Grid}>
-          {projects.map((p) => {
-            return (
-              <Link href={`/work/${p.slug.current}`} className={clsx(GridItem)}>
-                <div className={clsx(GridItemInner)}>
-                  <h3 className={clsx(GridItemTitle)}>{p.title}</h3>
-                </div>
-                <Image
-                  src={p.previewUrl}
-                  fill
-                  alt={p.title}
-                  className={clsx(ProjectImg)}
-                />
-              </Link>
-            );
-          })}
-        </div>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Gallery data={projects} type={type} />
+        </Suspense>
       </section>
       <Footer />
     </>

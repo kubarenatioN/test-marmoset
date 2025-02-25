@@ -1,0 +1,72 @@
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.GridFilters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #fff;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+
+.GridNavLink {
+  padding: 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+
+  &Active {
+    background-color: red;
+  }
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.GridItem {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+
+  &:hover {
+    .GridItemInner {
+      background-color: #12121297;
+    }
+    .GridItemTitle {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ProjectImg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.GridItemInner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  z-index: 2;
+  padding: 1rem;
+  transition: background-color 0.3s;
+}
+
+.GridItemTitle {
+  color: #f2f2f2;
+  font-size: 1.6rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: 0.3s;
+}
+
+.ProjectImg {
+  object-fit: cover;
+  transition: transform 0.3s;
+}

@@ -18,7 +18,7 @@ export default async function Home() {
 
   return (
     <>
-      <Header onHomepage />
+      <Header absolute />
       <HomeFullpage data={data} />;
     </>
   );

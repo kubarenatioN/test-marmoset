@@ -22,6 +22,7 @@ const ImageBlock: FC<PortableTextTypeComponentProps<ImageBlockProps>> = ({
         width: '100%',
         height: 'auto',
       }}
+      sizes='(max-width: 768px) 100vw, 1000px'
     />
   ) : (
     <div
@@ -39,6 +40,7 @@ const ImageBlock: FC<PortableTextTypeComponentProps<ImageBlockProps>> = ({
           height: 'auto',
         }}
         alt=''
+        sizes='(max-width: 768px) 100vw, 1000px'
       />
     </div>
   );

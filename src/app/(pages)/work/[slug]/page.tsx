@@ -3,9 +3,7 @@ import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
 import { client } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
-import Link from 'next/link';
 import { FC } from 'react';
-import { IoIosArrowRoundBack } from 'react-icons/io';
 import styles from './page.module.scss';
 
 const { Banner, BannerBackLink, PageContent } = styles;
@@ -43,13 +41,17 @@ const Page: FC<PageProps> = async ({ params }) => {
     <>
       {project.banner && (
         <div className={Banner}>
+          <ProjectBanner banner={project.banner} />
+        </div>
+      )}
+      {/* <div>
+        <span>
           <Link href={'/work'} className={BannerBackLink}>
             <IoIosArrowRoundBack size={20} />
             Back to Projects
           </Link>
-          <ProjectBanner banner={project.banner} />
-        </div>
-      )}
+        </span>
+      </div> */}
       <div className={PageContent}>
         {project.content && <Post content={project.content} />}
       </div>

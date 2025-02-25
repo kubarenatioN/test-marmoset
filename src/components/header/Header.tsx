@@ -8,13 +8,13 @@ import { FC } from 'react';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
-  onHomepage?: boolean;
+  absolute?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ onHomepage = false }) => {
+const Header: FC<HeaderProps> = ({ absolute = true }) => {
   return (
     <header
-      className={clsx(styles.Header, 'header', onHomepage ? 'homepage' : '')}
+      className={clsx(styles.Header, 'header', absolute ? 'absolute' : '')}
     >
       <nav className={styles.Menu}>
         <ul className={clsx(styles.MenuList, 'header-menu__list')}>

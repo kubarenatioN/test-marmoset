@@ -22,6 +22,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner }) => {
           fill
           src={banner.imgUrl}
           alt={banner.title ?? ''}
+          sizes='100vw'
         />
       )}
       {banner.videoUrl && (

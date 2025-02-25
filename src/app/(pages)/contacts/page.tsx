@@ -2,9 +2,8 @@ import Footer from '@/components/footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import { FaPhoneVolume } from 'react-icons/fa';
-import { IoMdMail } from 'react-icons/io';
-import { PiMapPinLineFill } from 'react-icons/pi';
+import { BsInstagram, BsTwitterX, BsVimeo } from 'react-icons/bs';
+import { FaArtstation } from 'react-icons/fa';
 import styles from './page.module.scss';
 
 interface pageProps {}
@@ -20,16 +19,24 @@ const page: FC<pageProps> = ({}) => {
         <section className={styles.Section}>
           <ul className={styles.List}>
             <li>
-              <IoMdMail size={20} />
-              <Link href='/'>Contact 1</Link>
+              <Link href={'/'}>
+                <FaArtstation />
+              </Link>
             </li>
             <li>
-              <FaPhoneVolume size={20} />
-              <Link href='/'>Contact 2</Link>
+              <Link href={'/'}>
+                <BsTwitterX />
+              </Link>
             </li>
             <li>
-              <PiMapPinLineFill size={20} />
-              <Link href='/'>Contact 3</Link>
+              <Link href={'/'}>
+                <BsInstagram />
+              </Link>
+            </li>
+            <li>
+              <Link href={'/'}>
+                <BsVimeo />
+              </Link>
             </li>
           </ul>
         </section>

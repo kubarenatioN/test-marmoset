@@ -15,7 +15,7 @@ const page: FC<pageProps> = ({}) => {
   return (
     <>
       <main className={styles.Main}>
-        <Image src={url} alt='' fill objectFit='cover' />
+        <Image src={url} alt='' fill style={{ objectFit: 'cover' }} />
         <section className={styles.Section}>
           <ul className={styles.List}>
             <li>

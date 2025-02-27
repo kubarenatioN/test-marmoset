@@ -1,5 +1,5 @@
 export interface IPageBanner {
   title?: string;
-  imageUrl: string;
-  videoUrl: string;
+  imageUrl?: string;
+  videoUrl?: string;
 }

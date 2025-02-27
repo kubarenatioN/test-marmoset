@@ -8,7 +8,6 @@ export interface IProject {
   title: string;
   slug: ISlug;
   previewUrl: string;
-  modelUrl?: string;
   banner?: IProjectBanner;
   content?: PortableTextBlock[];
   primaryTags?: ITag[];

@@ -2,35 +2,53 @@
 
 import { IPageBanner } from '@/models';
 import Image from 'next/image';
-import { FC, useRef } from 'react';
+import { FC, use, useRef, useState } from 'react';
+import { BiLoaderCircle } from 'react-icons/bi';
 import styles from './style.module.scss';
 
-const { BannerVideoWrapper, BannerVideo, BannerVideoActions } = styles;
+const { BannerVideoWrapper, BannerVideo, BannerVideoLoader } = styles;
 
 interface WorkBannerProps {
-  banner: IPageBanner;
+  banner: Promise<IPageBanner>;
 }
 
 const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
+  const [videoLoading, setVideoLoading] = useState(true);
+
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const data = use(banner);
 
   return (
     <>
-      {banner.imageUrl && (
-        <Image src={banner.imageUrl} alt={banner.title ?? ''} />
-      )}
-      {banner.videoUrl && (
+      {data.imageUrl && <Image src={data.imageUrl} alt={data.title ?? ''} />}
+
+      {data.videoUrl && (
         <div className={BannerVideoWrapper}>
           <video
             ref={videoRef}
-            src={banner.videoUrl}
+            src={data.videoUrl}
             controls={false}
             autoPlay={true}
             playsInline
             loop={true}
+            style={{
+              visibility: videoLoading ? 'hidden' : 'visible',
+            }}
             muted
+            onLoadedData={() => {
+              setVideoLoading(false);
+            }}
             className={BannerVideo}
-          />
+          ></video>
+
+          {videoLoading && (
+            <div className={BannerVideoLoader}>
+              <div>
+                <BiLoaderCircle />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

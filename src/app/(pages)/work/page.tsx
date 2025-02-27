@@ -3,6 +3,7 @@ import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
 import { FC, Suspense } from 'react';
+import { BiLoader } from 'react-icons/bi';
 import Gallery from './components/Gallery';
 import { getProjects } from './data';
 import styles from './page.module.scss';
@@ -24,16 +25,24 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
   const type = (await searchParams)?.type;
   const projects = getProjects(type);
 
-  const banner = await client.fetch<IPageBanner>(
+  const banner = client.fetch<IPageBanner>(
     bannerQuery,
     {},
-    { next: { revalidate: 10 } }
+    { next: { revalidate: 20 } }
   );
 
   return (
     <>
       <section className={Banner}>
-        <WorkBanner banner={banner} />
+        <Suspense
+          fallback={
+            <div>
+              <BiLoader size={32} color='#fff' />
+            </div>
+          }
+        >
+          <WorkBanner banner={banner} />
+        </Suspense>
       </section>
       <section className={''}>
         <Suspense fallback={<h1>Loading...</h1>}>

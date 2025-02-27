@@ -1,15 +1,12 @@
 import '@/assets/styles/article.scss';
-import {
-  PortableText,
-  PortableTextBlock,
-  PortableTextMarkComponentProps,
-} from '@portabletext/react';
-import { Property } from 'csstype';
+import { PortableText, PortableTextBlock } from '@portabletext/react';
 import { FC } from 'react';
 import ArticleTagsBlock from './components/ArticleTagsBlock';
 import { ColumnBlock, ColumnsBlock } from './components/ColumnsBlock';
 import ImageBlock from './components/ImageBlock';
 import ModelBlock from './components/ModelBlock';
+import VideoBlock from './components/VideoBlock';
+import AlignMark from './marks/AlignMark';
 
 interface PostProps {
   content: PortableTextBlock[];
@@ -24,6 +21,7 @@ const Post: FC<PostProps> = ({ content }) => {
           types: {
             modelBlock: ModelBlock,
             imgBlock: ImageBlock,
+            videoBlock: VideoBlock,
             columns: ColumnsBlock,
             column: ColumnBlock,
             tagsBlock: ArticleTagsBlock,
@@ -41,28 +39,7 @@ const Post: FC<PostProps> = ({ content }) => {
             },
           },
           marks: {
-            align: (
-              props: PortableTextMarkComponentProps<{
-                _type: 'align';
-                dir: string;
-              }>
-            ) => {
-              const { value } = props;
-
-              const textAlign: Property.TextAlign =
-                value?.dir === 'center'
-                  ? 'center'
-                  : value?.dir === 'right'
-                  ? 'end'
-                  : 'start';
-
-              // return paragraph with proper alignment
-              return (
-                <p style={{ textAlign, textWrap: 'balance' }}>
-                  {props.children}
-                </p>
-              );
-            },
+            align: AlignMark,
           },
         }}
       />

@@ -36,7 +36,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner }) => {
             loop={true}
             muted
             className={BannerVideo}
-          />
+          ></video>
         </div>
       )}
       {/* {banner.modelUrl && <ModelViewerScene modelUrl={banner.modelUrl} />} */}

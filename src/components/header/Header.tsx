@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import styles from './Header.module.scss';
 
 interface HeaderProps {
   absolute?: boolean;
@@ -13,27 +12,17 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ absolute = true }) => {
   return (
-    <header
-      className={clsx(styles.Header, 'header', absolute ? 'absolute' : '')}
-    >
-      <nav className={styles.Menu}>
-        <ul className={clsx(styles.MenuList, 'header-menu__list')}>
-          {/* <li>
-            <Link
-              href={'/'}
-              onClick={() => {
-                requestTimeout(() => {
-                  window.location.hash = '';
-                }, 10);
-              }}
-            >
-              Home
-            </Link>
-          </li> */}
-          <li>
-            <Link href={'/work'}>Work</Link>
+    <header className={clsx('header', absolute ? 'absolute' : '')}>
+      <nav>
+        <ul className={clsx('header-menu__list layout-grid')}>
+          <li className='header-menu__start'>
+            <ul>
+              <li>
+                <Link href={'/work'}>Work</Link>
+              </li>
+            </ul>
           </li>
-          <li>
+          <li className='header-menu__center'>
             <Link href={'/'} className='logo-link'>
               <Image
                 className='logo'
@@ -44,8 +33,12 @@ const Header: FC<HeaderProps> = ({ absolute = true }) => {
               />
             </Link>
           </li>
-          <li>
-            <Link href={'/contacts'}>Contacts</Link>
+          <li className='header-menu__end'>
+            <ul>
+              <li>
+                <Link href={'/contacts'}>Contacts</Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>

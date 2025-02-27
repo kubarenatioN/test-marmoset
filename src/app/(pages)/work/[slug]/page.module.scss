@@ -1,6 +1,6 @@
 .Banner {
   position: relative;
-  height: 70dvh;
+  height: 78dvh;
   // height: calc(100vh - 120px); // think about header height
 }
 
@@ -24,7 +24,8 @@
 
 .PageContent {
   max-width: 64rem;
-  padding-block: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
   padding-inline: 1rem;
   margin: 0 auto;
   display: flex;

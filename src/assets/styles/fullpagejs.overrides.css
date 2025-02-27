@@ -1,0 +1,118 @@
+body {
+  /* Overwriting styles for the navigation dots */
+  #fp-nav ul li a span,
+  .fp-slidesNav ul li a span {
+    background-color: #575757;
+  }
+
+  #fp-nav ul li a.active span {
+    background-color: #151515;
+  }
+
+  /* Uncomment to overwrite the styles of the tooltips too */
+  /*
+  .fp-tooltip{
+      font-size: 1.2em !important;
+      margin-right: 10px;
+  }
+  */
+
+  .fp-watermark {
+    display: none;
+  }
+}
+
+/* add specificity */
+.pr-fp-hidden.fp-section {
+  margin-left: -5000px;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fp-overflow {
+  position: relative;
+}
+
+.pr-fp-hidden.pr-fp-active {
+  visibility: visible;
+  margin-left: 0;
+}
+
+.pr-animating-in {
+  animation-duration: var(--fp-anim-dur);
+}
+
+.pr-animating-out {
+  animation-duration: var(--fp-anim-dur);
+}
+
+/* FP Main Page animations */
+@keyframes moveFromBottomOut {
+  25% {
+    transform: scale(var(--fp-s-scale));
+  }
+  50%,
+  100% {
+    transform: translateY(-80%) scale(var(--fp-s-scale));
+    opacity: 0.4;
+    filter: blur(8px);
+  }
+}
+
+@keyframes moveFromTopOut {
+  25% {
+    transform: scale(var(--fp-s-scale));
+  }
+  50%,
+  100% {
+    transform: translateY(80%) scale(var(--fp-s-scale));
+    opacity: 0.4;
+    filter: blur(8px);
+  }
+}
+
+@keyframes moveFromBottom {
+  0% {
+    transform: scale(var(--fp-s-scale)) translateY(125%);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
+  25% {
+    transform: scale(var(--fp-s-scale)) translateY(125%);
+  }
+  50% {
+    transform: scale(var(--fp-s-scale)) translateY(0);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
+  75%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes moveFromTop {
+  0% {
+    transform: scale(var(--fp-s-scale)) translateY(-125%);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
+  25% {
+    transform: scale(var(--fp-s-scale)) translateY(-125%);
+  }
+  50% {
+    transform: scale(var(--fp-s-scale)) translateY(0);
+    /* opacity: 0.8; */
+    filter: blur(2px);
+  }
+  75%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}

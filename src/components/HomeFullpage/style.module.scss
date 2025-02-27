@@ -1,0 +1,71 @@
+.Section {
+  position: relative;
+}
+
+.Content {
+  overflow: hidden;
+  opacity: 0.4;
+  transition: 1s opacity;
+
+  &.inited {
+    opacity: 1;
+  }
+}
+
+.Nav {
+  &List {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+  }
+
+  &Link {
+    display: block;
+    padding: 12px;
+
+    &:hover {
+      .NavDot {
+        transform: scale(1.4);
+        opacity: 1;
+      }
+    }
+  }
+
+  &LinkActive {
+    .NavDot {
+      background-color: #ffffff;
+      transform: scale(1.4);
+      opacity: 1;
+    }
+  }
+
+  &Dot {
+    display: block;
+    width: 6px;
+    aspect-ratio: 1;
+    opacity: 0.5;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: 0.2s;
+    mix-blend-mode: difference;
+  }
+}
+
+.FpSlideVideoWrapper {
+  position: absolute;
+  inset: 0;
+  background-color: #0c0c0c;
+}
+
+.FpSlideVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #0c0c0c;
+}

@@ -1,0 +1,57 @@
+import Footer from '@/components/footer/Footer';
+import WorkBanner from '@/components/WorkBanner/WorkBanner';
+import { client } from '@/helpers/sanity-client';
+import { IPageBanner } from '@/models';
+import { FC, Suspense } from 'react';
+import { BiLoader } from 'react-icons/bi';
+import Gallery from './components/Gallery';
+import { getProjects } from './data';
+import styles from './page.module.scss';
+
+const { Banner } = styles;
+
+const bannerQuery = `*[_type == 'workBanner'][0]`;
+
+// export const revalidate = 0;
+// export const fetchCache = 'force-no-store';
+
+interface PageProps {
+  searchParams?: Promise<{
+    type?: string;
+  }>;
+}
+
+const Page: FC<PageProps> = async ({ searchParams }) => {
+  const type = (await searchParams)?.type;
+  const projects = getProjects(type);
+
+  const banner = client.fetch<IPageBanner>(
+    bannerQuery,
+    {},
+    { next: { revalidate: 20 } }
+  );
+
+  return (
+    <>
+      <section className={Banner}>
+        <Suspense
+          fallback={
+            <div>
+              <BiLoader size={32} color='#fff' />
+            </div>
+          }
+        >
+          <WorkBanner banner={banner} />
+        </Suspense>
+      </section>
+      <section className={''}>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Gallery data={projects} type={type} />
+        </Suspense>
+      </section>
+      <Footer />
+    </>
+  );
+};
+
+export default Page;

@@ -3,6 +3,7 @@ import { PortableText, PortableTextBlock } from '@portabletext/react';
 import { FC } from 'react';
 import ArticleTagsBlock from './components/ArticleTagsBlock';
 import { ColumnBlock, ColumnsBlock } from './components/ColumnsBlock';
+import GalleryBlock from './components/GalleryBlock';
 import ImageBlock from './components/ImageBlock';
 import ModelBlock from './components/ModelBlock';
 import VideoBlock from './components/VideoBlock';
@@ -22,6 +23,7 @@ const Post: FC<PostProps> = ({ content }) => {
             modelBlock: ModelBlock,
             imgBlock: ImageBlock,
             videoBlock: VideoBlock,
+            galleryBlock: GalleryBlock,
             columns: ColumnsBlock,
             column: ColumnBlock,
             tagsBlock: ArticleTagsBlock,

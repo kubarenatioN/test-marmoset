@@ -1,0 +1,8 @@
+body {
+  .yarl__navigation_next,
+  .yarl__navigation_prev {
+    transform: none;
+    top: 100px;
+    bottom: 100px;
+  }
+}

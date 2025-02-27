@@ -14,6 +14,7 @@ const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
     <video
       preload='metadata'
       controls={true}
+      muted
       src={value.url}
       style={{
         display: 'inline-block',
@@ -31,6 +32,7 @@ const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
       <video
         preload='metadata'
         controls={true}
+        muted
         src={value.url}
         style={{
           width: '100%',

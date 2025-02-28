@@ -2,8 +2,7 @@
 
 import { IPageBanner } from '@/models';
 import Image from 'next/image';
-import { FC, use, useRef, useState } from 'react';
-import { BiLoaderCircle } from 'react-icons/bi';
+import { FC, use, useRef } from 'react';
 import styles from './style.module.scss';
 
 const { BannerVideoWrapper, BannerVideo, BannerVideoLoader } = styles;
@@ -13,8 +12,6 @@ interface WorkBannerProps {
 }
 
 const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
-  const [videoLoading, setVideoLoading] = useState(true);
-
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const data = use(banner);
@@ -32,23 +29,9 @@ const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
             autoPlay={true}
             playsInline
             loop={true}
-            style={{
-              visibility: videoLoading ? 'hidden' : 'visible',
-            }}
             muted
-            onLoadedData={() => {
-              setVideoLoading(false);
-            }}
             className={BannerVideo}
           ></video>
-
-          {videoLoading && (
-            <div className={BannerVideoLoader}>
-              <div>
-                <BiLoaderCircle />
-              </div>
-            </div>
-          )}
         </div>
       )}
     </>

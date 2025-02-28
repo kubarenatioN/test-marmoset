@@ -3,8 +3,9 @@ import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
 import { FC, Suspense } from 'react';
-import { BiLoader } from 'react-icons/bi';
 import Gallery from './components/Gallery';
+import GalleryFilters from './components/GalleryFilters';
+import GallerySkeleton from './components/GallerySkeleton';
 import { getProjects } from './data';
 import styles from './page.module.scss';
 
@@ -23,30 +24,28 @@ interface PageProps {
 
 const Page: FC<PageProps> = async ({ searchParams }) => {
   const type = (await searchParams)?.type;
+
   const projects = getProjects(type);
 
   const banner = client.fetch<IPageBanner>(
     bannerQuery,
     {},
-    { next: { revalidate: 20 } }
+    { next: { revalidate: 10 } }
   );
 
   return (
     <>
       <section className={Banner}>
-        <Suspense
-          fallback={
-            <div>
-              <BiLoader size={32} color='#fff' />
-            </div>
-          }
-        >
-          <WorkBanner banner={banner} />
-        </Suspense>
+        <WorkBanner banner={banner} />
       </section>
       <section className={''}>
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Gallery data={projects} type={type} />
+        <GalleryFilters type={type} />
+
+        <Suspense
+          key={`gallery-${type ?? 'all'}`}
+          fallback={<GallerySkeleton />}
+        >
+          <Gallery data={projects} />
         </Suspense>
       </section>
       <Footer />

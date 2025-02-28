@@ -1,56 +1,37 @@
+// 'use client';
+
 import { IProject } from '@/models';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, use } from 'react';
 import styles from './Gallery.module.scss';
-import { filters } from './filters';
 
-const {
-  Grid,
-  GridItem,
-  ProjectImg,
-  GridItemInner,
-  GridItemTitle,
-  GridFilters,
-  GridNavLink,
-  GridNavLinkActive,
-} = styles;
+const { Grid, GridItem, ProjectImg, GridItemInner, GridItemTitle } = styles;
 
 interface GalleryProps {
   data: Promise<IProject[]>;
   type?: string | null;
 }
 
-const Gallery: FC<GalleryProps> = ({ data, type = null }) => {
+const Gallery: FC<GalleryProps> = ({ data }) => {
+  // debug:
+  const delay = () =>
+    new Promise((res) => {
+      console.log('tick start');
+
+      setTimeout(() => {
+        console.log('tick end');
+        res(null);
+      }, 2000);
+    });
+
+  // const res = use(delay().then(() => data));
+
   const res = use(data);
 
   return (
     <>
-      <div className={GridFilters}>
-        {filters.map((item) => {
-          return (
-            <Link
-              className={clsx(
-                GridNavLink,
-                item.type === type ? GridNavLinkActive : ''
-              )}
-              key={item.label}
-              href={
-                item.type
-                  ? {
-                      query: { type: item.type },
-                    }
-                  : '/work'
-              }
-              scroll={false}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </div>
-
       <div className={Grid}>
         {res.map((p) => {
           return (

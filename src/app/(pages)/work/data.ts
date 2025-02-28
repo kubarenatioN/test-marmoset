@@ -2,10 +2,10 @@ import { client } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
 import { FilteredResponseQueryOptions } from '@sanity/client';
 
-const allQuery = `*[_type == 'project'] | order(_createdAt asc)`;
+const allQuery = `*[_type == 'project'] | order(_createdAt desc)`;
 
 const query = (category: string) => {
-  return `*[_type == 'project' && references(*[_type == 'primaryTag' && value.current == '${category}']._id)] | order(_createdAt asc) {
+  return `*[_type == 'project' && references(*[_type == 'primaryTag' && value.current == '${category}']._id)] | order(_createdAt desc) {
     slug,
     title,
     previewUrl,
@@ -13,7 +13,7 @@ const query = (category: string) => {
 };
 
 const options: FilteredResponseQueryOptions = {
-  next: { revalidate: 10 },
+  next: { revalidate: 60 },
 };
 
 export const getProjects = async (

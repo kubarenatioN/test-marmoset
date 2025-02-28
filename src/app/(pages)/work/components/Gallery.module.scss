@@ -18,7 +18,7 @@
   letter-spacing: 1px;
 
   &Active {
-    background-color: red;
+    background-color: rgb(132, 0, 0);
   }
 
   &:hover {
@@ -69,4 +69,31 @@
 .ProjectImg {
   object-fit: cover;
   transition: transform 0.3s;
+}
+
+.Loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+
+  svg {
+    font-size: 48px;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    display: block;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

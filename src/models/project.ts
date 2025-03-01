@@ -12,6 +12,8 @@ export interface IProject {
   content?: PortableTextBlock[];
   primaryTags?: ITag[];
   otherTags?: ITag[] | null;
+  _createdAt: string;
+  _id: string;
 }
 
 export interface IProjectBanner {

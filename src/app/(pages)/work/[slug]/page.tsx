@@ -3,30 +3,26 @@ import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
 import { client } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
+import Image from 'next/image';
+import Link from 'next/link';
 import { FC } from 'react';
+import { nextPrevProjQ, projectQ } from './data';
 import styles from './page.module.scss';
 
-const { Banner, PageContent, ArticleBackStrip } = styles;
+const {
+  Banner,
+  PageContent,
+  ArticleBackStrip,
+  PaginationSection,
+  PaginationTitle,
+  PaginationNav,
+} = styles;
 
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
 }
-
-const projectQ = (slug: string) =>
-  `*[_type == 'project' && slug.current == '${slug}'][0] {
-  ...,
-  banner->,
-  primaryTags[]->,
-  content[]{
-    ...,
-    _type == 'tagsBlock' => {
-      "primaryTags": project->primaryTags[]->,
-      "otherTags": project->otherTags[]
-    }
-  }
-}`;
 
 const Page: FC<PageProps> = async ({ params }) => {
   const { slug } = await params;
@@ -36,6 +32,18 @@ const Page: FC<PageProps> = async ({ params }) => {
     {},
     { next: { revalidate: 10 } }
   );
+
+  const pagination = await client.fetch(
+    nextPrevProjQ(),
+    {
+      lastCreatedAt: project._createdAt,
+    },
+    { next: { revalidate: 10 } }
+  );
+  // console.log(project.title, pagination);
+
+  const prev: IProject = pagination.prev ?? pagination.last;
+  const next: IProject = pagination.next ?? pagination.first;
 
   return (
     <>
@@ -54,6 +62,26 @@ const Page: FC<PageProps> = async ({ params }) => {
           </>
         )}
       </div>
+
+      <section className={PaginationSection}>
+        <h2 className={PaginationTitle}>More Projects</h2>
+
+        <nav className={PaginationNav}>
+          {[prev, next].map((proj) => {
+            return (
+              <Link key={proj.title} href={proj.slug.current}>
+                <Image
+                  src={proj.previewUrl}
+                  alt={proj.title}
+                  width={400}
+                  height={300}
+                />
+              </Link>
+            );
+          })}
+        </nav>
+      </section>
+
       <Footer />
     </>
   );

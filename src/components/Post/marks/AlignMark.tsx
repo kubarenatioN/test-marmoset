@@ -1,24 +1,17 @@
-import { PortableTextMarkComponentProps } from '@portabletext/react';
-import { FC } from 'react';
+import { PortableTextBlock } from '@portabletext/react';
+import { CSSProperties } from 'react';
 
-interface AlignMarkProps {
-  _type: 'align';
-  dir: string;
+export function getBlockAlign(
+  value: PortableTextBlock
+): CSSProperties['textAlign'] | undefined {
+  const alignMarks = value.children.findLast((node) =>
+    node.marks?.findLast((mark: string) => mark.includes('align--'))
+  );
+  const lastMark = alignMarks?.marks?.findLast((m: string) =>
+    m.includes('align--')
+  );
+
+  const alignProp = lastMark && lastMark.split('--')[1];
+
+  return alignProp;
 }
-
-const AlignMark: FC<PortableTextMarkComponentProps<AlignMarkProps>> = ({
-  value,
-  children,
-}) => {
-  const textAlign =
-    value?.dir === 'center'
-      ? 'center'
-      : value?.dir === 'right'
-      ? 'end'
-      : 'start';
-
-  // return paragraph with proper alignment
-  return <p style={{ textAlign, textWrap: 'balance' }}>{children}</p>;
-};
-
-export default AlignMark;

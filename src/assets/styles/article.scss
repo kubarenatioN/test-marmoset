@@ -56,4 +56,22 @@
     font-weight: 300;
     font-family: var(--font-geist-mono);
   }
+
+  .article-link {
+    color: #ffe44c;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline;
+    padding-inline: 0rem;
+  }
+
+  .align--left {
+    text-align: start;
+  }
+  .align--center {
+    text-align: center;
+  }
+  .align--right {
+    text-align: end;
+  }
 }

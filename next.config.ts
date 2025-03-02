@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
       {
         hostname: 'dl.dropboxusercontent.com',
       },
+      {
+        hostname: 'cdn.sanity.io',
+      },
     ],
   },
 };

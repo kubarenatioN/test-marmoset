@@ -1,3 +1,6 @@
+import { client } from '@/helpers/sanity-client';
+import { IProject } from '@/models';
+
 export const projectQ = (slug: string) =>
   `*[_type == 'project' && slug.current == '${slug}'][0] {
   ...,
@@ -9,7 +12,8 @@ export const projectQ = (slug: string) =>
       "primaryTags": project->primaryTags[]->,
       "otherTags": project->otherTags[]
     }
-  }
+  },
+  softwareUsed[]->
 }`;
 
 export const nextPrevProjQ = () => {
@@ -35,3 +39,15 @@ export const nextPrevProjQ = () => {
   }
 `;
 };
+
+export function getProject(slug: string) {
+  return client.fetch<IProject>(
+    projectQ(slug),
+    {},
+    { next: { revalidate: 20 } }
+  );
+}
+
+export function getProjectPagination(params = {}) {
+  return client.fetch(nextPrevProjQ(), params, { next: { revalidate: 10 } });
+}

@@ -1,12 +1,12 @@
 import Footer from '@/components/footer/Footer';
 import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
-import { client } from '@/helpers/sanity-client';
+import { urlFor } from '@/helpers/url-builder';
 import { IProject } from '@/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import { nextPrevProjQ, projectQ } from './data';
+import { getProject, getProjectPagination } from './data';
 import styles from './page.module.scss';
 
 const {
@@ -16,6 +16,10 @@ const {
   PaginationSection,
   PaginationTitle,
   PaginationNav,
+  SoftwareUsedBlock,
+  SoftwareUsedTitle,
+  SoftwareUsedList,
+  SoftwareUsedItem,
 } = styles;
 
 interface PageProps {
@@ -27,20 +31,13 @@ interface PageProps {
 const Page: FC<PageProps> = async ({ params }) => {
   const { slug } = await params;
 
-  const project = await client.fetch<IProject>(
-    projectQ(slug),
-    {},
-    { next: { revalidate: 10 } }
-  );
+  const project = await getProject(slug);
 
-  const pagination = await client.fetch(
-    nextPrevProjQ(),
-    {
-      lastCreatedAt: project._createdAt,
-    },
-    { next: { revalidate: 10 } }
-  );
-  // console.log(project.title, pagination);
+  const pagination = await getProjectPagination({
+    lastCreatedAt: project._createdAt,
+  });
+
+  // console.log(project.softwareUsed[0].icon);
 
   const prev: IProject = pagination.prev ?? pagination.last;
   const next: IProject = pagination.next ?? pagination.first;
@@ -55,13 +52,41 @@ const Page: FC<PageProps> = async ({ params }) => {
         </div>
       )}
 
-      <div className={PageContent}>
+      <section className={PageContent}>
         {project.content && (
           <>
             <Post content={project.content} />
           </>
         )}
-      </div>
+        <div className={SoftwareUsedBlock}>
+          <h2 className={SoftwareUsedTitle}>Software Used</h2>
+
+          {project.softwareUsed && (
+            <ul className={SoftwareUsedList}>
+              {project.softwareUsed.map((soft) => {
+                const url = urlFor(soft.icon.asset).fit('clip').url();
+
+                return (
+                  <li key={soft.slug.current} className={SoftwareUsedItem}>
+                    {soft.icon && (
+                      <Image
+                        src={url}
+                        alt={soft.name}
+                        width={20}
+                        height={20}
+                        style={{
+                          objectFit: 'contain',
+                        }}
+                      />
+                    )}
+                    <span>{soft.name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      </section>
 
       <section className={PaginationSection}>
         <h2 className={PaginationTitle}>More Projects</h2>

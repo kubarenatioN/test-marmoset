@@ -28,8 +28,10 @@
   flex-direction: column;
 
   article {
+    margin-top: -100px; // Probably better, check safari
     position: relative;
-    top: -100px;
+    z-index: 2;
+    // top: -100px;
   }
 }
 
@@ -81,5 +83,34 @@
     &:hover {
       filter: grayscale(0);
     }
+  }
+}
+
+.SoftwareUsedBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.SoftwareUsedList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+.SoftwareUsedItem {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 4px 12px;
+  // border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: #393939;
+  cursor: pointer;
+
+  span {
+    font-size: 0.8rem;
   }
 }

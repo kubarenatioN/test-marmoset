@@ -14,6 +14,7 @@ export interface IProject {
   otherTags?: ITag[] | null;
   _createdAt: string;
   _id: string;
+  softwareUsed?: IProjectSoftware[] | null;
 }
 
 export interface IProjectBanner {
@@ -26,4 +27,10 @@ export interface IProjectBanner {
 export interface ITag<T = string> {
   value: T;
   label: string;
+}
+
+export interface IProjectSoftware {
+  name: string;
+  slug: ISlug;
+  icon?: any;
 }

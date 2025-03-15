@@ -2,6 +2,7 @@ import { FpMedia } from '@/components/FullpageMedia/FullpageMedia';
 import { IHomepageSlide } from '@/models';
 import { clsx } from 'clsx';
 import { FC } from 'react';
+import Footer from '../footer/Footer';
 import styles from './style.module.scss';
 
 interface HomepageMobileProps {
@@ -24,6 +25,8 @@ const HomepageMobile: FC<HomepageMobileProps> = ({ data }) => {
           </section>
         );
       })}
+
+      <Footer />
     </main>
   );
 };

@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
-import { CgClose } from 'react-icons/cg';
 import { IoClose } from 'react-icons/io5';
 import { SlMenu } from 'react-icons/sl';
 import styles from './style.module.scss';
@@ -93,7 +92,7 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
             alt='Polyrhythm'
             style={{
               aspectRatio: 200 / 30,
-              height: 24,
+              // height: 24,
               width: '100%',
             }}
             width={200}
@@ -110,7 +109,8 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
             className={clsx('btn-reset', styles.OpenBtn)}
             onClick={() => setOpen((prev) => !prev)}
           >
-            {!open ? <SlMenu size={32} /> : <CgClose size={32} />}
+            {/* {!open ? <SlMenu size={32} /> : <CgClose size={32} />} */}
+            <SlMenu size={32} />
           </button>
         </div>
 
@@ -159,14 +159,18 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
             </ul>
           </nav>
 
-          <div
-            data-step={rgbPart === 0 ? 'red' : rgbPart === 1 ? 'green' : 'blue'}
-            className={clsx(styles.Timeline, robotoMono.variable)}
-          >
-            <span style={{ position: 'relative' }}>
-              <span>{time && time.toLocaleString()}</span>
-              <span>{time && time.toLocaleString()}</span>
-            </span>
+          <div>
+            <div
+              data-step={
+                rgbPart === 0 ? 'red' : rgbPart === 1 ? 'green' : 'blue'
+              }
+              className={clsx(styles.Timeline, robotoMono.variable)}
+            >
+              <div style={{ position: 'relative' }}>
+                <span>{time && time.toLocaleString()}</span>
+                <span>{time && time.toLocaleString()}</span>
+              </div>
+            </div>
           </div>
 
           <div>

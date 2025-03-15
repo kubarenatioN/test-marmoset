@@ -1,7 +1,7 @@
 .Header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   align-items: center;
   position: fixed;
   top: 0;
@@ -16,6 +16,9 @@
   display: none;
   grid-template-rows: 2fr 5fr auto 2fr;
   background-color: #000000e3;
+  padding-block: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   &Open {
     display: grid;
@@ -59,7 +62,6 @@
 .OpenBtn {
   position: relative;
   color: #fff;
-  z-index: 101;
 
   svg {
     display: block;
@@ -77,8 +79,10 @@
   }
 }
 
-$fz-factor: calc(100vw / 9);
-$offset-factor: calc(calc(100vw / 120) - 1px);
+$fz-factor-w: calc(100vw / 9);
+// $fz-factor: min($fz-factor-w, 2rem);
+$fz-factor: 2rem;
+$offset-factor: calc(calc($fz-factor / 120) - 1px);
 
 .Timeline {
   // background-color: #000000;
@@ -87,8 +91,10 @@ $offset-factor: calc(calc(100vw / 120) - 1px);
   font-size: $fz-factor;
   overflow: hidden;
   font-family: var(--font-geist-mono);
-  transition: background-color 0.5s 0.3s;
+  transition: background-color 0.4s 0.3s;
   padding: 1rem 12px;
+  margin: 1rem 0;
+  width: 100vw;
 
   span {
     display: inline-block;
@@ -104,8 +110,8 @@ $offset-factor: calc(calc(100vw / 120) - 1px);
 
   span:nth-child(2) {
     position: absolute;
-    left: $offset-factor;
-    top: $offset-factor;
+    left: 2px;
+    top: 3px;
   }
 
   &[data-step='red'] {
@@ -136,7 +142,4 @@ $offset-factor: calc(calc(100vw / 120) - 1px);
       }
     }
   }
-}
-
-.TimeClone {
 }

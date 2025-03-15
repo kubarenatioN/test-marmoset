@@ -21,30 +21,12 @@
   &Active {
     background-color: rgb(132, 0, 0);
   }
-
-  &:hover {
-    background-color: #fff;
-    color: #000;
-  }
 }
 
 .GridItem {
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-
-  // &:hover {
-  //   .GridItemInner {
-  //     background-color: #12121297;
-  //   }
-  //   .GridItemTitle {
-  //     opacity: 1;
-  //     transform: translateY(0);
-  //   }
-  //   .ProjectImg {
-  //     transform: scale(1.1);
-  //   }
-  // }
 }
 
 .GridItemInner {
@@ -116,6 +98,13 @@
   .GridItemTitle {
     opacity: 0;
     transform: translateY(-100%);
+  }
+
+  .GridNavLink {
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
   }
 }
 

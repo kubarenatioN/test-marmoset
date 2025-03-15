@@ -1,0 +1,23 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Section {
+  position: relative;
+  height: 100vh;
+}
+
+.SectionBlock {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.BlockContent {
+  display: flex;
+  justify-content: center;
+}

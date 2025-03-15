@@ -9,10 +9,10 @@ import ReactFullpage, {
   Item,
 } from '@fullpage/react-fullpage';
 import { clsx } from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useRef, useState } from 'react';
 import FooterContent from '../footer/FooterContent';
+import { FpMedia } from '../FullpageMedia/FullpageMedia';
 import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
 
@@ -97,7 +97,6 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
     if (hash !== '' && hash !== 'footer') {
       _api.moveTo(hash);
       setActiveSlide(hash);
-      console.log(hash);
     } else if (hash === '') {
       _api.moveTo(1);
       setActiveSlide(sectionIds[0]);
@@ -231,7 +230,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
 
   return (
     <>
-      <div ref={containerRef} className={clsx(styles.Content, 'fp-root')}>
+      <main ref={containerRef} className={clsx(styles.Content, 'fp-root')}>
         <ReactFullpage
           licenseKey={'asd'}
           anchors={sectionIds}
@@ -248,49 +247,52 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
 
             return (
               <ReactFullpage.Wrapper>
-                <FpSection options={{ api: fullpageApi }}>
-                  <FpImage slide={data[0]} />
-
-                  <div className='section-content__wrapper'>
-                    <div className={clsx('section-content section-content-1')}>
-                      <a
-                        href='x.com'
-                        target='_blank'
-                        className='section-content-1__cta'
-                      >
-                        View more
-                      </a>
-                      <nav>
-                        <ul className='section-content-1__nav'>
-                          {mainSectionLinks.map((l) => {
-                            return (
-                              <li key={l.label}>
-                                <Link
-                                  href={l.url}
-                                  target='_blank'
-                                  className='section-content-1__link'
-                                >
-                                  {l.label}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                </FpSection>
-
-                {data.slice(1).map((slide) => {
+                {data.map((slide, i) => {
                   return (
                     <FpSection options={{ api: fullpageApi }} key={slide.title}>
-                      <FpImage slide={slide} />
+                      <FpMedia slide={slide} />
 
-                      <div className='section-content__wrapper'>
-                        <div className={clsx('section-content')}>
-                          <h1>{slide.title}</h1>
+                      {i === 0 && (
+                        <div className='section-content__wrapper'>
+                          <div
+                            className={clsx(
+                              'section-content section-content-1'
+                            )}
+                          >
+                            <a
+                              href='x.com'
+                              target='_blank'
+                              className='section-content-1__cta'
+                            >
+                              View more
+                            </a>
+                            <nav>
+                              <ul className='section-content-1__nav'>
+                                {mainSectionLinks.map((l) => {
+                                  return (
+                                    <li key={l.label}>
+                                      <Link
+                                        href={l.url}
+                                        target='_blank'
+                                        className='section-content-1__link'
+                                      >
+                                        {l.label}
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </nav>
+                          </div>
                         </div>
-                      </div>
+                      )}
+                      {i > 0 && (
+                        <div className='section-content__wrapper'>
+                          <div className={clsx('section-content')}>
+                            <h1>{slide.title}</h1>
+                          </div>
+                        </div>
+                      )}
                     </FpSection>
                   );
                 })}
@@ -322,7 +324,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
             );
           })}
         </ul>
-      </div>
+      </main>
     </>
   );
 };
@@ -350,45 +352,6 @@ const FpSection: FC<FullpageSectionProps> = ({ options, children, footer }) => {
       {/*  */}
       {children}
     </div>
-  );
-};
-
-interface FullpageImageProps {
-  slide: IHomepageSlide;
-}
-
-const FpImage: FC<FullpageImageProps> = ({ slide }) => {
-  const { imgUrl, videoUrl, videoLoop } = slide;
-
-  return (
-    <>
-      {/* Image */}
-      {imgUrl && (
-        <Image
-          priority
-          fill
-          src={imgUrl}
-          alt='Vanya loh'
-          style={{
-            objectFit: 'cover',
-          }}
-        />
-      )}
-
-      {/* Video */}
-      {videoUrl && (
-        <div className={styles.FpSlideVideoWrapper}>
-          <video
-            muted
-            loop={Boolean(videoLoop)}
-            autoPlay
-            playsInline
-            src={videoUrl}
-            className={styles.FpSlideVideo}
-          ></video>
-        </div>
-      )}
-    </>
   );
 };
 

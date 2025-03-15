@@ -48,7 +48,7 @@ const Gallery: FC<GalleryProps> = ({ data }) => {
                 fill
                 alt={p.title}
                 className={clsx(ProjectImg)}
-                sizes='(max-width: 768px) 100vw, 33vw'
+                sizes='(max-width: 400px) 100vw, (max-width: 1000px) 50vw, 33vw'
               />
             </Link>
           );

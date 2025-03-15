@@ -1,0 +1,10 @@
+.Container {
+  height: 600px;
+  margin-block: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .Container {
+    height: 72vh;
+  }
+}

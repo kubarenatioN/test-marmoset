@@ -2,6 +2,7 @@ import { PortableTextComponentProps } from '@portabletext/react';
 import dynamic from 'next/dynamic';
 import { FC } from 'react';
 import { SlideImage } from 'yet-another-react-lightbox';
+import styles from './GalleryBlock.module.scss';
 
 const LightBoxWrapper = dynamic(
   () => import('@/components/LightBoxWrapper/LightBoxWrapper')
@@ -23,11 +24,7 @@ const GalleryBlock: FC<PortableTextComponentProps<GalleryBlockProps>> = ({
   }));
 
   return (
-    <div
-      style={{
-        marginBlock: '2rem',
-      }}
-    >
+    <div className={styles.Container}>
       <LightBoxWrapper items={data} />
     </div>
   );

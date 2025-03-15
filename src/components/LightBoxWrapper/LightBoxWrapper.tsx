@@ -10,10 +10,9 @@ import 'yet-another-react-lightbox/styles.css';
 
 interface LightBoxWrapperProps {
   items: SlideImage[];
-  height?: string | number;
 }
 
-const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items, height = 600 }) => {
+const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items }) => {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -75,7 +74,7 @@ const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items, height = 600 }) => {
           style: {
             width: '100%',
             maxWidth: '100%',
-            height,
+            height: '100%',
           },
         }}
       />

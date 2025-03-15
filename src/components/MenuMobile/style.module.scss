@@ -1,0 +1,142 @@
+.Header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 2rem 1rem;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.Wrapper {
+  position: fixed;
+  inset: 0;
+  display: none;
+  grid-template-rows: 2fr 5fr auto 2fr;
+  background-color: #000000e3;
+
+  &Open {
+    display: grid;
+  }
+
+  & > * {
+    place-self: center;
+  }
+}
+
+.Nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  place-self: center stretch;
+  padding-inline: 12px;
+}
+
+.Menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Link {
+  display: block;
+  text-align: center;
+  padding: 1.2rem 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  font-weight: 200;
+  color: #d6d6d6;
+  text-transform: uppercase;
+}
+
+.LinkActive {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.OpenBtn {
+  position: relative;
+  color: #fff;
+  z-index: 101;
+
+  svg {
+    display: block;
+  }
+}
+
+.CloseBtn {
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  padding: 6px;
+
+  svg {
+    display: block;
+  }
+}
+
+$fz-factor: calc(100vw / 9);
+$offset-factor: calc(calc(100vw / 120) - 1px);
+
+.Timeline {
+  // background-color: #000000;
+  text-align: center;
+  color: #ff0000;
+  font-size: $fz-factor;
+  overflow: hidden;
+  font-family: var(--font-geist-mono);
+  transition: background-color 0.5s 0.3s;
+  padding: 1rem 12px;
+
+  span {
+    display: inline-block;
+    width: 100%;
+    transition: color 2.4s;
+    letter-spacing: -2px;
+  }
+
+  span:nth-child(1) {
+    position: relative;
+    z-index: 2;
+  }
+
+  span:nth-child(2) {
+    position: absolute;
+    left: $offset-factor;
+    top: $offset-factor;
+  }
+
+  &[data-step='red'] {
+    span {
+      color: #ff0000;
+      &:nth-child(2) {
+        color: #00ff00;
+      }
+    }
+  }
+
+  &[data-step='green'] {
+    span {
+      color: #00ff00;
+      &:nth-child(2) {
+        color: #0000ff;
+      }
+    }
+  }
+
+  &[data-step='blue'] {
+    background-color: #fff;
+
+    span {
+      color: #0000ff;
+      &:nth-child(2) {
+        color: #ff0000;
+      }
+    }
+  }
+}
+
+.TimeClone {
+}

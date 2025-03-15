@@ -1,25 +1,18 @@
 import Header from '@/components/header/Header';
 import HomeFullpage from '@/components/HomeFullpage/HomeFullpage';
-import { client } from '@/helpers/sanity-client';
-import { IHomepageSlide } from '@/models';
-
-const fpSlidesQuery = `*[_type == 'homepageSlide'] | order(order asc, _createdAt asc)`;
+import HomepageMobile from '@/components/HomepageMobile/HomepageMobile';
+import { getSlides } from '@/data/homepage';
+import { isMobile } from '@/helpers/is-mobile';
 
 export default async function Home() {
-  const data = await client.fetch<IHomepageSlide[]>(
-    fpSlidesQuery,
-    {},
-    {
-      next: {
-        revalidate: 10,
-      },
-    }
-  );
+  const data = await getSlides();
+
+  const mobile = await isMobile();
 
   return (
     <>
       <Header absolute />
-      <HomeFullpage data={data} />;
+      {!mobile ? <HomeFullpage data={data} /> : <HomepageMobile data={data} />}
     </>
   );
 }

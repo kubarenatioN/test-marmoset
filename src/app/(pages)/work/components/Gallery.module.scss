@@ -10,6 +10,7 @@
   color: #fff;
   padding-top: 3rem;
   padding-bottom: 1rem;
+  padding-inline: 1rem;
 }
 
 .GridNavLink {
@@ -32,18 +33,18 @@
   overflow: hidden;
   aspect-ratio: 4 / 3;
 
-  &:hover {
-    .GridItemInner {
-      background-color: #12121297;
-    }
-    .GridItemTitle {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .ProjectImg {
-      transform: scale(1.1);
-    }
-  }
+  // &:hover {
+  //   .GridItemInner {
+  //     background-color: #12121297;
+  //   }
+  //   .GridItemTitle {
+  //     opacity: 1;
+  //     transform: translateY(0);
+  //   }
+  //   .ProjectImg {
+  //     transform: scale(1.1);
+  //   }
+  // }
 }
 
 .GridItemInner {
@@ -61,8 +62,6 @@
   color: #f2f2f2;
   font-size: 1.6rem;
   text-align: center;
-  opacity: 0;
-  transform: translateY(-100%);
   transition: 0.3s;
 }
 
@@ -95,5 +94,57 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .GridItem {
+    &:hover {
+      .GridItemInner {
+        background-color: #12121297;
+      }
+      .GridItemTitle {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .ProjectImg {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .GridItemTitle {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .GridNavLink {
+    padding: 1.6rem;
+  }
+
+  .Grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .GridItemTitle {
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .GridItemInner {
+    align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .Grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .GridItemTitle {
+    font-size: 1.2rem;
   }
 }

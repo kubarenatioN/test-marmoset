@@ -14,6 +14,7 @@ const {
   PageContent,
   ArticleBackStrip,
   PaginationSection,
+  PaginationImage,
   PaginationTitle,
   PaginationNav,
   SoftwareUsedBlock,
@@ -96,6 +97,7 @@ const Page: FC<PageProps> = async ({ params }) => {
             return (
               <Link key={proj.title} href={proj.slug.current}>
                 <Image
+                  className={PaginationImage}
                   src={proj.previewUrl}
                   alt={proj.title}
                   width={400}

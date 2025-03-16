@@ -27,6 +27,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
+  display: flex;
 }
 
 .GridItemInner {
@@ -125,6 +126,8 @@
 
   .GridItemInner {
     align-self: flex-end;
+    position: static;
+    width: 100%;
   }
 }
 

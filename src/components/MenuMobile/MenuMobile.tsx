@@ -160,7 +160,7 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
           </nav>
 
           <div>
-            <div
+            {/* <div
               data-step={
                 rgbPart === 0 ? 'red' : rgbPart === 1 ? 'green' : 'blue'
               }
@@ -170,7 +170,7 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
                 <span>{time && time.toLocaleString()}</span>
                 <span>{time && time.toLocaleString()}</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div>

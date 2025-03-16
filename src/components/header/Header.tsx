@@ -4,7 +4,7 @@ import { isMobile } from '@/helpers/is-mobile';
 import clsx from 'clsx';
 import { FC } from 'react';
 import MenuMobile from '../MenuMobile/MenuMobile';
-import styles from './Header.module.scss';
+import styles from './styles.module.scss';
 
 interface HeaderProps {
   absolute?: boolean;

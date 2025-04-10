@@ -1,16 +1,24 @@
 import ModelViewerScene from '@/components/ModelViewerScene/ModelViewerScene';
+import { isMobile } from '@/helpers/is-mobile';
 import { PortableTextTypeComponentProps } from '@portabletext/react';
 import { FC } from 'react';
+import ModelBlockMobile from './ModelBlockMobile';
 
-interface ModelBlockProps {
+export interface ModelBlockProps {
   title?: string;
   url: string;
 }
 
-const ModelBlock: FC<PortableTextTypeComponentProps<ModelBlockProps>> = ({
+const ModelBlock: FC<PortableTextTypeComponentProps<ModelBlockProps>> = async ({
   value,
   isInline,
 }) => {
+  const mobile = await isMobile();
+
+  if (mobile) {
+    return <ModelBlockMobile value={value} />;
+  }
+
   return (
     <div
       style={{

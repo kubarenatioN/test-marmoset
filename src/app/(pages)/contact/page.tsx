@@ -53,7 +53,7 @@ const page: FC<pageProps> = async ({}) => {
       <section
         className={styles.BlockMail}
         style={{
-          backgroundImage: `url('images/stairs.png')`,
+          backgroundImage: `url('/images/stairs.png')`,
         }}
       >
         <div className={styles.Mail}>

@@ -57,7 +57,7 @@ const ModelBlockMobile: FC<ModelBlockMobileProps> = ({ value }) => {
                   position: 'relative',
                 }}
               >
-                <ModelViewerScene modelUrl={url} />;
+                <ModelViewerScene modelUrl={url} />
               </div>
             );
           },

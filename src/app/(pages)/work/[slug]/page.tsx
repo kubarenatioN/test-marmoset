@@ -59,6 +59,7 @@ const Page: FC<PageProps> = async ({ params }) => {
             <Post content={project.content} />
           </>
         )}
+
         <div className={SoftwareUsedBlock}>
           <h2 className={SoftwareUsedTitle}>Software Used</h2>
 

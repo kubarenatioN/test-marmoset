@@ -8,3 +8,9 @@
     height: 72vh;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .Container {
+    height: 98vw;
+  }
+}

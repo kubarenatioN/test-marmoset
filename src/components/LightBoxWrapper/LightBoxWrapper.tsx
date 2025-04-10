@@ -27,6 +27,7 @@ const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items }) => {
   return (
     <>
       <Lightbox
+        className='inline'
         index={index}
         slides={slides}
         plugins={[Inline, Fullscreen]}
@@ -80,6 +81,7 @@ const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items }) => {
       />
 
       <Lightbox
+        className='fullscreen'
         index={index}
         slides={slides}
         on={{

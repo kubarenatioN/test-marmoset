@@ -1,16 +1,36 @@
 import Footer from '@/components/footer/Footer';
+import { getContacts } from '@/data/contacts';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 import { BsInstagram, BsTwitterX, BsVimeo } from 'react-icons/bs';
 import { FaArtstation } from 'react-icons/fa';
 import styles from './page.module.scss';
 
+const iconsMap: {
+  [key: string]: ReactElement;
+} = {
+  artstation: <FaArtstation />,
+  instagram: <BsInstagram />,
+  vimeo: <BsVimeo />,
+  xcom: <BsTwitterX />,
+};
+
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
-  const url =
-    'https://res.cloudinary.com/dc2sdos71/image/upload/v1740332655/23232dd_matqn7.png';
+const page: FC<pageProps> = async ({}) => {
+  const data = await getContacts();
+
+  const email = data.email;
+
+  const links = {
+    artstation: data.artstation,
+    instagram: data.instagram,
+    vimeo: data.vimeo,
+    xcom: data.xcom,
+  };
+
+  const url = data.bgUrl;
 
   return (
     <>
@@ -18,29 +38,28 @@ const page: FC<pageProps> = ({}) => {
         <Image src={url} alt='' fill style={{ objectFit: 'cover' }} />
         <section className={styles.Section}>
           <ul className={styles.List}>
-            <li>
-              <Link href={'/'}>
-                <FaArtstation />
-              </Link>
-            </li>
-            <li>
-              <Link href={'/'}>
-                <BsTwitterX />
-              </Link>
-            </li>
-            <li>
-              <Link href={'/'}>
-                <BsInstagram />
-              </Link>
-            </li>
-            <li>
-              <Link href={'/'}>
-                <BsVimeo />
-              </Link>
-            </li>
+            {Object.entries(links).map(([type, url]) => {
+              return (
+                <li key={type}>
+                  <Link target='_blank' href={url}>
+                    {iconsMap[type]}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </section>
       </main>
+      <section
+        className={styles.BlockMail}
+        style={{
+          backgroundImage: `url('images/stairs.png')`,
+        }}
+      >
+        <div className={styles.Mail}>
+          <Link href={`mailto:${email}`}>{email}</Link>
+        </div>
+      </section>
       <Footer />
     </>
   );

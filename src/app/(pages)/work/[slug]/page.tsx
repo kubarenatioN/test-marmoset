@@ -38,8 +38,6 @@ const Page: FC<PageProps> = async ({ params }) => {
     lastCreatedAt: project._createdAt,
   });
 
-  // console.log(project.softwareUsed[0].icon);
-
   const prev: IProject = pagination.prev ?? pagination.last;
   const next: IProject = pagination.next ?? pagination.first;
 

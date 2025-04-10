@@ -60,10 +60,10 @@ const Page: FC<PageProps> = async ({ params }) => {
           </>
         )}
 
-        <div className={SoftwareUsedBlock}>
-          <h2 className={SoftwareUsedTitle}>Software Used</h2>
+        {project.softwareUsed && (
+          <div className={SoftwareUsedBlock}>
+            <h2 className={SoftwareUsedTitle}>Software Used</h2>
 
-          {project.softwareUsed && (
             <ul className={SoftwareUsedList}>
               {project.softwareUsed.map((soft) => {
                 const url = urlFor(soft.icon.asset).fit('clip').url();
@@ -86,8 +86,8 @@ const Page: FC<PageProps> = async ({ params }) => {
                 );
               })}
             </ul>
-          )}
-        </div>
+          </div>
+        )}
       </section>
 
       <section className={PaginationSection}>

@@ -1,18 +1,29 @@
+'use client';
+
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 
 interface MenuDesktopProps {}
 
 const MenuDesktop: FC<MenuDesktopProps> = ({}) => {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    return pathname.slice(1) === path ? 'active' : '';
+  };
+
   return (
     <nav>
       <ul className={clsx('header-menu__list layout-grid')}>
         <li className='header-menu__start'>
           <ul>
             <li>
-              <Link href={'/work'}>Work</Link>
+              <Link className={clsx(isActive('work'))} href={'/work'}>
+                Work
+              </Link>
             </li>
           </ul>
         </li>
@@ -30,7 +41,9 @@ const MenuDesktop: FC<MenuDesktopProps> = ({}) => {
         <li className='header-menu__end'>
           <ul>
             <li>
-              <Link href={'/contact'}>Contact</Link>
+              <Link className={clsx(isActive('contact'))} href={'/contact'}>
+                Contact
+              </Link>
             </li>
           </ul>
         </li>

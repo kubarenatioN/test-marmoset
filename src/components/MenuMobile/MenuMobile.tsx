@@ -5,9 +5,10 @@ import { Roboto_Mono } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useReducer, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { SlMenu } from 'react-icons/sl';
+import { pageScrollReducer } from './helpers';
 import styles from './style.module.scss';
 
 const robotoMono = Roboto_Mono({
@@ -35,10 +36,17 @@ const menu = [
 interface MenuMobileProps {}
 
 const MenuMobile: FC<MenuMobileProps> = ({}) => {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  const [scrollState, dispatchScrollState] = useReducer(pageScrollReducer, {
+    start: true,
+    scrolledDown: false,
+    y: 0,
+  });
+
   const [time, setTime] = useState<Date | null>(null);
   const [rgbPart, setRgbPart] = useState(0);
-  const pathname = usePathname();
 
   const tick = () => {
     setTime(new Date());
@@ -49,10 +57,24 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(tick, 200);
+    const abort = new AbortController();
+
+    const windowScrollHandler = (e: Event) => {
+      if (open) {
+        return;
+      }
+
+      const scrollY = window.scrollY;
+      dispatchScrollState({ y: scrollY });
+    };
+
+    window.addEventListener('scroll', windowScrollHandler, {
+      signal: abort.signal,
+      passive: true,
+    });
 
     return () => {
-      clearInterval(intervalId);
+      abort.abort();
     };
   }, []);
 
@@ -74,18 +96,19 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
     setOpen(false);
   };
 
+  const isUp = `${!scrollState.start && scrollState.scrolledDown ? 'up' : ''}`;
+  const isStart = scrollState.start;
+
   return (
     <>
-      <header className={clsx(styles.Header)}>
-        <div></div>
-
-        <Link
-          href={'/'}
-          className={clsx(styles.Logo)}
-          style={{
-            display: 'inline-block',
-          }}
-        >
+      <header
+        className={clsx(
+          styles.Header,
+          isUp ? styles.HeaderUp : '',
+          isStart ? styles.HeaderStart : ''
+        )}
+      >
+        <Link href={'/'} className={clsx(styles.Logo)}>
           <Image
             className='logo'
             src={'/images/logo.svg'}
@@ -103,6 +126,7 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
         <div
           style={{
             justifySelf: 'flex-end',
+            padding: '0.8rem',
           }}
         >
           <button
@@ -114,7 +138,12 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
           </button>
         </div>
 
-        <div className={clsx(styles.Wrapper, open ? styles.WrapperOpen : '')}>
+        <div
+          className={clsx(
+            styles.MenuWrapper,
+            open ? styles.MenuWrapperOpen : ''
+          )}
+        >
           <div>
             <Link
               onClick={closeMenu}

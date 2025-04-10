@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
       {
         hostname: 'cdn.sanity.io',
       },
+      {
+        hostname: 'm.media-amazon.com',
+      },
     ],
   },
 };

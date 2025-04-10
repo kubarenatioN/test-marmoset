@@ -15,7 +15,7 @@ const HomepageMobile: FC<HomepageMobileProps> = ({ data }) => {
       {data.map((slide, i) => {
         return (
           <section key={slide.title} className={styles.Section}>
-            <FpMedia slide={slide} />
+            <FpMedia slide={slide} mobile />
 
             <div className={clsx(styles.SectionBlock)}>
               <div className={clsx(styles.BlockContent)}>

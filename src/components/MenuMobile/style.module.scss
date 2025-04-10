@@ -1,16 +1,36 @@
 .Header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  padding: 1rem 1rem;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
+  transition: all 0.2s 0s;
+  background-color: #000000c0;
 }
 
-.Wrapper {
+.HeaderUp {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s 0.2s;
+}
+
+.HeaderStart {
+  background-color: #00000000;
+}
+
+.Logo {
+  justify-self: flex-start;
+  padding: 1rem;
+
+  img {
+    display: block;
+  }
+}
+
+.MenuWrapper {
   position: fixed;
   inset: 0;
   display: none;
@@ -62,6 +82,10 @@
 .OpenBtn {
   position: relative;
   color: #fff;
+
+  button {
+    display: block;
+  }
 
   svg {
     display: block;

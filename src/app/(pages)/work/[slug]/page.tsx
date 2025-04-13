@@ -3,6 +3,7 @@ import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
 import { urlFor } from '@/helpers/url-builder';
 import { IProject } from '@/models';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -22,6 +23,25 @@ const {
   SoftwareUsedList,
   SoftwareUsedItem,
 } = styles;
+
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const { slug } = await params;
+
+  // fetch data
+  const project = await getProject(slug);
+
+  console.log(project);
+
+  return {
+    title: `${project.title}`,
+  };
+}
 
 interface PageProps {
   params: Promise<{

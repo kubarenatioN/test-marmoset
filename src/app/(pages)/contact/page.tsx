@@ -1,6 +1,7 @@
 import Footer from '@/components/footer/Footer';
 import { getContacts } from '@/data/contacts';
 import { getSocials } from '@/models/contacts';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, ReactElement } from 'react';
@@ -15,6 +16,11 @@ const iconsMap: {
   instagram: <BsInstagram />,
   vimeo: <BsVimeo />,
   xcom: <BsTwitterX />,
+};
+
+export const metadata: Metadata = {
+  title: 'Contact | Polyrhythm 📽️',
+  description: 'Contact me',
 };
 
 interface pageProps {}

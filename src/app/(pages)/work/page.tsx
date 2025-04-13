@@ -2,6 +2,7 @@ import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
+import { Metadata } from 'next';
 import { FC, Suspense } from 'react';
 import Gallery from './components/Gallery';
 import GalleryFilters from './components/GalleryFilters';
@@ -10,6 +11,11 @@ import { getProjects } from './data';
 import styles from './page.module.scss';
 
 const { Banner } = styles;
+
+export const metadata: Metadata = {
+  title: 'Work | Polyrhythm 📽️',
+  description: 'Explore portfolio',
+};
 
 const bannerQuery = `*[_type == 'workBanner'][0]`;
 

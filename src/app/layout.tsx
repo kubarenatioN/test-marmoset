@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const geistSans = Geist({
@@ -27,6 +28,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* <!-- Yandex.Metrika counter --> */}
+        <Script src='/meta/ym.js' type='text/javascript'></Script>
+        <noscript>
+          <div>
+            <img
+              src='https://mc.yandex.ru/watch/101022621'
+              style={{ position: 'absolute', left: '-9999px;' }}
+              alt=''
+            />
+          </div>
+        </noscript>
+        {/* <!-- /Yandex.Metrika counter --> */}
         {children}
       </body>
     </html>

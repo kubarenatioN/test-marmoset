@@ -13,7 +13,6 @@ import Link from 'next/link';
 import { FC, useRef, useState } from 'react';
 import FooterContent from '../footer/FooterContent';
 import { FpMedia } from '../FullpageMedia/FullpageMedia';
-import { mainSectionLinks } from './sections.config';
 import styles from './style.module.scss';
 
 const FOOTER_CLASS = 'pr-section-footer';
@@ -259,14 +258,13 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
                               'section-content section-content-1'
                             )}
                           >
-                            <a
-                              href='x.com'
-                              target='_blank'
+                            <Link
+                              href={'/work'}
                               className='section-content-1__cta'
                             >
                               View more
-                            </a>
-                            <nav>
+                            </Link>
+                            {/* <nav>
                               <ul className='section-content-1__nav'>
                                 {mainSectionLinks.map((l) => {
                                   return (
@@ -282,7 +280,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
                                   );
                                 })}
                               </ul>
-                            </nav>
+                            </nav> */}
                           </div>
                         </div>
                       )}

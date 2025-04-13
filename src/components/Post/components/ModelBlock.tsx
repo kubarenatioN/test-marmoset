@@ -1,7 +1,7 @@
-import ModelViewerScene from '@/components/ModelViewerScene/ModelViewerScene';
 import { isMobile } from '@/helpers/is-mobile';
 import { PortableTextTypeComponentProps } from '@portabletext/react';
 import { FC } from 'react';
+import ModelBlockDesktop from './ModelBlockDesktop';
 import ModelBlockMobile from './ModelBlockMobile';
 
 export interface ModelBlockProps {
@@ -19,19 +19,7 @@ const ModelBlock: FC<PortableTextTypeComponentProps<ModelBlockProps>> = async ({
     return <ModelBlockMobile value={value} />;
   }
 
-  return (
-    <div
-      style={{
-        marginBlock: '2rem',
-        position: 'relative',
-        width: '100%',
-        height: 'auto',
-        aspectRatio: 16 / 9,
-      }}
-    >
-      <ModelViewerScene modelUrl={value.url} />
-    </div>
-  );
+  return <ModelBlockDesktop url={value.url} />;
 };
 
 export default ModelBlock;

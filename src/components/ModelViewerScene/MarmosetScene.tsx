@@ -9,13 +9,14 @@ declare global {
   }
 }
 
-type Marmoset = any;
+export type Marmoset = any;
 
 interface MarmosetSceneProps {
   url: string;
+  onInit?: (marmoset: Marmoset) => void;
 }
 
-const MarmosetScene: FC<MarmosetSceneProps> = ({ url }) => {
+const MarmosetScene: FC<MarmosetSceneProps> = ({ url, onInit }) => {
   const [marmoset, setMarmoset] = useState<null | Marmoset>(null);
   const marmRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,6 +36,10 @@ const MarmosetScene: FC<MarmosetSceneProps> = ({ url }) => {
     const { clientWidth: w, clientHeight: h } = container;
 
     const viewer = new m.WebViewer(w, h, url);
+
+    viewer.onLoad = () => {
+      onInit?.(marmoset);
+    };
 
     // console.log(marmoset, viewer);
 

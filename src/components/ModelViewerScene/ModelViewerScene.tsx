@@ -3,12 +3,13 @@ import MarmosetScene from './MarmosetScene';
 
 interface ModelViewerSceneProps {
   modelUrl: string;
+  onInit?: () => void;
 }
 
-const ModelViewerScene: FC<ModelViewerSceneProps> = ({ modelUrl }) => {
+const ModelViewerScene: FC<ModelViewerSceneProps> = ({ modelUrl, onInit }) => {
   return (
     <>
-      <MarmosetScene url={modelUrl} />
+      <MarmosetScene url={modelUrl} onInit={onInit} />
     </>
   );
 };

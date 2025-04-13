@@ -36,8 +36,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // fetch data
   const project = await getProject(slug);
 
-  console.log(project);
-
   return {
     title: `${project.title}`,
   };

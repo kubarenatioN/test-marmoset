@@ -4,6 +4,11 @@ import '@/assets/styles/fp-styles.css';
 import '@/assets/styles/fullpagejs.overrides.css';
 import { requestTimeout } from '@/helpers/timeout';
 import { IHomepageSlide } from '@/models';
+import {
+  getSocials,
+  IContacts,
+  socialsTypeToLabelMap,
+} from '@/models/contacts';
 import ReactFullpage, {
   fullpageApi as FullpageApi,
   Item,
@@ -25,15 +30,21 @@ const Z_INDEX_BELOW = 1;
 
 interface HomeFullpageProps {
   data: IHomepageSlide[];
+  contacts: IContacts;
 }
 
-const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
+/**
+ * Desktop only
+ */
+const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
   const sectionIds = [...data.map((s, i) => String(i + 1)), 'footer'];
 
   const [activeSlide, setActiveSlide] = useState(sectionIds[0]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
+
+  const socials = getSocials(contacts);
 
   let _api: FullpageApi;
 
@@ -264,23 +275,23 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data }) => {
                             >
                               View more
                             </Link>
-                            {/* <nav>
+                            <nav>
                               <ul className='section-content-1__nav'>
-                                {mainSectionLinks.map((l) => {
+                                {Object.entries(socials).map(([type, url]) => {
                                   return (
-                                    <li key={l.label}>
+                                    <li key={type}>
                                       <Link
-                                        href={l.url}
+                                        href={url}
                                         target='_blank'
                                         className='section-content-1__link'
                                       >
-                                        {l.label}
+                                        {socialsTypeToLabelMap[type]}
                                       </Link>
                                     </li>
                                   );
                                 })}
                               </ul>
-                            </nav> */}
+                            </nav>
                           </div>
                         </div>
                       )}

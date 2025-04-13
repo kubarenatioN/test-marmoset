@@ -1,5 +1,6 @@
 import Footer from '@/components/footer/Footer';
 import { getContacts } from '@/data/contacts';
+import { getSocials } from '@/models/contacts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, ReactElement } from 'react';
@@ -23,12 +24,7 @@ const page: FC<pageProps> = async ({}) => {
 
   const email = data.email;
 
-  const links = {
-    artstation: data.artstation,
-    instagram: data.instagram,
-    vimeo: data.vimeo,
-    xcom: data.xcom,
-  };
+  const links = getSocials(data);
 
   const url = data.bgUrl;
 

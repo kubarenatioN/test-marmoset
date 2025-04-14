@@ -1,13 +1,11 @@
-import { revalidatePath } from 'next/cache';
-
 export async function POST(request: Request) {
   const body = await request.json();
   const { _type, slug } = body;
 
   console.log('webhook body', body);
 
-  revalidatePath('/(pages)/work');
-  revalidatePath(`/(pages)/work/[slug]`, 'page');
+  // revalidatePath('/(pages)/work');
+  // revalidatePath(`/(pages)/work/[slug]`, 'page');
 
   return Response.json({ revalidated: true, now: Date.now() });
 }

@@ -6,7 +6,7 @@ export const getContacts = async () => {
     `*[_type == 'contactPage'][0]`,
     {},
     {
-      cache: 'force-cache',
+      cache: 'default',
       next: {
         tags: ['contacts'],
       },

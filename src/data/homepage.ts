@@ -8,7 +8,7 @@ export const getSlides = async () => {
     query,
     {},
     {
-      cache: 'force-cache',
+      cache: 'default',
       next: { tags: ['homepage-slides'] },
     }
   );

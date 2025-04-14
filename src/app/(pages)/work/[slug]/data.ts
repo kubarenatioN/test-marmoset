@@ -45,7 +45,7 @@ export function getProject(slug: string) {
     projectQ(slug),
     {},
     {
-      cache: 'force-cache',
+      cache: 'default',
       next: {},
     }
   );
@@ -53,7 +53,7 @@ export function getProject(slug: string) {
 
 export function getProjectPagination(params = {}) {
   return client.fetch(nextPrevProjQ(), params, {
-    cache: 'force-cache',
+    cache: 'default',
     next: {},
   });
 }

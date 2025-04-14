@@ -8,9 +8,8 @@ export const getSlides = async () => {
     query,
     {},
     {
-      next: {
-        revalidate: 20,
-      },
+      cache: 'force-cache',
+      next: { tags: ['homepage-slides'] },
     }
   );
 };

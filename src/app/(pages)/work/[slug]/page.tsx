@@ -7,6 +7,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import { getProjects } from '../data';
 import { getProject, getProjectPagination } from './data';
 import styles from './page.module.scss';
 
@@ -39,6 +40,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.title}`,
   };
+}
+
+export async function generateStaticParams() {
+  const data = await getProjects();
+
+  return data.map((p) => ({
+    slug: p.slug.current,
+  }));
 }
 
 interface PageProps {

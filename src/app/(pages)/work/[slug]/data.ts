@@ -44,10 +44,16 @@ export function getProject(slug: string) {
   return client.fetch<IProject>(
     projectQ(slug),
     {},
-    { next: { revalidate: 20 } }
+    {
+      cache: 'force-cache',
+      next: {},
+    }
   );
 }
 
 export function getProjectPagination(params = {}) {
-  return client.fetch(nextPrevProjQ(), params, { next: { revalidate: 10 } });
+  return client.fetch(nextPrevProjQ(), params, {
+    cache: 'force-cache',
+    next: {},
+  });
 }

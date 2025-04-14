@@ -36,7 +36,7 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
   const banner = client.fetch<IPageBanner>(
     bannerQuery,
     {},
-    { next: { revalidate: 10 } }
+    { cache: 'no-cache', next: { tags: ['work-banner'] } }
   );
 
   return (

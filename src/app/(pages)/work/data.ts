@@ -13,7 +13,10 @@ const query = (category: string) => {
 };
 
 const options: FilteredResponseQueryOptions = {
-  next: { revalidate: 60 },
+  cache: 'force-cache',
+  next: {
+    tags: ['projects', 'all'],
+  },
 };
 
 export const getProjects = async (

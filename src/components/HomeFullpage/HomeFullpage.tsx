@@ -308,7 +308,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
 
                 <FpSection options={{ api: fullpageApi }} footer>
                   <footer className='pr-section-footer'>
-                    <FooterContent />
+                    <FooterContent contacts={contacts} />
                   </footer>
                 </FpSection>
               </ReactFullpage.Wrapper>

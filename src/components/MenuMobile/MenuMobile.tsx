@@ -115,10 +115,8 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
             alt='Polyrhythm'
             style={{
               aspectRatio: 200 / 30,
-              // height: 24,
-              width: '100%',
             }}
-            width={200}
+            width={215}
             height={30}
           />
         </Link>

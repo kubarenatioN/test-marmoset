@@ -69,23 +69,20 @@
 }
 
 .BlockMail {
-  margin-top: 200px;
-  height: 98vh;
+  margin-top: 0rem;
+  min-height: 400px;
   padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #3d3d3d;
 }
 
 .Mail {
   a {
     display: inline-block;
     padding: 1rem 2rem;
-    background-color: #ff0000db;
+    background-color: #000000db;
     color: #ffffff;
     border-radius: 12px;
     font-size: 1.8rem;
@@ -152,6 +149,13 @@
         padding: 2rem;
         font-size: 3rem;
       }
+    }
+  }
+
+  .Mail {
+    a {
+      font-size: 1rem;
+      padding: 1rem;
     }
   }
 }

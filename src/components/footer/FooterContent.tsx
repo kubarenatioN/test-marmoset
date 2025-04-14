@@ -1,10 +1,13 @@
+import { getSocials, IContacts } from '@/models/contacts';
 import { clsx } from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import Icon from '../Icon/Icon';
 import styles from './styles.module.scss';
 
-interface FooterContentProps {}
+interface FooterContentProps {
+  contacts: IContacts;
+}
 
 const menu = [
   {
@@ -17,28 +20,23 @@ const menu = [
   },
 ];
 
-const FooterContent: FC<FooterContentProps> = ({}) => {
+const FooterContent: FC<FooterContentProps> = ({ contacts }) => {
+  const links = getSocials(contacts);
+
   return (
     <div className={clsx(styles.FooterContent)}>
       <div className={clsx(styles.FooterTopRow)}>
-        <Link href={'/'} className='logo-link'>
-          <Image
-            className='logo'
-            src={'/images/logo.svg'}
-            alt='Polyrhythm'
-            width={140}
-            height={27}
-          />
-        </Link>
-        <nav className={clsx(styles.FooterNavMenu)}>
-          {menu.map((el) => {
+        <ul className={clsx(styles.FooterSocialsList)}>
+          {Object.entries(links).map(([type, url]) => {
             return (
-              <Link key={el.url} href={el.url}>
-                {el.label}
-              </Link>
+              <li key={type} className={clsx(styles.FooterSocialLink)}>
+                <Link href={url} target='_blank'>
+                  <Icon name={type} />
+                </Link>
+              </li>
             );
           })}
-        </nav>
+        </ul>
       </div>
       <div className={clsx(styles.FooterBottomRow)}>
         <span>2025 &copy; Polyrhythm. All Rights Reserved</span>

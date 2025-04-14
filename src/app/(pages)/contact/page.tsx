@@ -1,22 +1,12 @@
 import Footer from '@/components/footer/Footer';
+import Icon from '@/components/Icon/Icon';
 import { getContacts } from '@/data/contacts';
 import { getSocials } from '@/models/contacts';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, ReactElement } from 'react';
-import { BsInstagram, BsTwitterX, BsVimeo } from 'react-icons/bs';
-import { FaArtstation } from 'react-icons/fa';
+import { FC } from 'react';
 import styles from './page.module.scss';
-
-const iconsMap: {
-  [key: string]: ReactElement;
-} = {
-  artstation: <FaArtstation />,
-  instagram: <BsInstagram />,
-  vimeo: <BsVimeo />,
-  xcom: <BsTwitterX />,
-};
 
 export const metadata: Metadata = {
   title: 'Contact | Polyrhythm 📽️',
@@ -44,7 +34,7 @@ const page: FC<pageProps> = async ({}) => {
               return (
                 <li key={type}>
                   <Link target='_blank' href={url}>
-                    {iconsMap[type]}
+                    <Icon name={type} />
                   </Link>
                 </li>
               );
@@ -52,12 +42,7 @@ const page: FC<pageProps> = async ({}) => {
           </ul>
         </section>
       </main>
-      <section
-        className={styles.BlockMail}
-        style={{
-          backgroundImage: `url('/images/stairs.png')`,
-        }}
-      >
+      <section className={styles.BlockMail}>
         <div className={styles.Mail}>
           <Link href={`mailto:${email}`}>{email}</Link>
         </div>

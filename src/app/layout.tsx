@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   description: 'Digital Artist',
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000' },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +35,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {children}
+
         {/* <!-- Yandex.Metrika counter --> */}
         <Script src='/meta/ym.js' type='text/javascript'></Script>
         <noscript>
@@ -40,7 +49,6 @@ export default function RootLayout({
           </div>
         </noscript>
         {/* <!-- /Yandex.Metrika counter --> */}
-        {children}
       </body>
     </html>
   );

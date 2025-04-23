@@ -9,22 +9,51 @@ const { BannerVideoWrapper, BannerVideo, BannerVideoLoader } = styles;
 
 interface WorkBannerProps {
   banner: Promise<IPageBanner>;
+  mobile?: boolean;
 }
 
-const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
+const WorkBanner: FC<WorkBannerProps> = ({ banner, mobile }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const data = use(banner);
+  const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } =
+    use(banner);
 
   return (
     <>
-      {data.imageUrl && <Image src={data.imageUrl} alt={data.title ?? ''} />}
-
-      {data.videoUrl && (
+      {!mobile ? (
+        imageUrl ? (
+          <Image
+            fill
+            src={imageUrl}
+            alt={title ?? ''}
+            style={{ objectFit: 'cover' }}
+          />
+        ) : videoUrl ? (
+          <div className={BannerVideoWrapper}>
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              controls={false}
+              autoPlay={true}
+              playsInline
+              loop={true}
+              muted
+              className={BannerVideo}
+            ></video>
+          </div>
+        ) : null
+      ) : imageMobileUrl ? (
+        <Image
+          fill
+          src={imageMobileUrl}
+          alt={title ?? ''}
+          style={{ objectFit: 'cover' }}
+        />
+      ) : videoMobileUrl ? (
         <div className={BannerVideoWrapper}>
           <video
             ref={videoRef}
-            src={data.videoUrl}
+            src={videoMobileUrl}
             controls={false}
             autoPlay={true}
             playsInline
@@ -33,7 +62,7 @@ const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
             className={BannerVideo}
           ></video>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

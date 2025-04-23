@@ -4,17 +4,12 @@ import '@/assets/styles/fp-styles.css';
 import '@/assets/styles/fullpagejs.overrides.css';
 import { requestTimeout } from '@/helpers/timeout';
 import { IHomepageSlide } from '@/models';
-import {
-  getSocials,
-  IContacts,
-  socialsTypeToLabelMap,
-} from '@/models/contacts';
+import { getSocials, IContacts } from '@/models/contacts';
 import ReactFullpage, {
   fullpageApi as FullpageApi,
   Item,
 } from '@fullpage/react-fullpage';
 import { clsx } from 'clsx';
-import Link from 'next/link';
 import { FC, useRef, useState } from 'react';
 import FooterContent from '../footer/FooterContent';
 import { FpMedia } from '../FullpageMedia/FullpageMedia';
@@ -262,7 +257,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
                     <FpSection options={{ api: fullpageApi }} key={slide.title}>
                       <FpMedia slide={slide} />
 
-                      {i === 0 && (
+                      {/* {i === 0 && (
                         <div className='section-content__wrapper'>
                           <div
                             className={clsx(
@@ -294,8 +289,8 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
                             </nav>
                           </div>
                         </div>
-                      )}
-                      {i > 0 && (
+                      )} */}
+                      {i >= 0 && (
                         <div className='section-content__wrapper'>
                           <div className={clsx('section-content')}>
                             <h1>{slide.title}</h1>

@@ -19,8 +19,10 @@ export interface IProject {
 
 export interface IProjectBanner {
   title: string;
-  imgUrl: string;
-  videoUrl: string;
+  imgUrl?: string;
+  imgMobileUrl?: string;
+  videoUrl?: string;
+  videoMobileUrl?: string;
   // modelUrl: string; for now we don't support 3D models in banner
 }
 

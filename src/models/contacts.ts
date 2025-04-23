@@ -4,7 +4,8 @@ export interface IContacts {
   email: string;
   artstation: string;
   xcom: string;
-  bgUrl: string;
+  bgUrl?: string;
+  bgMobileUrl?: string;
 }
 
 export function getSocials(data: IContacts) {

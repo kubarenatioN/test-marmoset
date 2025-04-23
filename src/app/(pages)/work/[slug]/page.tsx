@@ -1,6 +1,7 @@
 import Footer from '@/components/footer/Footer';
 import Post from '@/components/Post/Post';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
+import { isMobile } from '@/helpers/is-mobile';
 import { urlFor } from '@/helpers/url-builder';
 import { IProject } from '@/models';
 import { Metadata } from 'next';
@@ -65,6 +66,8 @@ const Page: FC<PageProps> = async ({ params }) => {
     lastCreatedAt: project._createdAt,
   });
 
+  const mobile = isMobile();
+
   const prev: IProject = pagination.prev ?? pagination.last;
   const next: IProject = pagination.next ?? pagination.first;
 
@@ -72,7 +75,7 @@ const Page: FC<PageProps> = async ({ params }) => {
     <>
       {project.banner && (
         <div className={Banner}>
-          <ProjectBanner banner={project.banner} />
+          <ProjectBanner banner={project.banner} mobile={mobile} />
 
           <div className={ArticleBackStrip}></div>
         </div>

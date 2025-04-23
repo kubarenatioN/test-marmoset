@@ -1,5 +1,6 @@
 import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
+import { isMobile } from '@/helpers/is-mobile';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
 import { Metadata } from 'next';
@@ -30,6 +31,7 @@ interface PageProps {
 
 const Page: FC<PageProps> = async ({ searchParams }) => {
   const type = (await searchParams)?.type;
+  const _mobile = await isMobile();
 
   const projects = getProjects(type);
 
@@ -42,7 +44,7 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
   return (
     <>
       <section className={Banner}>
-        <WorkBanner banner={banner} />
+        <WorkBanner banner={banner} mobile={_mobile} />
       </section>
       <section className={''}>
         <GalleryFilters type={type} />

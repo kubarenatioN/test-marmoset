@@ -20,9 +20,6 @@ export const metadata: Metadata = {
 
 const bannerQuery = `*[_type == 'workBanner'][0]`;
 
-// export const revalidate = 0;
-// export const fetchCache = 'force-no-store';
-
 interface PageProps {
   searchParams?: Promise<{
     type?: string;

@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'localhost',
+        hostname: '**', // wildcard
       },
       {
         hostname: 'res.cloudinary.com',
@@ -14,13 +14,12 @@ const nextConfig: NextConfig = {
       {
         hostname: 'dl.dropboxusercontent.com',
       },
-      {
-        hostname: 'cdn.sanity.io',
-      },
-      {
-        hostname: 'm.media-amazon.com',
-      },
     ],
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
 };
 

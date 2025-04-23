@@ -13,7 +13,6 @@ const query = (category: string) => {
 };
 
 const options: FilteredResponseQueryOptions = {
-  cache: 'default',
   next: {
     tags: ['projects', 'all'],
   },

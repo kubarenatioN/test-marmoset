@@ -1,5 +1,6 @@
 import Footer from '@/components/footer/Footer';
 import Post from '@/components/Post/Post';
+import PostWrapper from '@/components/Post/PostWrapper';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
 import { isMobile } from '@/helpers/is-mobile';
 import { urlFor } from '@/helpers/url-builder';
@@ -84,7 +85,9 @@ const Page: FC<PageProps> = async ({ params }) => {
       <section className={PageContent}>
         {project.content && (
           <>
-            <Post content={project.content} />
+            <PostWrapper>
+              <Post content={project.content} />
+            </PostWrapper>
           </>
         )}
 

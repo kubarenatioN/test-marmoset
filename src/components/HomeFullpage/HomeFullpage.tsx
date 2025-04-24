@@ -10,6 +10,7 @@ import ReactFullpage, {
   Item,
 } from '@fullpage/react-fullpage';
 import { clsx } from 'clsx';
+import Link from 'next/link';
 import { FC, useRef, useState } from 'react';
 import FooterContent from '../footer/FooterContent';
 import { FpMedia } from '../FullpageMedia/FullpageMedia';
@@ -293,7 +294,22 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
                       {i >= 0 && (
                         <div className='section-content__wrapper'>
                           <div className={clsx('section-content')}>
-                            <h1>{slide.title}</h1>
+                            <div className='fp-slide_inner'>
+                              <h1 className='fp-slide_title'>{slide.title}</h1>
+                              {slide.text && (
+                                <p className='fp-slide_subtitle'>
+                                  {slide.text}
+                                </p>
+                              )}
+                              {slide.project?.slug.current && (
+                                <Link
+                                  className='fp-slide_cta'
+                                  href={`/work/${slide.project.slug.current}`}
+                                >
+                                  Explore
+                                </Link>
+                              )}
+                            </div>
                           </div>
                         </div>
                       )}

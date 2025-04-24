@@ -76,6 +76,28 @@
   line-height: 1rem;
   font-weight: 400;
   margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.fp-slide_cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  height: 40px;
+  background: #ffffff;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+
+  animation-name: btn-blink;
+  animation-duration: 6s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
 }
 
 @media screen and (min-width: 1921px) {
@@ -114,5 +136,16 @@
     padding: 0.6rem 1.8rem;
     font-size: 0.8rem;
     margin-top: 0.8rem;
+  }
+}
+
+@keyframes btn-blink {
+  0% {
+    transform: translate(-100%, -100%) rotate(-30deg) scaleX(1.5);
+  }
+
+  18%,
+  100% {
+    transform: translate(100%, 100%) rotate(-30deg) scaleX(1.5);
   }
 }

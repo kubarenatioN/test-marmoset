@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { getProjects } from './(pages)/work/data';
 
+export const revalidate = 3600; // 1hr
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = (await getProjects()).map((p) => ({
     url: `https://thepolyrhythm.com/work/${p.slug.current}`,

@@ -49,11 +49,11 @@ const page: FC<pageProps> = async ({}) => {
           </ul>
         </section>
       </main>
-      <section className={styles.BlockMail}>
+      {/* <section className={styles.BlockMail}>
         <div className={styles.Mail}>
           <Link href={`mailto:${email}`}>{email}</Link>
         </div>
-      </section>
+      </section> */}
       <Footer />
     </>
   );

@@ -14,7 +14,7 @@ import styles from './page.module.scss';
 const { Banner } = styles;
 
 export const metadata: Metadata = {
-  title: 'Work | Polyrhythm 📽️',
+  title: 'Work | Polyrhythm',
   description: 'Explore portfolio',
 };
 

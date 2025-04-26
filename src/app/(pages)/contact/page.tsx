@@ -10,7 +10,7 @@ import { FC } from 'react';
 import styles from './page.module.scss';
 
 export const metadata: Metadata = {
-  title: 'Contact | Polyrhythm 📽️',
+  title: 'Contact | Polyrhythm',
   description: 'Contact me',
 };
 

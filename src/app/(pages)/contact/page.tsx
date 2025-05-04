@@ -11,7 +11,7 @@ import styles from './page.module.scss';
 
 export const metadata: Metadata = {
   title: 'Contact | Polyrhythm',
-  description: 'Contact me',
+  description: `Discover my 3D modeling and texturing portfolio, showcasing realistic, high-quality visuals crafted with precision and creativity`,
 };
 
 interface pageProps {}

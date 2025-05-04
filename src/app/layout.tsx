@@ -15,7 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Polyrhythm',
-  description: 'Digital Artist',
+  description: `Discover my 3D modeling and texturing portfolio, showcasing realistic, high-quality visuals crafted with precision and creativity`,
+  keywords: [
+    '3D modeling',
+    '3D artist',
+    '3D generalist',
+    'portfolio',
+    'digital art',
+  ],
 };
 
 export const viewport: Viewport = {
@@ -35,8 +42,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <DetectInAppBrowser /> */}
-
         {children}
 
         {/* <!-- Yandex.Metrika counter --> */}

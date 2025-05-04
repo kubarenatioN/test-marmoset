@@ -15,7 +15,7 @@ const { Banner } = styles;
 
 export const metadata: Metadata = {
   title: 'Work | Polyrhythm',
-  description: 'Explore portfolio',
+  description: `Discover my 3D modeling and texturing portfolio, showcasing realistic, high-quality visuals crafted with precision and creativity`,
 };
 
 const bannerQuery = `*[_type == 'workBanner'][0]`;

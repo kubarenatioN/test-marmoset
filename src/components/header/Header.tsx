@@ -1,28 +1,40 @@
+'use client';
+
 import '@/assets/styles/header.scss';
 import MenuDesktop from '@/components/MenuDesktop/MenuDesktop';
-import { isMobile } from '@/helpers/is-mobile';
+import { useDeviceType } from '@/helpers/useDeviceType';
 import clsx from 'clsx';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import MenuMobile from '../MenuMobile/MenuMobile';
 import styles from './styles.module.scss';
 
 interface HeaderProps {
-  absolute?: boolean;
-  mobile?: boolean;
+  mobile?: boolean; // remove
 }
 
-const Header: FC<HeaderProps> = async ({ mobile = true }) => {
-  mobile = await isMobile();
+const Header: FC<HeaderProps> = ({}) => {
+  const deviceType = useDeviceType();
+
+  useEffect(() => {
+    console.log('deviceType:', deviceType);
+  }, [deviceType]);
 
   return (
     <>
-      {!mobile && (
+      {deviceType === 'desktop' && (
         <header className={clsx('header', styles.HeaderDesktop)}>
           <MenuDesktop />
         </header>
       )}
 
-      {mobile && <MenuMobile />}
+      {deviceType === 'mobile' && <MenuMobile />}
+
+      {!deviceType && (
+        <MenuMobile />
+        // <div style={{ visibility: 'hidden' }}>
+        //   <MenuMobile />
+        // </div>
+      )}
     </>
   );
 };

@@ -1,3 +1,4 @@
+import '@/assets/styles/fp-styles.css';
 import { FpMedia } from '@/components/FullpageMedia/FullpageMedia';
 import { IHomepageSlide } from '@/models';
 import { clsx } from 'clsx';

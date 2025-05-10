@@ -4,14 +4,16 @@ import { FC } from 'react';
 import FooterContent from './FooterContent';
 import styles from './styles.module.scss';
 
-interface FooterProps {}
+interface FooterProps {
+  hideSocials?: boolean;
+}
 
-const Footer: FC<FooterProps> = async ({}) => {
+const Footer: FC<FooterProps> = async ({ hideSocials }) => {
   const contacts = await getContacts();
 
   return (
     <footer className={clsx(styles.Footer)}>
-      <FooterContent contacts={contacts} />
+      <FooterContent contacts={contacts} hideSocials />
     </footer>
   );
 };

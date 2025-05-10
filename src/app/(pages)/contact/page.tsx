@@ -1,10 +1,9 @@
 import Footer from '@/components/footer/Footer';
 import Icon from '@/components/Icon/Icon';
 import { getContacts } from '@/data/contacts';
-import { isMobile } from '@/helpers/is-mobile';
 import { getSocials } from '@/models/contacts';
 import { Metadata } from 'next';
-import Image from 'next/image';
+import { getImageProps } from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import styles from './page.module.scss';
@@ -18,22 +17,45 @@ interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
   const data = await getContacts();
-  const mobile = await isMobile();
+  // const mobile = await isMobile();
 
   const email = data.email;
 
   const links = getSocials(data);
 
   const { bgUrl, bgMobileUrl } = data;
+  const common = { fill: true, sizes: '100vw', alt: '' };
 
-  const imgUrl = mobile && bgMobileUrl ? bgMobileUrl : bgUrl;
+  const img = bgUrl
+    ? getImageProps({
+        ...common,
+        src: bgUrl,
+      })
+    : null;
+
+  const mobileImg = bgMobileUrl
+    ? getImageProps({
+        ...common,
+        src: bgMobileUrl,
+      })
+    : null;
+
+  // const imgUrl = mobile && bgMobileUrl ? bgMobileUrl : bgUrl;
 
   return (
     <>
       <main className={styles.Main}>
-        {imgUrl ? (
+        <picture>
+          {img?.props && (
+            <source media='(min-width: 600px)' srcSet={img.props.srcSet} />
+          )}
+          {mobileImg?.props && (
+            <img {...mobileImg.props} className={styles.BgImg} />
+          )}
+        </picture>
+        {/* {imgUrl ? (
           <Image src={imgUrl} alt='' fill style={{ objectFit: 'cover' }} />
-        ) : null}
+        ) : null} */}
 
         <section className={styles.Section}>
           <ul className={styles.List}>

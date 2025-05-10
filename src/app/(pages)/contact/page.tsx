@@ -17,7 +17,6 @@ interface pageProps {}
 
 const page: FC<pageProps> = async ({}) => {
   const data = await getContacts();
-  // const mobile = await isMobile();
 
   const email = data.email;
 
@@ -40,8 +39,6 @@ const page: FC<pageProps> = async ({}) => {
       })
     : null;
 
-  // const imgUrl = mobile && bgMobileUrl ? bgMobileUrl : bgUrl;
-
   return (
     <>
       <main className={styles.Main}>
@@ -53,9 +50,6 @@ const page: FC<pageProps> = async ({}) => {
             <img {...mobileImg.props} className={styles.BgImg} />
           )}
         </picture>
-        {/* {imgUrl ? (
-          <Image src={imgUrl} alt='' fill style={{ objectFit: 'cover' }} />
-        ) : null} */}
 
         <section className={styles.Section}>
           <ul className={styles.List}>
@@ -76,7 +70,7 @@ const page: FC<pageProps> = async ({}) => {
           <Link href={`mailto:${email}`}>{email}</Link>
         </div>
       </section> */}
-      <Footer />
+      <Footer hideSocials={true} />
     </>
   );
 };

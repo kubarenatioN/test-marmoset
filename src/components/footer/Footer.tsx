@@ -13,7 +13,7 @@ const Footer: FC<FooterProps> = async ({ hideSocials }) => {
 
   return (
     <footer className={clsx(styles.Footer)}>
-      <FooterContent contacts={contacts} hideSocials />
+      <FooterContent contacts={contacts} hideSocials={hideSocials} />
     </footer>
   );
 };

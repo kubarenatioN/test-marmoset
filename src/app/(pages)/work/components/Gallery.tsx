@@ -1,59 +1,27 @@
-// 'use client';
-
-import { IProject } from '@/models';
-import { clsx } from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC, use } from 'react';
-import styles from './Gallery.module.scss';
-
-const { Grid, GridItem, ProjectImg, GridItemInner, GridItemTitle } = styles;
+import { FC, Suspense } from 'react';
+import { getProjects } from '../data';
+import GalleryFilters from './GalleryFilters';
+import GalleryGrid from './GalleryGrid';
+import GallerySkeleton from './GallerySkeleton';
 
 interface GalleryProps {
-  data: Promise<IProject[]>;
-  type?: string | null;
+  searchParams?: Promise<{
+    type?: string;
+  }>;
 }
 
-const Gallery: FC<GalleryProps> = ({ data }) => {
-  // debug:
-  const delay = () =>
-    new Promise((res) => {
-      console.log('tick start');
+const Gallery: FC<GalleryProps> = async ({ searchParams }) => {
+  const type = (await searchParams)?.type;
 
-      setTimeout(() => {
-        console.log('tick end');
-        res(null);
-      }, 2000);
-    });
-
-  // const res = use(delay().then(() => data));
-
-  const res = use(data);
+  const projects = getProjects(type);
 
   return (
     <>
-      <div className={Grid}>
-        {res.map((p) => {
-          return (
-            <Link
-              key={p.slug.current}
-              href={`/work/${p.slug.current}`}
-              className={clsx(GridItem)}
-            >
-              <div className={clsx(GridItemInner)}>
-                <h3 className={clsx(GridItemTitle)}>{p.title}</h3>
-              </div>
-              <Image
-                src={p.previewUrl}
-                fill
-                alt={p.title}
-                className={clsx(ProjectImg)}
-                sizes='(max-width: 400px) 100vw, (max-width: 1000px) 50vw, 33vw'
-              />
-            </Link>
-          );
-        })}
-      </div>
+      <GalleryFilters type={type} />
+
+      <Suspense key={`gallery-${type ?? 'all'}`} fallback={<GallerySkeleton />}>
+        <GalleryGrid data={projects} />
+      </Suspense>
     </>
   );
 };

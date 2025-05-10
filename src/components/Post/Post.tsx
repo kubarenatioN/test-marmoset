@@ -12,7 +12,7 @@ import ArticleTagsBlock from './components/ArticleTagsBlock';
 import { ColumnBlock, ColumnsBlock } from './components/ColumnsBlock';
 import GalleryBlock from './components/GalleryBlock';
 import ImageBlock from './components/ImageBlock';
-import ModelBlock from './components/ModelBlock';
+import ModelBlockFacade from './components/ModelBlockFacade';
 import VideoBlock from './components/VideoBlock';
 import { getBlockAlign } from './marks/AlignMark';
 
@@ -27,7 +27,7 @@ const Post: FC<PostProps> = ({ content }) => {
         value={content}
         components={{
           types: {
-            modelBlock: ModelBlock,
+            modelBlock: ModelBlockFacade,
             imgBlock: ImageBlock,
             videoBlock: VideoBlock,
             galleryBlock: GalleryBlock,

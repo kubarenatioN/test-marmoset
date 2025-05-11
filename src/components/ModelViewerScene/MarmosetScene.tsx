@@ -1,5 +1,6 @@
 'use client';
 
+import { getImageProps } from 'next/image';
 import Script from 'next/script';
 import { FC, useEffect, useRef, useState } from 'react';
 
@@ -39,6 +40,12 @@ const MarmosetScene: FC<MarmosetSceneProps> = ({ url, onInit }) => {
 
     viewer.onLoad = () => {
       onInit?.(marmoset);
+
+      const uiContainer = container.querySelector('#marmosetUI');
+      if (uiContainer) {
+        const logoBlock = setupLogo();
+        uiContainer.insertAdjacentElement('beforebegin', logoBlock);
+      }
     };
 
     // console.log(marmoset, viewer);
@@ -65,5 +72,27 @@ const MarmosetScene: FC<MarmosetSceneProps> = ({ url, onInit }) => {
     </div>
   );
 };
+
+function setupLogo() {
+  const logoBlock = document.createElement('div');
+  const logo = document.createElement('img');
+  const imgW = 100;
+  const imgH = 20;
+  const { props } = getImageProps({
+    src: '/images/logo.svg',
+    alt: '3D model was made at Thepolyrhythm',
+    width: imgW,
+    height: imgH,
+  });
+  logo.style.objectFit = 'contain';
+  logo.style.display = 'block';
+  logo.src = props.src;
+  logo.alt = props.alt;
+  logo.width = imgW;
+  logo.height = imgH;
+  logoBlock.append(logo);
+  logoBlock.classList.add('pr-marmoset-logo-container');
+  return logoBlock;
+}
 
 export default MarmosetScene;

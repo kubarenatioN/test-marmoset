@@ -1,5 +1,6 @@
-import { isMobile } from '@/helpers/is-mobile';
-import { PortableTextTypeComponentProps } from '@portabletext/react';
+'use client';
+
+import { useDeviceType } from '@/helpers/useDeviceType';
 import { FC } from 'react';
 import ModelBlockDesktop from './ModelBlockDesktop';
 import ModelBlockMobile from './ModelBlockMobile';
@@ -9,17 +10,18 @@ export interface ModelBlockProps {
   url: string;
 }
 
-const ModelBlock: FC<PortableTextTypeComponentProps<ModelBlockProps>> = async ({
-  value,
-  isInline,
-}) => {
-  const mobile = await isMobile();
+const ModelBlock: FC<ModelBlockProps> = ({ url, title }) => {
+  const deviceType = useDeviceType();
 
-  if (mobile) {
-    return <ModelBlockMobile value={value} />;
+  if (!deviceType) {
+    return null;
   }
 
-  return <ModelBlockDesktop url={value.url} />;
+  if (deviceType === 'mobile') {
+    return <ModelBlockMobile value={{ url, title }} />;
+  }
+
+  return <ModelBlockDesktop url={url} />;
 };
 
 export default ModelBlock;

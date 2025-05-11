@@ -1,24 +1,16 @@
-import Footer from '@/components/footer/Footer';
 import WorkBanner from '@/components/WorkBanner/WorkBanner';
-import { isMobile } from '@/helpers/is-mobile';
+import Footer from '@/components/footer/Footer';
 import { client } from '@/helpers/sanity-client';
 import { IPageBanner } from '@/models';
 import { Metadata } from 'next';
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 import Gallery from './components/Gallery';
-import GalleryFilters from './components/GalleryFilters';
-import GallerySkeleton from './components/GallerySkeleton';
-import { getProjects } from './data';
 import styles from './page.module.scss';
-
-const { Banner } = styles;
 
 export const metadata: Metadata = {
   title: 'Work | Polyrhythm',
   description: `Discover my 3D modeling and texturing portfolio, showcasing realistic, high-quality visuals crafted with precision and creativity`,
 };
-
-const bannerQuery = `*[_type == 'workBanner'][0]`;
 
 interface PageProps {
   searchParams?: Promise<{
@@ -27,32 +19,20 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = async ({ searchParams }) => {
-  const type = (await searchParams)?.type;
-  const _mobile = await isMobile();
-
-  const projects = getProjects(type);
-
-  const banner = client.fetch<IPageBanner>(
-    bannerQuery,
+  const banner = await client.fetch<IPageBanner>(
+    `*[_type == 'workBanner'][0]`,
     {},
     { cache: 'default', next: { tags: ['work-banner'] } }
   );
 
   return (
     <>
-      <section className={Banner}>
-        <WorkBanner banner={banner} mobile={_mobile} />
+      <section className={styles.Banner}>
+        <WorkBanner banner={banner} />
       </section>
-      <section className={''}>
-        <GalleryFilters type={type} />
-
-        <Suspense
-          key={`gallery-${type ?? 'all'}`}
-          fallback={<GallerySkeleton />}
-        >
-          <Gallery data={projects} />
-        </Suspense>
-      </section>
+      <main>
+        <Gallery searchParams={searchParams} />
+      </main>
       <Footer />
     </>
   );

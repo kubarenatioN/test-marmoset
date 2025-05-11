@@ -14,13 +14,16 @@ const nextConfig: NextConfig = {
       {
         hostname: 'dl.dropboxusercontent.com',
       },
+      {
+        hostname: 'media.thepolyrhythm.com',
+      },
     ],
   },
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
-  },
+  // logging: {
+  //   fetches: {
+  //     fullUrl: true,
+  //   },
+  // },
 };
 
 export default nextConfig;

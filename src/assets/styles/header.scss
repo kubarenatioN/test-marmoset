@@ -43,3 +43,27 @@
     object-fit: contain;
   }
 }
+
+.header-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.header-show {
+  // animation-name: headerShow;
+  animation-duration: 0.4s;
+}
+
+@keyframes headerShow {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

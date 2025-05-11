@@ -1,3 +1,8 @@
+.Skeleton {
+  position: relative;
+  min-height: 640px;
+}
+
 .Grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -128,6 +133,21 @@
     align-self: flex-end;
     position: static;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .GridNavLink {
+    padding: 1.4rem;
+  }
+
+  .GridFilters {
+    padding-inline: 0;
+  }
+
+  .GridNavLink {
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
   }
 }
 

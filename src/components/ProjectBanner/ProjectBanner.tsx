@@ -1,27 +1,34 @@
 'use client';
 
+import { useDeviceType } from '@/helpers/useDeviceType';
 import { IProjectBanner } from '@/models';
 import Image from 'next/image';
-import { FC, use, useRef } from 'react';
+import { FC, useRef } from 'react';
 import styles from './style.module.scss';
 
 const { BannerImage, BannerVideo, BannerVideoWrapper } = styles;
 
 interface ProjectBannerProps {
   banner: IProjectBanner;
-  mobile: Promise<boolean>;
+  mobile?: boolean;
+  // mobile: Promise<boolean>;
 }
 
-const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile }) => {
+const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const isMobile = use(mobile);
+  // const isMobile = mobile;
+  const deviceType = useDeviceType();
 
   const { imgUrl, videoUrl, imgMobileUrl, videoMobileUrl, title } = banner;
 
+  if (!deviceType) {
+    return null;
+  }
+
   return (
     <>
-      {!isMobile ? (
+      {deviceType === 'desktop' ? (
         imgUrl ? (
           <Image
             className={BannerImage}
@@ -29,6 +36,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile }) => {
             src={imgUrl}
             alt={title ?? ''}
             sizes='100vw'
+            priority
           />
         ) : videoUrl ? (
           <div className={BannerVideoWrapper}>
@@ -51,6 +59,7 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile }) => {
           src={imgMobileUrl}
           alt={title ?? ''}
           sizes='100vw'
+          priority
         />
       ) : videoMobileUrl ? (
         <div className={BannerVideoWrapper}>

@@ -6,12 +6,7 @@ interface GallerySkeletonProps {}
 
 const GallerySkeleton: FC<GallerySkeletonProps> = ({}) => {
   return (
-    <div
-      style={{
-        minHeight: 300,
-        position: 'relative',
-      }}
-    >
+    <div className={styles.Skeleton}>
       <div className={styles.Loader}>
         <LuLoaderPinwheel />
       </div>

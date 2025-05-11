@@ -1,22 +1,42 @@
 'use client';
 
+import { useDeviceType } from '@/helpers/useDeviceType';
 import { IPageBanner } from '@/models';
 import Image from 'next/image';
-import { FC, use, useRef } from 'react';
+import { FC, useRef } from 'react';
 import styles from './style.module.scss';
 
 const { BannerVideoWrapper, BannerVideo, BannerVideoLoader } = styles;
 
 interface WorkBannerProps {
-  banner: Promise<IPageBanner>;
-  mobile?: boolean;
+  banner: IPageBanner;
+  // banner: Promise<IPageBanner>;
 }
 
-const WorkBanner: FC<WorkBannerProps> = ({ banner, mobile }) => {
+const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } =
-    use(banner);
+  const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } = banner;
+  // const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } =
+  //   use(banner);
+
+  const deviceType = useDeviceType();
+  const mobile = deviceType === 'mobile';
+
+  if (!deviceType) {
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'grid',
+          placeItems: 'center',
+        }}
+      >
+        <img src='/loader.svg' alt='Loader' />
+      </div>
+    );
+  }
 
   return (
     <>

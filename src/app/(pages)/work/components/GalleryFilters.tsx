@@ -22,13 +22,7 @@ const GalleryFilters: FC<GalleryFiltersProps> = ({ type = null }) => {
                 item.type === type ? GridNavLinkActive : ''
               )}
               key={item.label}
-              href={
-                item.type
-                  ? {
-                      query: { type: item.type },
-                    }
-                  : '/work'
-              }
+              href={`/work${item.type ? `/category/${item.type}` : ''}`}
               scroll={false}
             >
               {item.label}

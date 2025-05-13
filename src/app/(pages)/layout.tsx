@@ -10,7 +10,6 @@ const layout: FC<layoutProps> = ({ children }) => {
     <>
       <Header />
       {children}
-      {/* <PageUpBtn /> */}
     </>
   );
 };

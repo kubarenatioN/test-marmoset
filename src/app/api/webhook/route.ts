@@ -1,8 +1,12 @@
+import { revalidatePath } from 'next/cache';
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { _type, slug } = body;
 
   console.log('webhook body', body);
+
+  revalidatePath('/(pages)/work/(index)', 'layout');
 
   // revalidatePath('/(pages)/work');
   // revalidatePath(`/(pages)/work/[slug]`, 'page');
@@ -11,7 +15,8 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  console.log('webhook GET', request);
+  console.log('test revalidating GET');
+  revalidatePath('/(pages)/work/(index)', 'layout');
 
   return new Response('ok');
 }

@@ -7,6 +7,7 @@ export async function POST(request: Request) {
   console.log('revalidate path', '/', body);
 
   revalidatePath('/', 'layout');
+  revalidatePath('/(pages)/work/(index)', 'layout');
 
   return Response.json({ revalidated: true, now: Date.now() });
 }

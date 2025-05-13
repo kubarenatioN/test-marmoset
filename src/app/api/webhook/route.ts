@@ -8,6 +8,7 @@ export async function POST(request: Request) {
 
   revalidatePath('/', 'layout');
   revalidatePath('/(pages)/work/(index)', 'layout');
+  revalidatePath('/(pages)/work/(index)', 'page');
 
   return Response.json({ revalidated: true, now: Date.now() });
 }

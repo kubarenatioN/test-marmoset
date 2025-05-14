@@ -45,9 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   const data = await getProjects();
 
-  return data.map((p) => ({
-    slug: p.slug.current,
-  }));
+  return data
+    .filter((p) => p && p.slug && p.slug.current != null)
+    .map((p) => ({
+      slug: p.slug.current,
+    }));
 }
 
 interface PageProps {

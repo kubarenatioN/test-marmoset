@@ -6,6 +6,8 @@ export async function POST(request: Request) {
 
   console.log('*** [DEBUG] revalidate path ***', body);
 
+  revalidatePath('/(pages)/work/(index)', 'layout');
+  revalidatePath('/(pages)/work/(index)', 'page');
   revalidatePath('/', 'layout');
 
   return Response.json({
@@ -16,6 +18,9 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   console.log('test revalidating GET');
+
+  revalidatePath('/(pages)/work/(index)', 'layout');
+  revalidatePath('/(pages)/work/(index)', 'page');
   revalidatePath('/', 'layout');
 
   return Response.json({

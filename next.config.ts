@@ -30,6 +30,10 @@ const nextConfig: NextConfig = {
         source: '/:path*', // applies to all routes
         headers: [
           {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+          {
             key: 'Netlify-CDN-Cache-Control',
             value: 'public, max-age=60',
           },

@@ -24,6 +24,23 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*', // applies to all routes
+        headers: [
+          {
+            key: 'Netlify-CDN-Cache-Control',
+            value: 'public, max-age=60',
+          },
+          {
+            key: 'X-PR-Test',
+            value: 'Ivanfimoz',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,16 +1,17 @@
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 export async function POST(request: Request) {
   const body = await request.json();
   const { _type, slug } = body;
 
   console.log('*** [DEBUG] revalidate path ***', body);
+  console.log('***', new Date().toLocaleString());
 
   revalidateTag('all');
 
-  revalidatePath('/(pages)/work/(index)', 'layout');
-  revalidatePath('/(pages)', 'layout');
-  revalidatePath('/');
+  // revalidatePath('/(pages)/work/(index)', 'layout');
+  // revalidatePath('/(pages)', 'layout');
+  // revalidatePath('/');
 
   return Response.json({
     revalidated: true,
@@ -19,13 +20,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  console.log('test revalidating GET');
+  console.log('test revalidating GET', new Date().toLocaleString());
 
   revalidateTag('all');
 
-  revalidatePath('/(pages)/work/(index)', 'layout');
-  revalidatePath('/(pages)', 'layout');
-  revalidatePath('/');
+  // revalidatePath('/(pages)/work/(index)', 'layout');
+  // revalidatePath('/(pages)', 'layout');
+  // revalidatePath('/');
 
   return Response.json({
     revalidated: true,

@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Netlify-CDN-Cache-Control',
-            value: 'public, max-age=60',
+            value: 'no-store',
           },
           {
             key: 'X-PR-Test',

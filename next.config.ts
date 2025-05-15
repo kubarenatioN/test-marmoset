@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=60, stale-while-revalidate=300',
+            value: 'public, max-age=60, must-revalidate',
           },
           {
             key: 'Netlify-CDN-Cache-Control',

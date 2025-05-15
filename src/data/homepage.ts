@@ -1,4 +1,4 @@
-import { client } from '@/helpers/sanity-client';
+import { sanityFetch } from '@/helpers/sanity-client';
 import { IHomepageSlide } from '@/models';
 
 const query = `*[_type == 'homepageSlide'] {
@@ -9,11 +9,10 @@ const query = `*[_type == 'homepageSlide'] {
 } | order(order asc, _createdAt asc)`;
 
 export const getSlides = async () => {
-  return client.fetch<IHomepageSlide[]>(
+  return sanityFetch<IHomepageSlide[]>(
     query,
     {},
     {
-      cache: 'default',
       next: { tags: ['homepage-slides'] },
     }
   );

@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -6,9 +6,11 @@ export async function POST(request: Request) {
 
   console.log('*** [DEBUG] revalidate path ***', body);
 
+  revalidateTag('all');
+
   revalidatePath('/(pages)/work/(index)', 'layout');
-  revalidatePath('/(pages)/work/(index)', 'page');
-  revalidatePath('/', 'layout');
+  revalidatePath('/(pages)', 'layout');
+  revalidatePath('/');
 
   return Response.json({
     revalidated: true,
@@ -19,9 +21,11 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   console.log('test revalidating GET');
 
+  revalidateTag('all');
+
   revalidatePath('/(pages)/work/(index)', 'layout');
-  revalidatePath('/(pages)/work/(index)', 'page');
-  revalidatePath('/', 'layout');
+  revalidatePath('/(pages)', 'layout');
+  revalidatePath('/');
 
   return Response.json({
     revalidated: true,

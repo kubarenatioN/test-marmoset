@@ -1,4 +1,4 @@
-import { client } from '@/helpers/sanity-client';
+import { sanityFetch } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
 
 export const projectQ = (slug: string) =>
@@ -41,19 +41,9 @@ export const nextPrevProjQ = () => {
 };
 
 export function getProject(slug: string) {
-  return client.fetch<IProject>(
-    projectQ(slug),
-    {},
-    {
-      cache: 'default',
-      next: {},
-    }
-  );
+  return sanityFetch<IProject>(projectQ(slug));
 }
 
 export function getProjectPagination(params = {}) {
-  return client.fetch(nextPrevProjQ(), params, {
-    cache: 'default',
-    next: {},
-  });
+  return sanityFetch(nextPrevProjQ(), params);
 }

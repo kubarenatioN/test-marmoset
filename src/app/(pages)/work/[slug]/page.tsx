@@ -2,7 +2,7 @@ import Footer from '@/components/footer/Footer';
 import Post from '@/components/Post/Post';
 import PostWrapper from '@/components/Post/PostWrapper';
 import ProjectBanner from '@/components/ProjectBanner/ProjectBanner';
-import { urlFor } from '@/helpers/url-builder';
+import { urlFor } from '@/helpers/sanity-client';
 import { IProject } from '@/models';
 import { Metadata } from 'next';
 import Image from 'next/image';

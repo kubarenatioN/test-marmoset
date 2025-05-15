@@ -23,6 +23,9 @@ interface PostProps {
 const Post: FC<PostProps> = ({ content }) => {
   return (
     <article className={'post-article'}>
+      <div style={{ position: 'fixed', top: 0, right: 0, opacity: 0 }}>
+        <h2 id='test-time'>{new Date().toLocaleString()}</h2>
+      </div>
       <PortableText
         value={content}
         components={{

@@ -1,12 +1,11 @@
-import { client } from '@/helpers/sanity-client';
+import { sanityFetch } from '@/helpers/sanity-client';
 import { IContacts } from '@/models/contacts';
 
 export const getContacts = async () => {
-  return client.fetch<IContacts>(
+  return sanityFetch<IContacts>(
     `*[_type == 'contactPage'][0]`,
     {},
     {
-      cache: 'default',
       next: {
         tags: ['contacts'],
       },

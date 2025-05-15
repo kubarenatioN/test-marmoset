@@ -1,4 +1,4 @@
-import { client } from '@/helpers/sanity-client';
+import { sanityFetch } from '@/helpers/sanity-client';
 import { IPageBanner, IProject } from '@/models';
 import { FilteredResponseQueryOptions } from '@sanity/client';
 
@@ -14,7 +14,7 @@ const query = (category: string) => {
 
 const options: FilteredResponseQueryOptions = {
   next: {
-    tags: ['projects', 'all'],
+    tags: ['projects'],
   },
 };
 
@@ -22,12 +22,12 @@ export const getProjects = async (
   category?: string | null
 ): Promise<IProject[]> => {
   if (!category || category === 'all') {
-    return client.fetch<IProject[]>(allQuery, {}, options);
+    return sanityFetch<IProject[]>(allQuery, {}, options);
   }
 
-  return client.fetch<IProject[]>(query(category), {}, options);
+  return sanityFetch<IProject[]>(query(category), {}, options);
 };
 
 export const getBanner = async () => {
-  return client.fetch<IPageBanner>(`*[_type == 'workBanner'][0]`, {});
+  return sanityFetch<IPageBanner>(`*[_type == 'workBanner'][0]`);
 };

@@ -31,11 +31,11 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
+            value: 'public, max-age=60, stale-while-revalidate=5',
           },
           {
             key: 'Netlify-CDN-Cache-Control',
-            value: 'no-store',
+            value: 'public, max-age=60',
           },
           {
             key: 'X-PR-Test',

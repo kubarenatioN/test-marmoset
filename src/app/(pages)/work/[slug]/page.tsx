@@ -17,6 +17,7 @@ const {
   PageContent,
   ArticleBackStrip,
   PaginationSection,
+  PaginationLink,
   PaginationImage,
   PaginationTitle,
   PaginationNav,
@@ -125,7 +126,11 @@ const Page: FC<PageProps> = async ({ params }) => {
         <nav className={PaginationNav}>
           {[prev, next].map((proj) => {
             return (
-              <Link key={proj.title} href={proj.slug.current}>
+              <Link
+                key={proj.title}
+                href={proj.slug.current}
+                className={PaginationLink}
+              >
                 <Image
                   className={PaginationImage}
                   src={proj.previewUrl}

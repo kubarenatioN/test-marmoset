@@ -1,6 +1,8 @@
 import { PortableTextTypeComponentProps } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
+import { clsx } from 'clsx';
 import { FC } from 'react';
+import styles from './ColumnsBlock.module.scss';
 
 interface ColumnsBlockProps {
   columns: TypedObject[];
@@ -18,17 +20,7 @@ export const ColumnsBlock: FC<
     })
   );
 
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${nodes.length}, 1fr)`,
-        columnGap: '1rem',
-      }}
-    >
-      {nodes}
-    </div>
-  );
+  return <div className={clsx(styles.Cols)}>{nodes}</div>;
 };
 
 interface ColumnBlockProps {

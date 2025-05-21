@@ -20,7 +20,7 @@ const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
         display: 'inline-block',
         width: '100%',
         height: 'auto',
-        objectFit: 'cover',
+        objectFit: 'contain',
       }}
     ></video>
   ) : (
@@ -37,7 +37,7 @@ const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
         style={{
           width: '100%',
           height: 'auto',
-          objectFit: 'cover',
+          objectFit: 'contain',
         }}
       ></video>
     </div>

@@ -17,7 +17,7 @@ export const sanityFetch = <T = any>(
 ) => {
   return client.fetch<T>(query, params, {
     ...options,
-    cacheMode: 'noStale',
+    cacheMode: process.env.NODE_ENV === 'development' ? undefined : 'noStale',
     next: {
       tags: ['all', ...(options.next?.tags ?? [])],
     },

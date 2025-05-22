@@ -103,6 +103,7 @@ const MenuMobile: FC<MenuMobileProps> = ({}) => {
     <>
       <header
         className={clsx(
+          'header--mobile',
           styles.Header,
           isUp ? styles.HeaderUp : '',
           isStart ? styles.HeaderStart : ''

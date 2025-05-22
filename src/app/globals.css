@@ -66,3 +66,23 @@ img.pointer {
   pointer-events: none;
   user-select: none;
 }
+
+@media screen and (min-width: 768px) {
+  .header--desktop {
+    display: block;
+  }
+
+  header.header--mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header--desktop {
+    display: none;
+  }
+
+  header.header--mobile {
+    display: grid;
+  }
+}

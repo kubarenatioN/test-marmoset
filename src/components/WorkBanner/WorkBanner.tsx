@@ -17,8 +17,6 @@ const WorkBanner: FC<WorkBannerProps> = ({ banner }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } = banner;
-  // const { imageUrl, videoUrl, imageMobileUrl, videoMobileUrl, title } =
-  //   use(banner);
 
   const deviceType = useDeviceType();
   const mobile = deviceType === 'mobile';

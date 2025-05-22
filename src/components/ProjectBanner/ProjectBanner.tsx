@@ -19,7 +19,18 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner }) => {
   const { imgUrl, videoUrl, imgMobileUrl, videoMobileUrl, title } = banner;
 
   if (!deviceType) {
-    return null;
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'grid',
+          placeItems: 'center',
+        }}
+      >
+        <img src='/loader.svg' alt='Loader' />
+      </div>
+    );
   }
 
   return (

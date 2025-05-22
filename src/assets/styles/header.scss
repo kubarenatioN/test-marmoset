@@ -44,17 +44,12 @@
   }
 }
 
-.header-desktop {
+.header--desktop {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 3;
-}
-
-.header-show {
-  // animation-name: headerShow;
-  animation-duration: 0.4s;
 }
 
 @keyframes headerShow {

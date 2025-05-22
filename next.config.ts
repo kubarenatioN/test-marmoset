@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*', // applies to all routes
+        source: '/((?!_next|static|.*\\..*).*)', // applies only to documents
         headers: [
           {
             key: 'Cache-Control',

@@ -3,7 +3,7 @@
 import { useDeviceType } from '@/helpers/useDeviceType';
 import { IProjectBanner } from '@/models';
 import Image from 'next/image';
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import styles from './style.module.scss';
 
 const { BannerImage, BannerVideo, BannerVideoWrapper } = styles;
@@ -11,19 +11,26 @@ const { BannerImage, BannerVideo, BannerVideoWrapper } = styles;
 interface ProjectBannerProps {
   banner: IProjectBanner;
   mobile?: boolean;
-  // mobile: Promise<boolean>;
 }
 
-const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile = false }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // const isMobile = mobile;
+const ProjectBanner: FC<ProjectBannerProps> = ({ banner }) => {
   const deviceType = useDeviceType();
 
   const { imgUrl, videoUrl, imgMobileUrl, videoMobileUrl, title } = banner;
 
   if (!deviceType) {
-    return null;
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'grid',
+          placeItems: 'center',
+        }}
+      >
+        <img src='/loader.svg' alt='Loader' />
+      </div>
+    );
   }
 
   return (
@@ -36,12 +43,11 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile = false }) => {
             src={imgUrl}
             alt={title ?? ''}
             sizes='100vw'
-            priority
+            loading='eager'
           />
         ) : videoUrl ? (
           <div className={BannerVideoWrapper}>
             <video
-              ref={videoRef}
               src={videoUrl}
               controls={false}
               autoPlay={true}
@@ -59,12 +65,11 @@ const ProjectBanner: FC<ProjectBannerProps> = ({ banner, mobile = false }) => {
           src={imgMobileUrl}
           alt={title ?? ''}
           sizes='100vw'
-          priority
+          loading='eager'
         />
       ) : videoMobileUrl ? (
         <div className={BannerVideoWrapper}>
           <video
-            ref={videoRef}
             src={videoMobileUrl}
             controls={false}
             autoPlay={true}

@@ -16,7 +16,7 @@ const MenuDesktop: FC<MenuDesktopProps> = ({}) => {
   };
 
   return (
-    <header className={clsx('header-desktop', 'header-show')}>
+    <header className={clsx('header--desktop')}>
       <nav>
         <ul className={clsx('header-menu__list layout-grid')}>
           <li className='header-menu__start'>

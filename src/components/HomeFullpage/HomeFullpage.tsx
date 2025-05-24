@@ -4,7 +4,7 @@ import '@/assets/styles/fp-styles.css';
 import '@/assets/styles/fullpagejs.overrides.css';
 import { requestTimeout } from '@/helpers/timeout';
 import { IHomepageSlide } from '@/models';
-import { getSocials, IContacts } from '@/models/contacts';
+import { IContacts } from '@/models/contacts';
 import ReactFullpage, {
   fullpageApi as FullpageApi,
   Item,
@@ -35,12 +35,10 @@ interface HomeFullpageProps {
 const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
   const sectionIds = [...data.map((s, i) => String(i + 1)), 'footer'];
 
-  const [activeSlide, setActiveSlide] = useState(sectionIds[0]);
+  const [activeSlide, setActiveSlide] = useState<string>(sectionIds[0]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef<boolean>(false);
-
-  const socials = getSocials(contacts);
 
   let _api: FullpageApi;
 
@@ -88,7 +86,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
 
     isScrolling.current = true;
 
-    slideLeave(origin, dest, dir);
+    _slideLeave(origin, dest, dir);
   };
 
   const onAnimationPhaseEnd = () => {
@@ -109,7 +107,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
     }
   };
 
-  const slideLeave = (origin: Item, dest: Item, dir: string) => {
+  const _slideLeave = (origin: Item, dest: Item, dir: string) => {
     const currentSlide = origin.item;
     const nextSlide = dest.item;
     const footerQuery = `.${FOOTER_CLASS}`;
@@ -184,7 +182,7 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
         if (isNextNotFooterSibling) {
           requestTimeout(() => {
             _api.moveTo(dest.anchor);
-            slideLeave({ item: footerSibling } as any, dest, 'up');
+            _slideLeave({ item: footerSibling } as any, dest, 'up');
           }, 50);
         } else {
           onAnimationPhaseEnd();
@@ -253,10 +251,14 @@ const HomeFullpage: FC<HomeFullpageProps> = ({ data, contacts }) => {
 
             return (
               <ReactFullpage.Wrapper>
-                {data.map((slide, i) => {
+                {data.map((slide, i, arr) => {
+                  const last = arr.length - 1 === i;
+                  const active = Number(activeSlide) - 1 === i;
+                  const lastActive = last && active;
+
                   return (
                     <FpSection options={{ api: fullpageApi }} key={slide.title}>
-                      <FpMedia slide={slide} />
+                      <FpMedia slide={slide} lastActive={lastActive} />
 
                       {/* {i === 0 && (
                         <div className='section-content__wrapper'>

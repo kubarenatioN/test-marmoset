@@ -1,16 +1,31 @@
+'use client';
+
 import { IHomepageSlide } from '@/models';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './style.module.scss';
 
 interface FullpageImageProps {
   slide: IHomepageSlide;
   mobile?: boolean;
+  lastActive?: boolean;
 }
 
-export const FpMedia: FC<FullpageImageProps> = ({ slide, mobile }) => {
+export const FpMedia: FC<FullpageImageProps> = ({
+  slide,
+  mobile,
+  lastActive,
+}) => {
   const { title, imgUrl, imgMobileUrl, videoUrl, videoMobileUrl, videoLoop } =
     slide;
+
+  useEffect(() => {
+    if (!lastActive) {
+      const sections = document.querySelectorAll(`.fp-section`);
+      const beforeFooter = sections.item(sections.length - 2);
+      beforeFooter?.querySelector('video')?.pause();
+    }
+  }, [lastActive]);
 
   if (mobile) {
     if (imgMobileUrl) {
@@ -36,6 +51,8 @@ export const FpMedia: FC<FullpageImageProps> = ({ slide, mobile }) => {
             loop={Boolean(videoLoop)}
             autoPlay
             playsInline
+            /* need to fix when footer is active and prev slide video gets paused  */
+            data-keepplaying={lastActive ? true : undefined}
             src={videoMobileUrl}
             className={styles.FpSlideVideo}
           ></video>
@@ -67,6 +84,8 @@ export const FpMedia: FC<FullpageImageProps> = ({ slide, mobile }) => {
             loop={Boolean(videoLoop)}
             autoPlay
             playsInline
+            /* need to fix when footer is active and prev slide video gets paused  */
+            data-keepplaying={lastActive ? true : undefined}
             src={videoUrl}
             className={styles.FpSlideVideo}
           ></video>

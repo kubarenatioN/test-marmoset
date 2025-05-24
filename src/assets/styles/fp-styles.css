@@ -6,6 +6,7 @@
   z-index: 2;
   color: #fff;
   padding: 80px;
+  pointer-events: none;
 }
 
 .pr-section-footer {
@@ -20,6 +21,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  pointer-events: all;
 }
 
 .section-content-1 {

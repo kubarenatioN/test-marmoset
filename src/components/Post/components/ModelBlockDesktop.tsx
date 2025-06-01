@@ -72,6 +72,7 @@ const ModelBlockDesktop: FC<ModelBlockDesktopProps> = ({ url }) => {
         modelUrl={url}
         onInit={() => {
           setInited(true);
+          ymHit();
         }}
       />
     </div>
@@ -79,3 +80,9 @@ const ModelBlockDesktop: FC<ModelBlockDesktopProps> = ({ url }) => {
 };
 
 export default ModelBlockDesktop;
+
+function ymHit() {
+  if (window && window.ym) {
+    window.ym(101022621, 'reachGoal', 'click-view-3d-model-desktop');
+  }
+}

@@ -13,7 +13,7 @@ import { ColumnBlock, ColumnsBlock } from './components/ColumnsBlock';
 import GalleryBlock from './components/GalleryBlock';
 import ImageBlock from './components/ImageBlock';
 import ModelBlockFacade from './components/ModelBlockFacade';
-import VideoBlock from './components/VideoBlock';
+import VideoBlockFacade from './components/VideoBlockFacade';
 import { getBlockAlign } from './marks/AlignMark';
 
 interface PostProps {
@@ -40,7 +40,7 @@ const Post: FC<PostProps> = ({ content }) => {
           types: {
             modelBlock: ModelBlockFacade,
             imgBlock: ImageBlock,
-            videoBlock: VideoBlock,
+            videoBlock: VideoBlockFacade,
             galleryBlock: GalleryBlock,
             columns: ColumnsBlock,
             column: ColumnBlock,

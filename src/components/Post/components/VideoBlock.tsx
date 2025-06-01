@@ -1,21 +1,30 @@
-import { PortableTextTypeComponentProps } from '@portabletext/react';
+'use client';
+
 import { FC } from 'react';
 
 interface VideoBlockProps {
-  title?: string;
-  url: string;
+  value: {
+    title?: string;
+    url: string;
+  };
+  isInline: boolean;
 }
 
-const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
-  value,
-  isInline,
-}) => {
+const VideoBlock: FC<VideoBlockProps> = ({ value, isInline }) => {
+  const onPlay = () => {
+    if (window && window.ym) {
+      window.ym(101022621, 'reachGoal', 'article-video-on-play');
+    }
+  };
+
   return isInline ? (
     <video
+      data-pr-post-video-inline
       preload='metadata'
       controls={true}
       muted
       src={value.url}
+      onPlay={onPlay}
       style={{
         display: 'inline-block',
         width: '100%',
@@ -30,10 +39,12 @@ const VideoBlock: FC<PortableTextTypeComponentProps<VideoBlockProps>> = ({
       }}
     >
       <video
+        data-pr-post-video-block
         preload='metadata'
         controls={true}
         muted
         src={value.url}
+        onPlay={onPlay}
         style={{
           width: '100%',
           height: 'auto',

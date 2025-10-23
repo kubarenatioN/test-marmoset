@@ -1,15 +1,18 @@
 import type { MetadataRoute } from 'next';
 import { getProjects } from './(pages)/work/data';
 
-export const revalidate = 3600; // 1hr
+export const revalidate = 3600; // 1 hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = (await getProjects()).map((p) => ({
-    url: `https://thepolyrhythm.com/work/${p.slug.current}`,
-    lastModified: new Date(),
-    changeFrequency: 'yearly' as any,
-    priority: 0.8,
-  }));
+  const projects = (await getProjects()).map((p) => {
+    return {
+      url: `https://thepolyrhythm.com/work/${p.slug.current}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as any,
+      priority: 0.8,
+      images: [p.previewUrl],
+    };
+  });
 
   return [
     {

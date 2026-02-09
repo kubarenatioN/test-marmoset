@@ -4,8 +4,12 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: ['/', '/_next/image*'],
-      disallow: ['/api/', '/_next/', '/server/', '/private/', '/admin/'],
+      allow: [
+        '/',
+        '/_next/static/', // Essential for CSS/JS to render the page correctly
+        '/_next/image', // CRITICAL: Allows Googlebot-Image to crawl optimized Cloudinary images
+      ],
+      disallow: ['/api/', '/server/', '/private/', '/admin/'],
     },
     sitemap: 'https://thepolyrhythm.com/sitemap.xml',
   };

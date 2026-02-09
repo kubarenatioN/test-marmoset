@@ -26,6 +26,7 @@ const FooterContent: FC<FooterContentProps> = ({
   hideSocials = false,
 }) => {
   const links = getSocials(contacts);
+  const year = new Date().getFullYear();
 
   return (
     <div className={clsx(styles.FooterContent)}>
@@ -45,7 +46,7 @@ const FooterContent: FC<FooterContentProps> = ({
         </div>
       ) : null}
       <div className={clsx(styles.FooterBottomRow)}>
-        <span>2025 &copy; Polyrhythm. All Rights Reserved</span>
+        <span>{year} &copy; Polyrhythm. All Rights Reserved</span>
       </div>
     </div>
   );

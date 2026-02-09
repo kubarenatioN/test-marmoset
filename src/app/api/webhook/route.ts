@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   console.log('*** [DEBUG] revalidate path ***', body);
   console.log('***', new Date().toLocaleString());
 
-  revalidateTag('all');
+  revalidateTag('all', 'max');
 
   // revalidatePath('/(pages)/work/(index)', 'layout');
   // revalidatePath('/(pages)', 'layout');
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   console.log('test revalidating GET', new Date().toLocaleString());
 
-  revalidateTag('all');
+  revalidateTag('all', 'max');
 
   // revalidatePath('/(pages)/work/(index)', 'layout');
   // revalidatePath('/(pages)', 'layout');

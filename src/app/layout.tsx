@@ -56,6 +56,21 @@ export default function RootLayout({
           </div>
         </noscript>
         {/* <!-- /Yandex.Metrika counter --> */}
+
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-EG0ZRB92LK'
+          type='text/javascript'
+        ></Script>
+        <Script id='google-analytics-data-layer'>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-EG0ZRB92LK');`}
+        </Script>
+        {/* <!-- /Google tag (gtag.js) --> */}
       </body>
     </html>
   );

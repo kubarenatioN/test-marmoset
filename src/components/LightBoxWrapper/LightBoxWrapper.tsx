@@ -48,7 +48,6 @@ const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items }) => {
                   alt={slide.alt ?? ''}
                   src={slide.src}
                   fill
-                  loading='eager'
                   draggable={false}
                   style={{
                     objectFit: 'contain',
@@ -107,12 +106,13 @@ const LightBoxWrapper: FC<LightBoxWrapperProps> = ({ items }) => {
                   alt={slide.alt ?? ''}
                   src={slide.src}
                   fill
-                  loading='eager'
                   draggable={false}
+                  className='lightbox-active'
                   style={{
                     objectFit: 'contain',
                   }}
                   sizes={`${wRatio}vw`}
+                  quality={100}
                 />
               </div>
             );

@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
         hostname: 'media.thepolyrhythm.com',
       },
     ],
+    qualities: [75, 100],
   },
   // logging: {
   //   fetches: {

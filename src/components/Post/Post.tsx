@@ -117,7 +117,7 @@ const Post: FC<PostProps> = ({ content }) => {
                 url: string;
                 text?: string;
                 _type: string;
-              }>
+              }>,
             ) => {
               const { value, children } = props;
               if (!value) {

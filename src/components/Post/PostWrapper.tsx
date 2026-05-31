@@ -53,9 +53,11 @@ const PostWrapper: FC<PostWrapperProps> = ({ children }) => {
                   <Image
                     src={slide.src}
                     alt=''
+                    className='single-media-lightbox'
                     fill
                     style={{ objectFit: 'contain' }}
                     sizes='100vw'
+                    quality={100}
                   />
                 </div>
               );

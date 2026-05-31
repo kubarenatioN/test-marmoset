@@ -25,12 +25,7 @@ const VideoBlock: FC<VideoBlockProps> = ({ value, isInline }) => {
       muted
       src={value.url}
       onPlay={onPlay}
-      style={{
-        display: 'inline-block',
-        width: '100%',
-        height: 'auto',
-        objectFit: 'contain',
-      }}
+      className='article-video article-video--inline'
     ></video>
   ) : (
     <div
@@ -45,11 +40,7 @@ const VideoBlock: FC<VideoBlockProps> = ({ value, isInline }) => {
         muted
         src={value.url}
         onPlay={onPlay}
-        style={{
-          width: '100%',
-          height: 'auto',
-          objectFit: 'contain',
-        }}
+        className='article-video article-video--block'
       ></video>
     </div>
   );

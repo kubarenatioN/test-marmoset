@@ -75,3 +75,29 @@
     text-align: end;
   }
 }
+
+.article-image {
+  width: 100%;
+  object-fit: contain;
+  height: auto;
+  max-height: 90vh;
+
+  &--inline {
+    display: inline-block;
+  }
+}
+
+.article-video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+
+  &--inline {
+    display: inline-block;
+  }
+}
+
+.article-video--block {
+  max-height: 90vh;
+}

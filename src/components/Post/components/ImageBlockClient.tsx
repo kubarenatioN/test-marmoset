@@ -17,12 +17,7 @@ const ImageBlockClient: FC<ImageBlockClientProps> = ({ url }) => {
         src={url}
         width={1600}
         height={900}
-        className='pointer'
-        style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: 'auto',
-        }}
+        className='pointer article-image'
         alt=''
         sizes='(max-width: 768px) 100vw, 1000px'
         onClick={() => {

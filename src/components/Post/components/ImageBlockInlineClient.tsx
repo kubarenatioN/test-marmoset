@@ -18,12 +18,7 @@ const ImageBlockInlineClient: FC<ImageBlockClientProps> = ({ url }) => {
         width={1600}
         height={900}
         alt=''
-        className='pointer'
-        style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: 'auto',
-        }}
+        className='pointer article-image article-image--inline'
         sizes='(max-width: 768px) 100vw, 600px'
         onClick={() => {
           update(url);

@@ -30,14 +30,14 @@ const nextConfig: NextConfig = {
       {
         source: '/((?!_next|static|.*\\..*).*)', // applies only to documents
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=60, stale-while-revalidate=5',
-          },
-          {
-            key: 'Netlify-CDN-Cache-Control',
-            value: 'public, max-age=60',
-          },
+          // {
+          //   key: 'Cache-Control',
+          //   value: 'public, max-age=60, stale-while-revalidate=5',
+          // },
+          // {
+          //   key: 'Netlify-CDN-Cache-Control',
+          //   value: 'public, max-age=60',
+          // },
           {
             key: 'X-PR-Test',
             value: 'Ivanfimoz',
